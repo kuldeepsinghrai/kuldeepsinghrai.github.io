@@ -68,6 +68,7 @@ const handleInput  = command => {
 }
 const showAbout = () => {
     myTerminal.print('==> I am Kuldeep Singh Rai');
+    myTerminal.print('==> Android Developer | Web Developer | Student');
    
 }
 
@@ -78,7 +79,10 @@ const showSkills = () => {
     const skills = [
         {name: "Android Development"},
         {name: "Java"},
-        {name: 'Git + Github'}
+        {name: "XML"},
+        {name: 'Git + Github'},
+        {name: 'Python'},
+        {name: 'Javascript'}
     ]
     skills.forEach((element) => {
         myTerminal.print(` > ${element.name}`);
@@ -154,9 +158,9 @@ const handleError = (command) => {
 const showWork = () => {
     const workExp = [
         {
-            name : '',
-            time: '',
-            post: '',
+            name : 'Bijnis',
+            time: 'March 2022 - Present',
+            post: 'Android Developer, Intern',
             work: ''
         },
        
@@ -168,7 +172,7 @@ const showWork = () => {
         myTerminal.print(`> ${workExp[i].post}`);
         myTerminal.print(`> ${workExp[i].name}`);
         myTerminal.print(`> ${workExp[i].time}`);
-        myTerminal.print(`> ${workExp[i].work}`);
+       // myTerminal.print(`> ${workExp[i].work}`);
         myTerminal.print('========================================================');
     }
 }
@@ -176,12 +180,29 @@ const showWork = () => {
 const showEducation = () => {
     const education = [
         {
-            name: 'BCA',
+            name: 'A Level, Computer Software Engineering',
             cgpa: '',
-            school: 'School name',
-            year: '2021-2024'
+            school: 'National Institute of Electronics & Information Technology',
+            year: '2021 - Ongoing'
         },
-        
+        {
+            name: 'Bachelor of Computer Applications',
+            cgpa: '',
+            school: 'Indira Gandhi National Open University',
+            year: '2021 - Ongoing'
+        },
+        {
+            name: 'CBSE 12th',
+            cgpa: '87%',
+            school: 'Govt. Boys Sr. Sec. School Palla-Mazra Delhi-110036',
+            year: '2019 - 2021'
+        },
+        {
+            name: 'CBSE 10th',
+            cgpa: '63%',
+            school: 'Govt. Boys Sr. Sec. School Palla-Mazra Delhi-110036',
+            year: '2017 - 2019'
+        },
     ];
     myTerminal.print('--------------------------------------------------------');
     myTerminal.print('******************** MY EDUCATION **********************');
