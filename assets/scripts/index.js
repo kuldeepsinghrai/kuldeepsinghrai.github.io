@@ -21,7 +21,7 @@ myTerminal.input('', command => {
 });
 
 function switchMode() {
-    window.open('index.html', "_self");
+    window.open('/', "_self");
 }
 
 const handleInput  = command => {
