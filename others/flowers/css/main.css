@@ -467,6 +467,8 @@ body {
 
 /* Additional flower styles */
 .flower--1 {
+  left: 47%;
+  transform: rotate(2deg);
   animation: moving-flower-1 4s linear infinite;
 }
 
@@ -554,13 +556,13 @@ body {
 
 /* Additional lavender flowers */
 .flower--4 {
-  left: 30%;
+  left: 49%;
   transform: rotate(10deg);
   animation: moving-flower-4 4s linear infinite;
 }
 
 .flower--5 {
-  left: 60%;
+  left: 51%;
   transform: rotate(-5deg);
   animation: moving-flower-5 4s linear infinite;
 }
@@ -585,37 +587,43 @@ body {
 
 /* Red Rose Positioning and Animations */
 .flower--red-1 {
-  left: 20%;
+  left: 42%;
+  --rot: -10deg;
   transform: rotate(-10deg);
   animation: moving-flower-red 4s linear infinite;
 }
 
 .flower--red-2 {
-  left: 35%;
+  left: 48%;
+  --rot: 15deg;
   transform: rotate(15deg);
   animation: moving-flower-red 4.2s linear infinite;
 }
 
 .flower--red-3 {
-  left: 65%;
+  left: 54%;
+  --rot: -20deg;
   transform: rotate(-20deg);
   animation: moving-flower-red 3.8s linear infinite;
 }
 
 .flower--red-4 {
-  left: 15%;
+  left: 38%;
+  --rot: 8deg;
   transform: rotate(8deg);
   animation: moving-flower-red 4.5s linear infinite;
 }
 
 .flower--red-5 {
-  left: 80%;
+  left: 58%;
+  --rot: -12deg;
   transform: rotate(-12deg);
   animation: moving-flower-red 4.1s linear infinite;
 }
 
 .flower--red-6 {
   left: 45%;
+  --rot: 18deg;
   transform: rotate(18deg);
   animation: moving-flower-red 3.9s linear infinite;
 }
@@ -658,25 +666,29 @@ body {
 
 /* White Rose Positioning and Animations */
 .flower--white-1 {
-  left: 25%;
+  left: 44%;
+  --rot: 12deg;
   transform: rotate(12deg);
   animation: moving-flower-white 4.3s linear infinite;
 }
 
 .flower--white-2 {
-  left: 55%;
+  left: 50%;
+  --rot: -15deg;
   transform: rotate(-15deg);
   animation: moving-flower-white 4s linear infinite;
 }
 
 .flower--white-3 {
-  left: 70%;
+  left: 56%;
+  --rot: 10deg;
   transform: rotate(10deg);
   animation: moving-flower-white 4.2s linear infinite;
 }
 
 .flower--white-4 {
-  left: 10%;
+  left: 40%;
+  --rot: -8deg;
   transform: rotate(-8deg);
   animation: moving-flower-white 4.4s linear infinite;
 }
@@ -709,19 +721,19 @@ body {
 
 /* Additional Lavender Rose Positioning */
 .flower--lavender-1 {
-  left: 40%;
+  left: 46%;
   transform: rotate(5deg);
   animation: moving-flower-4 4.1s linear infinite;
 }
 
 .flower--lavender-2 {
-  left: 60%;
+  left: 52%;
   transform: rotate(-7deg);
   animation: moving-flower-5 4.2s linear infinite;
 }
 
 .flower--lavender-3 {
-  left: 75%;
+  left: 43%;
   transform: rotate(9deg);
   animation: moving-flower-4 3.9s linear infinite;
 }
@@ -749,7 +761,7 @@ body {
     transform: rotate(var(--rot, -10deg));
   }
   50% {
-    transform: rotate(calc(var(--rot, -10deg) + 3deg));
+    transform: rotate(calc(var(--rot, -10deg) + 2deg));
   }
 }
 
@@ -758,7 +770,7 @@ body {
     transform: rotate(var(--rot, 12deg));
   }
   50% {
-    transform: rotate(calc(var(--rot, 12deg) - 3deg));
+    transform: rotate(calc(var(--rot, 12deg) - 2deg));
   }
 }
 
