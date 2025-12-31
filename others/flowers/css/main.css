@@ -50,7 +50,144 @@ body {
   --fl-speed: 0.3s;
 }
 
-/* Flower petals with lavender colors */
+/* Heart Container */
+.heart-container {
+  position: absolute;
+  left: 50%;
+  bottom: 60vmin;
+  transform: translateX(-50%);
+  z-index: 1000;
+  animation: heart-emerge 3s 3s ease-out backwards;
+}
+
+.heart-emoji {
+  font-size: 8vmin;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: heart-beat 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 1vmin rgba(255, 107, 157, 0.8));
+  line-height: 1;
+}
+
+.heart-emoji--2 {
+  font-size: 6vmin;
+  animation: heart-beat-2 1.5s ease-in-out infinite 0.3s;
+  transform: translate(-40%, -60%);
+  z-index: -1;
+}
+
+.heart-emoji--3 {
+  font-size: 5vmin;
+  animation: heart-beat-3 1.5s ease-in-out infinite 0.6s;
+  transform: translate(-60%, -40%);
+  z-index: -1;
+}
+
+@keyframes heart-beat-2 {
+  0%, 100% {
+    transform: translate(-40%, -60%) scale(1);
+  }
+  50% {
+    transform: translate(-40%, -60%) scale(1.2);
+  }
+}
+
+@keyframes heart-beat-3 {
+  0%, 100% {
+    transform: translate(-60%, -40%) scale(1);
+  }
+  50% {
+    transform: translate(-60%, -40%) scale(1.2);
+  }
+}
+
+.heart-particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1vmin;
+  height: 1vmin;
+}
+
+.particle {
+  position: absolute;
+  font-size: 2vmin;
+  line-height: 1;
+  animation: particle-float 3s ease-out infinite;
+  filter: drop-shadow(0 0 0.5vmin rgba(255, 107, 157, 0.6));
+}
+
+.particle--1 {
+  animation-delay: 0s;
+  --tx: 0vmin;
+  --ty: -8vmin;
+}
+
+.particle--2 {
+  animation-delay: 0.3s;
+  --tx: 3vmin;
+  --ty: -6vmin;
+}
+
+.particle--3 {
+  animation-delay: 0.6s;
+  --tx: -3vmin;
+  --ty: -6vmin;
+}
+
+.particle--4 {
+  animation-delay: 0.9s;
+  --tx: 2vmin;
+  --ty: -7vmin;
+}
+
+.particle--5 {
+  animation-delay: 1.2s;
+  --tx: -2vmin;
+  --ty: -7vmin;
+}
+
+.particle--6 {
+  animation-delay: 1.5s;
+  --tx: 0vmin;
+  --ty: -9vmin;
+}
+
+@keyframes heart-emerge {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20vmin) scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes heart-beat {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+@keyframes particle-float {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx, 0), var(--ty, -8vmin)) scale(0);
+  }
+}
+
+/* Flower petals - base style */
 .flower__leaf {
   position: absolute;
   bottom: 0;
@@ -58,11 +195,44 @@ body {
   width: 8vmin;
   height: 11vmin;
   border-radius: 51% 49% 47% 53%/44% 45% 55% 69%;
-  background-color: #b57edc;
-  background-image: linear-gradient(to top, #9b59b6, #b57edc);
   transform-origin: bottom center;
   opacity: 0.9;
   box-shadow: inset 0 0 2vmin rgba(255, 255, 255, 0.3);
+}
+
+/* Lavender flower petals */
+.flower--1 .flower__leaf,
+.flower--2 .flower__leaf,
+.flower--3 .flower__leaf,
+.flower--4 .flower__leaf,
+.flower--5 .flower__leaf,
+.flower--lavender-1 .flower__leaf,
+.flower--lavender-2 .flower__leaf,
+.flower--lavender-3 .flower__leaf {
+  background-color: #b57edc;
+  background-image: linear-gradient(to top, #9b59b6, #b57edc);
+}
+
+/* Red rose petals */
+.flower--red-1 .flower__leaf,
+.flower--red-2 .flower__leaf,
+.flower--red-3 .flower__leaf,
+.flower--red-4 .flower__leaf,
+.flower--red-5 .flower__leaf,
+.flower--red-6 .flower__leaf {
+  background-color: #dc143c;
+  background-image: linear-gradient(to top, #8b0000, #dc143c, #ff1744);
+  box-shadow: inset 0 0 2vmin rgba(255, 255, 255, 0.2), 0 0 1vmin rgba(220, 20, 60, 0.5);
+}
+
+/* White rose petals */
+.flower--white-1 .flower__leaf,
+.flower--white-2 .flower__leaf,
+.flower--white-3 .flower__leaf,
+.flower--white-4 .flower__leaf {
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f5f5f5, #ffffff, #fff8dc);
+  box-shadow: inset 0 0 2vmin rgba(0, 0, 0, 0.1), 0 0 1vmin rgba(255, 255, 255, 0.6);
 }
 
 .flower__leaf--1 {
@@ -97,6 +267,26 @@ body {
   height: 4vmin;
   border-radius: 50%;
   background-color: #e6e6fa;
+}
+
+/* Red rose center */
+.flower--red-1 .flower__white-circle,
+.flower--red-2 .flower__white-circle,
+.flower--red-3 .flower__white-circle,
+.flower--red-4 .flower__white-circle,
+.flower--red-5 .flower__white-circle,
+.flower--red-6 .flower__white-circle {
+  background-color: #ffb3d1;
+  box-shadow: 0 0 1vmin rgba(255, 107, 157, 0.5);
+}
+
+/* White rose center */
+.flower--white-1 .flower__white-circle,
+.flower--white-2 .flower__white-circle,
+.flower--white-3 .flower__white-circle,
+.flower--white-4 .flower__white-circle {
+  background-color: #fff;
+  box-shadow: 0 0 1vmin rgba(255, 255, 255, 0.6);
 }
 
 .flower__white-circle::after {
@@ -140,6 +330,41 @@ body {
 
 .flower__light:nth-child(odd) {
   background-color: #9370db;
+}
+
+/* Red rose lights */
+.flower--red-1 .flower__light,
+.flower--red-2 .flower__light,
+.flower--red-3 .flower__light,
+.flower--red-4 .flower__light,
+.flower--red-5 .flower__light,
+.flower--red-6 .flower__light {
+  background-color: #ff6b9d;
+}
+
+.flower--red-1 .flower__light:nth-child(odd),
+.flower--red-2 .flower__light:nth-child(odd),
+.flower--red-3 .flower__light:nth-child(odd),
+.flower--red-4 .flower__light:nth-child(odd),
+.flower--red-5 .flower__light:nth-child(odd),
+.flower--red-6 .flower__light:nth-child(odd) {
+  background-color: #ff1744;
+}
+
+/* White rose lights */
+.flower--white-1 .flower__light,
+.flower--white-2 .flower__light,
+.flower--white-3 .flower__light,
+.flower--white-4 .flower__light {
+  background-color: #fff;
+  box-shadow: 0 0 0.5vmin rgba(255, 255, 255, 0.8);
+}
+
+.flower--white-1 .flower__light:nth-child(odd),
+.flower--white-2 .flower__light:nth-child(odd),
+.flower--white-3 .flower__light:nth-child(odd),
+.flower--white-4 .flower__light:nth-child(odd) {
+  background-color: #f5f5f5;
 }
 
 .flower__light--1 {
@@ -358,20 +583,216 @@ body {
   50% { transform: rotate(-10deg); }
 }
 
+/* Red Rose Positioning and Animations */
+.flower--red-1 {
+  left: 20%;
+  transform: rotate(-10deg);
+  animation: moving-flower-red 4s linear infinite;
+}
+
+.flower--red-2 {
+  left: 35%;
+  transform: rotate(15deg);
+  animation: moving-flower-red 4.2s linear infinite;
+}
+
+.flower--red-3 {
+  left: 65%;
+  transform: rotate(-20deg);
+  animation: moving-flower-red 3.8s linear infinite;
+}
+
+.flower--red-4 {
+  left: 15%;
+  transform: rotate(8deg);
+  animation: moving-flower-red 4.5s linear infinite;
+}
+
+.flower--red-5 {
+  left: 80%;
+  transform: rotate(-12deg);
+  animation: moving-flower-red 4.1s linear infinite;
+}
+
+.flower--red-6 {
+  left: 45%;
+  transform: rotate(18deg);
+  animation: moving-flower-red 3.9s linear infinite;
+}
+
+.flower__leafs--red-1 {
+  animation-delay: 1.2s;
+}
+
+.flower__leafs--red-2 {
+  animation-delay: 1.5s;
+}
+
+.flower__leafs--red-3 {
+  animation-delay: 1.8s;
+}
+
+.flower__leafs--red-4 {
+  animation-delay: 2.1s;
+}
+
+.flower__leafs--red-5 {
+  animation-delay: 2.4s;
+}
+
+.flower__leafs--red-6 {
+  animation-delay: 2.7s;
+}
+
+.flower--red-1 .flower__line,
+.flower--red-2 .flower__line,
+.flower--red-3 .flower__line {
+  height: 65vmin;
+}
+
+.flower--red-4 .flower__line,
+.flower--red-5 .flower__line,
+.flower--red-6 .flower__line {
+  height: 55vmin;
+}
+
+/* White Rose Positioning and Animations */
+.flower--white-1 {
+  left: 25%;
+  transform: rotate(12deg);
+  animation: moving-flower-white 4.3s linear infinite;
+}
+
+.flower--white-2 {
+  left: 55%;
+  transform: rotate(-15deg);
+  animation: moving-flower-white 4s linear infinite;
+}
+
+.flower--white-3 {
+  left: 70%;
+  transform: rotate(10deg);
+  animation: moving-flower-white 4.2s linear infinite;
+}
+
+.flower--white-4 {
+  left: 10%;
+  transform: rotate(-8deg);
+  animation: moving-flower-white 4.4s linear infinite;
+}
+
+.flower__leafs--white-1 {
+  animation-delay: 1.3s;
+}
+
+.flower__leafs--white-2 {
+  animation-delay: 1.6s;
+}
+
+.flower__leafs--white-3 {
+  animation-delay: 1.9s;
+}
+
+.flower__leafs--white-4 {
+  animation-delay: 2.2s;
+}
+
+.flower--white-1 .flower__line {
+  height: 70vmin;
+}
+
+.flower--white-2 .flower__line,
+.flower--white-3 .flower__line,
+.flower--white-4 .flower__line {
+  height: 60vmin;
+}
+
+/* Additional Lavender Rose Positioning */
+.flower--lavender-1 {
+  left: 40%;
+  transform: rotate(5deg);
+  animation: moving-flower-4 4.1s linear infinite;
+}
+
+.flower--lavender-2 {
+  left: 60%;
+  transform: rotate(-7deg);
+  animation: moving-flower-5 4.2s linear infinite;
+}
+
+.flower--lavender-3 {
+  left: 75%;
+  transform: rotate(9deg);
+  animation: moving-flower-4 3.9s linear infinite;
+}
+
+.flower__leafs--lavender-1 {
+  animation-delay: 2.3s;
+}
+
+.flower__leafs--lavender-2 {
+  animation-delay: 2.6s;
+}
+
+.flower__leafs--lavender-3 {
+  animation-delay: 2.9s;
+}
+
+.flower--lavender-1 .flower__line,
+.flower--lavender-2 .flower__line,
+.flower--lavender-3 .flower__line {
+  height: 58vmin;
+}
+
+@keyframes moving-flower-red {
+  0%, 100% {
+    transform: rotate(var(--rot, -10deg));
+  }
+  50% {
+    transform: rotate(calc(var(--rot, -10deg) + 3deg));
+  }
+}
+
+@keyframes moving-flower-white {
+  0%, 100% {
+    transform: rotate(var(--rot, 12deg));
+  }
+  50% {
+    transform: rotate(calc(var(--rot, 12deg) - 3deg));
+  }
+}
+
 /* Small filler flowers */
 .small-flower {
   position: absolute;
   width: 4vmin;
   height: 4vmin;
-  background: #b57edc;
   border-radius: 50%;
-  box-shadow: 
-    0 0 0 1vmin rgba(181, 126, 220, 0.3),
-    0 0 0 2vmin rgba(181, 126, 220, 0.2);
   transform: scale(0);
   animation: 
     bloom-small 2s var(--d, 0s) forwards,
     float 4s infinite ease-in-out;
+}
+
+.small-flower--red {
+  background: #dc143c;
+  box-shadow: 
+    0 0 0 1vmin rgba(220, 20, 60, 0.3),
+    0 0 0 2vmin rgba(220, 20, 60, 0.2);
+}
+
+.small-flower--white {
+  background: #fff;
+  box-shadow: 
+    0 0 0 1vmin rgba(255, 255, 255, 0.3),
+    0 0 0 2vmin rgba(255, 255, 255, 0.2);
+}
+
+.small-flower--lavender {
+  background: #b57edc;
+  box-shadow: 
+    0 0 0 1vmin rgba(181, 126, 220, 0.3),
+    0 0 0 2vmin rgba(181, 126, 220, 0.2);
 }
 
 @keyframes bloom-small {
