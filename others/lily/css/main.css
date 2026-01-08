@@ -330,7 +330,7 @@ body {
 /* Lily positioning and animations */
 .flower--white-lily {
   left: 20%;
-  transform: rotate(5deg);
+  transform: rotate(0deg);
   animation: moving-lily-1 4s linear infinite;
 }
 
@@ -341,7 +341,7 @@ body {
 
 .flower--orange-lily {
   left: 35%;
-  transform: rotate(-3deg);
+  transform: rotate(30deg);
   animation: moving-lily-2 4.2s linear infinite;
 }
 
@@ -352,7 +352,7 @@ body {
 
 .flower--pink-lily {
   left: 50%;
-  transform: rotate(2deg);
+  transform: rotate(-30deg);
   animation: moving-lily-3 3.9s linear infinite;
 }
 
@@ -363,7 +363,7 @@ body {
 
 .flower--yellow-lily {
   left: 65%;
-  transform: rotate(-4deg);
+  transform: rotate(15deg);
   animation: moving-lily-4 4.1s linear infinite;
 }
 
@@ -374,7 +374,7 @@ body {
 
 .flower--red-lily {
   left: 80%;
-  transform: rotate(3deg);
+  transform: rotate(-15deg);
   animation: moving-lily-5 3.8s linear infinite;
 }
 
@@ -385,7 +385,7 @@ body {
 
 .flower--white-pink-lily {
   left: 12%;
-  transform: rotate(-2deg);
+  transform: rotate(0deg);
   animation: moving-lily-6 4.3s linear infinite;
 }
 
@@ -459,7 +459,7 @@ body {
 /* Animations */
 @keyframes moving-lily-1 {
   0%, 100% {
-    transform: rotate(5deg);
+    transform: rotate(0deg);
   }
   50% {
     transform: rotate(-2deg);
@@ -468,46 +468,46 @@ body {
 
 @keyframes moving-lily-2 {
   0%, 100% {
-    transform: rotate(-3deg);
+    transform: rotate(30deg);
   }
   50% {
-    transform: rotate(2deg);
+    transform: rotate(28deg);
   }
 }
 
 @keyframes moving-lily-3 {
   0%, 100% {
-    transform: rotate(2deg);
+    transform: rotate(-30deg);
   }
   50% {
-    transform: rotate(-1deg);
+    transform: rotate(-28deg);
   }
 }
 
 @keyframes moving-lily-4 {
   0%, 100% {
-    transform: rotate(-4deg);
+    transform: rotate(15deg);
   }
   50% {
-    transform: rotate(3deg);
+    transform: rotate(13deg);
   }
 }
 
 @keyframes moving-lily-5 {
   0%, 100% {
-    transform: rotate(3deg);
+    transform: rotate(-15deg);
   }
   50% {
-    transform: rotate(-2deg);
+    transform: rotate(-13deg);
   }
 }
 
 @keyframes moving-lily-6 {
   0%, 100% {
-    transform: rotate(-2deg);
+    transform: rotate(0deg);
   }
   50% {
-    transform: rotate(1deg);
+    transform: rotate(2deg);
   }
 }
 
