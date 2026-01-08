@@ -326,7 +326,7 @@ body {
 /* Orchid positioning and animations */
 .flower--purple-orchid {
   left: 20%;
-  transform: rotate(5deg);
+  transform: rotate(0deg);
   animation: moving-orchid-1 4s linear infinite;
 }
 
@@ -337,7 +337,7 @@ body {
 
 .flower--pink-orchid {
   left: 35%;
-  transform: rotate(-3deg);
+  transform: rotate(30deg);
   animation: moving-orchid-2 4.2s linear infinite;
 }
 
@@ -348,7 +348,7 @@ body {
 
 .flower--white-orchid {
   left: 50%;
-  transform: rotate(2deg);
+  transform: rotate(-30deg);
   animation: moving-orchid-3 3.9s linear infinite;
 }
 
@@ -359,7 +359,7 @@ body {
 
 .flower--yellow-orchid {
   left: 65%;
-  transform: rotate(-4deg);
+  transform: rotate(15deg);
   animation: moving-orchid-4 4.1s linear infinite;
 }
 
@@ -370,7 +370,7 @@ body {
 
 .flower--blue-orchid {
   left: 80%;
-  transform: rotate(3deg);
+  transform: rotate(-15deg);
   animation: moving-orchid-5 3.8s linear infinite;
 }
 
@@ -436,7 +436,7 @@ body {
 /* Animations */
 @keyframes moving-orchid-1 {
   0%, 100% {
-    transform: rotate(5deg);
+    transform: rotate(0deg);
   }
   50% {
     transform: rotate(-2deg);
@@ -445,37 +445,37 @@ body {
 
 @keyframes moving-orchid-2 {
   0%, 100% {
-    transform: rotate(-3deg);
+    transform: rotate(30deg);
   }
   50% {
-    transform: rotate(2deg);
+    transform: rotate(28deg);
   }
 }
 
 @keyframes moving-orchid-3 {
   0%, 100% {
-    transform: rotate(2deg);
+    transform: rotate(-30deg);
   }
   50% {
-    transform: rotate(-1deg);
+    transform: rotate(-28deg);
   }
 }
 
 @keyframes moving-orchid-4 {
   0%, 100% {
-    transform: rotate(-4deg);
+    transform: rotate(15deg);
   }
   50% {
-    transform: rotate(3deg);
+    transform: rotate(13deg);
   }
 }
 
 @keyframes moving-orchid-5 {
   0%, 100% {
-    transform: rotate(3deg);
+    transform: rotate(-15deg);
   }
   50% {
-    transform: rotate(-2deg);
+    transform: rotate(-13deg);
   }
 }
 

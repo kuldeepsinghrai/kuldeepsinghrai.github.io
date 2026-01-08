@@ -298,7 +298,7 @@ body {
 /* Lavender positioning and animations */
 .flower--lavender-1 {
   left: 42%;
-  transform: rotate(3deg);
+  transform: rotate(0deg);
   animation: moving-lavender-1 4s linear infinite;
 }
 
@@ -309,7 +309,7 @@ body {
 
 .flower--lavender-2 {
   left: 50%;
-  transform: rotate(-2deg);
+  transform: rotate(30deg);
   animation: moving-lavender-2 4.3s linear infinite;
 }
 
@@ -320,7 +320,7 @@ body {
 
 .flower--lavender-3 {
   left: 58%;
-  transform: rotate(4deg);
+  transform: rotate(-30deg);
   animation: moving-lavender-3 3.9s linear infinite;
 }
 
@@ -331,7 +331,7 @@ body {
 
 .flower--lavender-4 {
   left: 35%;
-  transform: rotate(-3deg);
+  transform: rotate(15deg);
   animation: moving-lavender-4 4.1s linear infinite;
 }
 
@@ -342,7 +342,7 @@ body {
 
 .flower--lavender-5 {
   left: 28%;
-  transform: rotate(2deg);
+  transform: rotate(-15deg);
   animation: moving-lavender-5 3.8s linear infinite;
 }
 
@@ -353,7 +353,7 @@ body {
 
 .flower--lavender-6 {
   left: 65%;
-  transform: rotate(-4deg);
+  transform: rotate(0deg);
   animation: moving-lavender-6 4.2s linear infinite;
 }
 
@@ -364,7 +364,7 @@ body {
 
 .flower--lavender-7 {
   left: 72%;
-  transform: rotate(3deg);
+  transform: rotate(30deg);
   animation: moving-lavender-7 3.7s linear infinite;
 }
 
@@ -375,7 +375,7 @@ body {
 
 .flower--lavender-8 {
   left: 22%;
-  transform: rotate(-2deg);
+  transform: rotate(-30deg);
   animation: moving-lavender-8 4.0s linear infinite;
 }
 
@@ -386,7 +386,7 @@ body {
 
 .flower--lavender-9 {
   left: 78%;
-  transform: rotate(5deg);
+  transform: rotate(15deg);
   animation: moving-lavender-9 3.9s linear infinite;
 }
 
@@ -397,7 +397,7 @@ body {
 
 .flower--lavender-10 {
   left: 15%;
-  transform: rotate(-1deg);
+  transform: rotate(-15deg);
   animation: moving-lavender-10 4.1s linear infinite;
 }
 
@@ -490,52 +490,52 @@ body {
 /* Animations */
 @keyframes moving-lavender-1 {
   0%, 100% {
-    transform: rotate(3deg);
+    transform: rotate(0deg);
   }
   50% {
-    transform: rotate(-1deg);
+    transform: rotate(-2deg);
   }
 }
 
 @keyframes moving-lavender-2 {
   0%, 100% {
-    transform: rotate(-2deg);
+    transform: rotate(30deg);
   }
   50% {
-    transform: rotate(2deg);
+    transform: rotate(28deg);
   }
 }
 
 @keyframes moving-lavender-3 {
   0%, 100% {
-    transform: rotate(4deg);
+    transform: rotate(-30deg);
   }
   50% {
-    transform: rotate(-3deg);
+    transform: rotate(-28deg);
   }
 }
 
 @keyframes moving-lavender-4 {
   0%, 100% {
-    transform: rotate(-3deg);
+    transform: rotate(15deg);
   }
   50% {
-    transform: rotate(1deg);
+    transform: rotate(13deg);
   }
 }
 
 @keyframes moving-lavender-5 {
   0%, 100% {
-    transform: rotate(2deg);
+    transform: rotate(-15deg);
   }
   50% {
-    transform: rotate(-1deg);
+    transform: rotate(-13deg);
   }
 }
 
 @keyframes moving-lavender-6 {
   0%, 100% {
-    transform: rotate(-4deg);
+    transform: rotate(0deg);
   }
   50% {
     transform: rotate(2deg);
@@ -544,37 +544,37 @@ body {
 
 @keyframes moving-lavender-7 {
   0%, 100% {
-    transform: rotate(3deg);
+    transform: rotate(30deg);
   }
   50% {
-    transform: rotate(-2deg);
+    transform: rotate(32deg);
   }
 }
 
 @keyframes moving-lavender-8 {
   0%, 100% {
-    transform: rotate(-2deg);
+    transform: rotate(-30deg);
   }
   50% {
-    transform: rotate(1deg);
+    transform: rotate(-32deg);
   }
 }
 
 @keyframes moving-lavender-9 {
   0%, 100% {
-    transform: rotate(5deg);
+    transform: rotate(15deg);
   }
   50% {
-    transform: rotate(-3deg);
+    transform: rotate(17deg);
   }
 }
 
 @keyframes moving-lavender-10 {
   0%, 100% {
-    transform: rotate(-1deg);
+    transform: rotate(-15deg);
   }
   50% {
-    transform: rotate(2deg);
+    transform: rotate(-17deg);
   }
 }
 
