@@ -22,8 +22,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             position: relative;
+            padding: 20px;
         }
 
         @keyframes gradientShift {
@@ -76,6 +78,7 @@
             text-align: center;
             border: 5px solid #ffd700;
             animation: fadeIn 1s ease-out;
+            margin: 20px 0;
         }
 
         @keyframes fadeIn {
@@ -182,6 +185,53 @@
             font-size: 2em;
             color: #d63384;
             margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .card {
+                padding: 50px 40px;
+                max-width: 100%;
+                width: 100%;
+            }
+            .special-title {
+                font-size: 3.5em;
+            }
+            .name {
+                font-size: 3em;
+            }
+            .message {
+                font-size: 1.3em;
+            }
+            .poem {
+                font-size: 1.4em;
+            }
+            .signature {
+                font-size: 1.6em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 40px 30px;
+            }
+            .special-title {
+                font-size: 2.8em;
+            }
+            .name {
+                font-size: 2.5em;
+            }
+            .message {
+                font-size: 1.1em;
+            }
+            .poem {
+                font-size: 1.2em;
+            }
+            .signature {
+                font-size: 1.4em;
+            }
         }
     </style>
 </head>

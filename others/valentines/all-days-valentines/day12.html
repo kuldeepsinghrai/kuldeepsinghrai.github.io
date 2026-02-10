@@ -20,8 +20,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             position: relative;
+            padding: 20px;
         }
 
         .confetti {
@@ -77,6 +79,7 @@
             text-align: center;
             border: 5px solid #ff69b4;
             animation: bounce 2s ease-in-out infinite;
+            margin: 20px 0;
         }
 
         @keyframes bounce {
@@ -121,6 +124,41 @@
             0%, 100% { transform: rotate(0deg) scale(1); }
             25% { transform: rotate(-10deg) scale(1.1); }
             75% { transform: rotate(10deg) scale(1.1); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .card {
+                padding: 40px 30px;
+                max-width: 100%;
+                width: 100%;
+            }
+            h1 {
+                font-size: 3em;
+            }
+            .name {
+                font-size: 2.2em;
+            }
+            .message {
+                font-size: 1.5em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            .name {
+                font-size: 1.8em;
+            }
+            .message {
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>

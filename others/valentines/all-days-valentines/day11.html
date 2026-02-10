@@ -22,7 +22,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 20px;
         }
 
         @keyframes gradientShift {
@@ -41,6 +43,7 @@
             text-align: center;
             position: relative;
             border: 4px solid #ffd700;
+            margin: 20px 0;
         }
 
         .day-number {
@@ -82,6 +85,41 @@
         @keyframes rainbow {
             0%, 100% { filter: hue-rotate(0deg); }
             50% { filter: hue-rotate(180deg); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .card {
+                padding: 40px 30px;
+                max-width: 100%;
+                width: 100%;
+            }
+            h1 {
+                font-size: 3.5em;
+            }
+            .name {
+                font-size: 2.5em;
+            }
+            .message {
+                font-size: 1.6em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 2.8em;
+            }
+            .name {
+                font-size: 2em;
+            }
+            .message {
+                font-size: 1.3em;
+            }
         }
     </style>
 </head>

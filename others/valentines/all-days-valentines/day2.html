@@ -20,8 +20,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             position: relative;
+            padding: 20px;
         }
 
         .stars {
@@ -56,6 +58,7 @@
             text-align: center;
             color: white;
             border: 2px solid rgba(255, 20, 147, 0.3);
+            margin: 20px 0;
         }
 
         .day-number {
@@ -95,6 +98,41 @@
         @keyframes glow {
             from { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); }
             to { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.9)); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .card {
+                padding: 40px 30px;
+                max-width: 100%;
+                width: 100%;
+            }
+            h1 {
+                font-size: 2.8em;
+            }
+            .name {
+                font-size: 2.2em;
+            }
+            .message {
+                font-size: 1.3em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 2.2em;
+            }
+            .name {
+                font-size: 1.8em;
+            }
+            .message {
+                font-size: 1.1em;
+            }
         }
     </style>
 </head>
