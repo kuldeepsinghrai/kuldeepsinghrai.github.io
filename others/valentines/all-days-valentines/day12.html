@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 12 - For Shobha 💗</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Fredoka One', cursive;
+            background: #ffe5f1;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff69b4;
+            animation: confettiFall 5s linear infinite;
+        }
+
+        .confetti-piece:nth-child(2n) {
+            background: #ff1493;
+            animation-duration: 6s;
+        }
+
+        .confetti-piece:nth-child(3n) {
+            background: #ffb6c1;
+            animation-duration: 7s;
+        }
+
+        .confetti-piece:nth-child(4n) {
+            background: #ff69b4;
+            animation-duration: 5.5s;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .card {
+            position: relative;
+            z-index: 10;
+            background: white;
+            border-radius: 30px;
+            padding: 55px 45px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 25px 70px rgba(255, 105, 180, 0.4);
+            text-align: center;
+            border: 5px solid #ff69b4;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .day-number {
+            font-size: 1.3em;
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 4em;
+            color: #e91e63;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0px #ffb6c1;
+        }
+
+        .name {
+            font-size: 3em;
+            color: #c2185b;
+            margin: 25px 0;
+            text-shadow: 2px 2px 0px #ffb6c1;
+        }
+
+        .message {
+            font-size: 1.8em;
+            line-height: 1.8;
+            color: #555;
+            margin: 30px 0;
+        }
+
+        .party {
+            font-size: 4em;
+            margin: 20px 0;
+            animation: party 1s ease-in-out infinite;
+        }
+
+        @keyframes party {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            75% { transform: rotate(10deg) scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="confetti" id="confetti"></div>
+    
+    <div class="card">
+        <div class="day-number">Day 12 of 14</div>
+        <div class="party">🎉</div>
+        <h1>My Celebration</h1>
+        <div class="name">Shobha</div>
+        <p class="message">
+            Every day with you is a celebration,<br>
+            filled with joy and happiness.<br>
+            You make life a party!
+        </p>
+        <div class="party">🎊</div>
+    </div>
+
+    <script>
+        function createConfetti() {
+            const confetti = document.getElementById('confetti');
+            for (let i = 0; i < 50; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.animationDelay = Math.random() * 2 + 's';
+                confetti.appendChild(piece);
+            }
+        }
+
+        createConfetti();
+    </script>
+</body>
+</html>
+

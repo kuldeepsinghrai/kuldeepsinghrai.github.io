@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14 Days of Valentine's - For Shobha 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 25px;
+            color: rgba(255, 255, 255, 0.6);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .header .name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3em;
+            color: #ffd700;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card-item {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .card-item:hover::before {
+            left: 100%;
+        }
+
+        .card-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border-color: #ff69b4;
+        }
+
+        .card-number {
+            font-size: 1.1em;
+            color: #d63384;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card-icon {
+            font-size: 3em;
+            margin: 15px 0;
+            display: block;
+        }
+
+        .card-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8em;
+            color: #e91e63;
+            margin-bottom: 10px;
+        }
+
+        .card-preview {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .special-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #d63384;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            .header .name {
+                font-size: 2em;
+            }
+            .cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>💖 14 Days of Valentine's 💖</h1>
+            <div class="name">For My Beautiful Shobha</div>
+            <p>Click on any card to open a special message for that day</p>
+        </div>
+
+        <div class="cards-grid">
+            <a href="day1.html" class="card-link">
+                <div class="card-item">
+                    <div class="card-number">Day 1</div>
+                    <span class="card-icon">🌹</span>
+                    <div class="card-title">My Beautiful</div>
+                    <div class="card-preview">Like a rose in full bloom...</div>
+                </div>
+            </a>
+
+            <a href="day2.html" class="card-link">
+                <div class="card-item">
+                    <div class="card-number">Day 2</div>
+                    <span class="card-icon">🌙</span>
+                    <div class="card-title">Under the Stars</div>
+                    <div class="card-preview">Even the stars shine brighter...</div>
+                </div>
+            </a>
+
+            <a href="day3.html" class="card-link">
+                <div class="card-item">
+                    <div class="card-number">Day 3</div>
+                    <span class="card-icon">💕</span>
+                    <div class="card-title">My Sweetheart</div>
+                    <div class="card-preview">Every moment with you...</div>
+                </div>
+            </a>
+
+            <a href="day4.html" class="card-link">
+                <div class="card-item">
+                    <div class="card-number">Day 4</div>
+                    <span class="card-icon">🦋</span>
+                    <div class="card-title">My Darling</div>
+                    <div class="card-preview">Like a butterfly...</div>
+                </div>
+            </a>
+
+            <a href="day5.html" class="card-link">
+                <div class="card-item">
+                    <div class="card-number">Day 5</div>
+                    <span class="card-icon">✨</span>
+                    <div class="card-title">My Angel</div>
+                    <div class="card-preview">You are my guiding star...</div>
+                </div>
+            </a>
+
+            <a href="day6.html" class="card-link">
+                <div class="card-item">
+                    <div class="card-number">Day 6</div>
+                    <span class="card-icon">🌅</span>
+                    <div class="card-title">My Sunshine</div>
+                    <div class="card-preview">Every sunrise reminds me...</div>
+                </div>
+            </a>
+
+            <a href="day7.html" class="card-link">
+                <div class="card-item">
+                    <div class="card-number">Day 7</div>
+                    <span class="card-icon">🌊</span>
+                    <div class="card-title">My Ocean</div>
+                    <div class="card-preview">Deep and endless...</div>
+                </div>
+            </a>
+
+            <a href="day8.html" class="card-link">
+                <div class="card-item">
+                    <div class="card-number">Day 8</div>
+                    <span class="card-icon">🎵</span>
+                    <div class="card-title">My Melody</div>
+                    <div class="card-preview">Your love is the sweetest song...</div>
+                </div>
+            </a>
+
+            <a href="day9.html" class="card-link">
+                <div class="card-item">
+                    <div class="card-number">Day 9</div>
+                    <span class="card-icon">💖</span>
+                    <div class="card-title">My Future</div>
+                    <div class="card-preview">With you, every day is brighter...</div>
+                </div>
+            </a>
+
+            <a href="day10.html" class="card-link">
+                <div class="card-item">
+                    <div class="card-number">Day 10</div>
+                    <span class="card-icon">🌸</span>
+                    <div class="card-title">My Garden</div>
+                    <div class="card-preview">Like spring flowers...</div>
+                </div>
+            </a>
+
+            <a href="day11.html" class="card-link">
+                <div class="card-item">
+                    <div class="card-number">Day 11</div>
+                    <span class="card-icon">🌈</span>
+                    <div class="card-title">My Rainbow</div>
+                    <div class="card-preview">You bring color to my world...</div>
+                </div>
+            </a>
+
+            <a href="day12.html" class="card-link">
+                <div class="card-item">
+                    <div class="card-number">Day 12</div>
+                    <span class="card-icon">🎉</span>
+                    <div class="card-title">My Celebration</div>
+                    <div class="card-preview">Every day with you...</div>
+                </div>
+            </a>
+
+            <a href="day13.html" class="card-link">
+                <div class="card-item">
+                    <div class="card-number">Day 13</div>
+                    <span class="card-icon">🌌</span>
+                    <div class="card-title">My Universe</div>
+                    <div class="card-preview">In this vast universe...</div>
+                </div>
+            </a>
+
+            <a href="day14.html" class="card-link">
+                <div class="card-item">
+                    <div class="special-badge">SPECIAL</div>
+                    <div class="card-number">Day 14</div>
+                    <span class="card-icon">💖</span>
+                    <div class="card-title">Happy Valentine's Day</div>
+                    <div class="card-preview">The final day celebration...</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            const hearts = ['💖', '❤️', '💕', '💗', '💓', '💝'];
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 6) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 10000);
+        }
+
+        for (let i = 0; i < 25; i++) {
+            setTimeout(() => createHeart(), i * 300);
+        }
+        setInterval(createHeart, 2000);
+    </script>
+</body>
+</html>
+

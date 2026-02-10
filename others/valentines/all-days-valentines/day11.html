@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 11 - For Shobha 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Shadows Into Light', cursive;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 40px;
+            padding: 60px 50px;
+            max-width: 530px;
+            width: 90%;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            border: 4px solid #ffd700;
+        }
+
+        .day-number {
+            font-size: 1.3em;
+            color: #d63384;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 4.5em;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+        }
+
+        .name {
+            font-size: 3.2em;
+            color: #e91e63;
+            margin: 25px 0;
+            font-weight: 600;
+        }
+
+        .message {
+            font-size: 2em;
+            line-height: 1.8;
+            color: #333;
+            margin: 35px 0;
+        }
+
+        .rainbow {
+            font-size: 4em;
+            margin: 20px 0;
+            animation: rainbow 3s ease-in-out infinite;
+        }
+
+        @keyframes rainbow {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="day-number">Day 11 of 14</div>
+        <div class="rainbow">🌈</div>
+        <h1>My Rainbow</h1>
+        <div class="name">Shobha</div>
+        <p class="message">
+            You bring color to my world,<br>
+            painting my life with happiness.<br>
+            You are my beautiful rainbow.
+        </p>
+        <div class="rainbow">💖</div>
+    </div>
+</body>
+</html>
+
