@@ -112,7 +112,26 @@
         .card-link {
             text-decoration: none;
             color: inherit;
+            display: none;
+        }
+
+        .card-link:not(.hidden) {
             display: block;
+        }
+
+        .card-link.fade-in {
+            animation: fadeInCard 0.6s ease-out;
+        }
+
+        @keyframes fadeInCard {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
         .card-item {
@@ -284,7 +303,7 @@
         </div>
 
         <div class="cards-grid">
-            <a href="day1.html" class="card-link">
+            <a href="day1.html" class="card-link" data-day="1">
                 <div class="card-item">
                     <div class="card-number">Day 1</div>
                     <span class="card-icon">🌹</span>
@@ -293,7 +312,7 @@
                 </div>
             </a>
 
-            <a href="day2.html" class="card-link">
+            <a href="day2.html" class="card-link" data-day="2">
                 <div class="card-item">
                     <div class="card-number">Day 2</div>
                     <span class="card-icon">🌙</span>
@@ -302,7 +321,7 @@
                 </div>
             </a>
 
-            <a href="day3.html" class="card-link">
+            <a href="day3.html" class="card-link" data-day="3">
                 <div class="card-item">
                     <div class="card-number">Day 3</div>
                     <span class="card-icon">💕</span>
@@ -311,7 +330,7 @@
                 </div>
             </a>
 
-            <a href="day4.html" class="card-link">
+            <a href="day4.html" class="card-link" data-day="4">
                 <div class="card-item">
                     <div class="card-number">Day 4</div>
                     <span class="card-icon">🦋</span>
@@ -320,7 +339,7 @@
                 </div>
             </a>
 
-            <a href="day5.html" class="card-link">
+            <a href="day5.html" class="card-link" data-day="5">
                 <div class="card-item">
                     <div class="card-number">Day 5</div>
                     <span class="card-icon">✨</span>
@@ -329,7 +348,7 @@
                 </div>
             </a>
 
-            <a href="day6.html" class="card-link">
+            <a href="day6.html" class="card-link" data-day="6">
                 <div class="card-item">
                     <div class="card-number">Day 6</div>
                     <span class="card-icon">🌅</span>
@@ -338,7 +357,7 @@
                 </div>
             </a>
 
-            <a href="day7.html" class="card-link">
+            <a href="day7.html" class="card-link" data-day="7">
                 <div class="card-item">
                     <div class="card-number">Day 7</div>
                     <span class="card-icon">🌊</span>
@@ -347,7 +366,7 @@
                 </div>
             </a>
 
-            <a href="day8.html" class="card-link">
+            <a href="day8.html" class="card-link" data-day="8">
                 <div class="card-item">
                     <div class="card-number">Day 8</div>
                     <span class="card-icon">🎵</span>
@@ -356,7 +375,7 @@
                 </div>
             </a>
 
-            <a href="day9.html" class="card-link">
+            <a href="day9.html" class="card-link" data-day="9">
                 <div class="card-item">
                     <div class="card-number">Day 9</div>
                     <span class="card-icon">💖</span>
@@ -365,7 +384,7 @@
                 </div>
             </a>
 
-            <a href="day10.html" class="card-link">
+            <a href="day10.html" class="card-link" data-day="10">
                 <div class="card-item">
                     <div class="card-number">Day 10</div>
                     <span class="card-icon">🌸</span>
@@ -374,7 +393,7 @@
                 </div>
             </a>
 
-            <a href="day11.html" class="card-link">
+            <a href="day11.html" class="card-link" data-day="11">
                 <div class="card-item">
                     <div class="card-number">Day 11</div>
                     <span class="card-icon">🌈</span>
@@ -383,7 +402,7 @@
                 </div>
             </a>
 
-            <a href="day12.html" class="card-link">
+            <a href="day12.html" class="card-link" data-day="12">
                 <div class="card-item">
                     <div class="card-number">Day 12</div>
                     <span class="card-icon">🎉</span>
@@ -392,7 +411,7 @@
                 </div>
             </a>
 
-            <a href="day13.html" class="card-link">
+            <a href="day13.html" class="card-link" data-day="13">
                 <div class="card-item">
                     <div class="card-number">Day 13</div>
                     <span class="card-icon">🌌</span>
@@ -401,7 +420,7 @@
                 </div>
             </a>
 
-            <a href="day14.html" class="card-link">
+            <a href="day14.html" class="card-link" data-day="14">
                 <div class="card-item">
                     <div class="special-badge">SPECIAL</div>
                     <div class="card-number">Day 14</div>
@@ -414,6 +433,61 @@
     </div>
 
     <script>
+        // Date-based card visibility
+        function updateCardVisibility() {
+            const today = new Date();
+            const currentMonth = today.getMonth() + 1; // JavaScript months are 0-indexed
+            const currentDay = today.getDate();
+            
+            // Check if it's February (month 2)
+            let visibleDay = 0;
+            
+            if (currentMonth === 2) {
+                // It's February
+                if (currentDay >= 1 && currentDay <= 14) {
+                    visibleDay = currentDay;
+                } else if (currentDay > 14) {
+                    // After Feb 14, show all cards
+                    visibleDay = 14;
+                }
+                // If currentDay < 1, visibleDay remains 0 (no cards shown)
+            } else if (currentMonth > 2 || (currentMonth === 1 && currentDay > 31)) {
+                // After February, show all cards
+                visibleDay = 14;
+            }
+            // If before February, visibleDay remains 0
+            
+            // Update card visibility
+            const cardLinks = document.querySelectorAll('.card-link');
+            cardLinks.forEach((link, index) => {
+                const dayNumber = parseInt(link.getAttribute('data-day'));
+                
+                if (dayNumber <= visibleDay) {
+                    link.classList.remove('hidden');
+                    // Add fade-in animation with delay
+                    setTimeout(() => {
+                        link.classList.add('fade-in');
+                    }, index * 50);
+                } else {
+                    link.classList.add('hidden');
+                    link.classList.remove('fade-in');
+                }
+            });
+            
+            // Update header message based on date
+            const headerMessage = document.querySelector('.header p');
+            if (visibleDay === 0) {
+                headerMessage.textContent = 'The journey begins on February 1st... 💖';
+            } else if (visibleDay < 14) {
+                headerMessage.textContent = `Day ${visibleDay} of 14 - Click on any available card to open a special message 💕`;
+            } else {
+                headerMessage.textContent = 'All 14 days are now available! Click on any card to open a special message 💖';
+            }
+        }
+        
+        // Initialize card visibility on page load
+        updateCardVisibility();
+        
         function createHeart() {
             const heart = document.createElement('div');
             heart.className = 'heart';
