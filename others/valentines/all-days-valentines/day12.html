@@ -70,16 +70,17 @@
         .card {
             position: relative;
             z-index: 10;
-            background: white;
+            background: linear-gradient(135deg, #f5576c 0%, #f093fb 50%, #4facfe 100%);
             border-radius: 30px;
             padding: 55px 45px;
             max-width: 500px;
             width: 90%;
-            box-shadow: 0 25px 70px rgba(255, 105, 180, 0.4);
+            box-shadow: 0 25px 70px rgba(255, 20, 147, 0.4);
             text-align: center;
-            border: 5px solid #ff69b4;
+            border: 5px solid rgba(255, 255, 255, 0.3);
             animation: bounce 2s ease-in-out infinite;
             margin: 20px 0;
+            color: white;
         }
 
         @keyframes bounce {
@@ -89,29 +90,31 @@
 
         .day-number {
             font-size: 1.3em;
-            color: #d63384;
+            color: #ffd700;
             margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
         }
 
         h1 {
             font-size: 4em;
-            color: #e91e63;
+            color: #ffffff;
             margin-bottom: 20px;
-            text-shadow: 3px 3px 0px #ffb6c1;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .name {
             font-size: 3em;
-            color: #c2185b;
+            color: #ffd700;
             margin: 25px 0;
-            text-shadow: 2px 2px 0px #ffb6c1;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 215, 0, 0.6);
         }
 
         .message {
             font-size: 1.8em;
             line-height: 1.8;
-            color: #555;
+            color: rgba(255, 255, 255, 0.95);
             margin: 30px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .party {
