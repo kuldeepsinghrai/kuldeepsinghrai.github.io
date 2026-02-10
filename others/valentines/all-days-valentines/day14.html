@@ -28,10 +28,31 @@
             padding: 20px;
         }
 
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 105, 180, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(138, 43, 226, 0.3) 0%, transparent 50%);
+            animation: pulseGlow 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
         .hearts {
@@ -44,24 +65,31 @@
 
         .heart {
             position: absolute;
-            font-size: 30px;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 35px;
+            color: rgba(255, 255, 255, 0.9);
             animation: float 8s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.6));
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
         }
 
         @keyframes float {
             0%, 100% {
-                transform: translateY(100vh) rotate(0deg);
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
                 opacity: 0;
             }
             10% {
                 opacity: 1;
+                transform: translateY(90vh) rotate(36deg) scale(1);
+            }
+            50% {
+                transform: translateY(50vh) rotate(180deg) scale(1.2);
             }
             90% {
                 opacity: 1;
+                transform: translateY(10vh) rotate(324deg) scale(1);
             }
             100% {
-                transform: translateY(-100px) rotate(360deg);
+                transform: translateY(-100px) rotate(360deg) scale(0.8);
                 opacity: 0;
             }
         }
@@ -69,88 +97,246 @@
         .card {
             position: relative;
             z-index: 10;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 40px;
-            padding: 70px 60px;
-            max-width: 600px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 200% 200%;
+            animation: fadeIn 1.5s ease-out, cardGlow 3s ease-in-out infinite, gradientMove 8s ease infinite;
+            border-radius: 50px;
+            padding: 80px 70px;
+            max-width: 650px;
             width: 90%;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+            box-shadow: 
+                0 20px 60px rgba(255, 105, 180, 0.4),
+                0 40px 100px rgba(255, 20, 147, 0.3),
+                0 0 100px rgba(255, 215, 0, 0.3);
             text-align: center;
-            border: 5px solid #ffd700;
-            animation: fadeIn 1s ease-out;
+            border: 3px solid rgba(255, 215, 0, 0.5);
             margin: 20px 0;
+            overflow: hidden;
+            color: white;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 215, 0, 0.1) 50%,
+                transparent 70%
+            );
+            animation: shine 4s linear infinite;
+            pointer-events: none;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50px;
+            padding: 3px;
+            background: linear-gradient(135deg, #ffd700, #ff69b4, #ff1493, #ffd700);
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderRotate 5s linear infinite;
+            pointer-events: none;
+            opacity: 0.6;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: scale(0.9);
+                transform: scale(0.85) translateY(30px);
             }
             to {
                 opacity: 1;
-                transform: scale(1);
+                transform: scale(1) translateY(0);
             }
         }
 
+        @keyframes cardGlow {
+            0%, 100% {
+                box-shadow: 
+                    0 20px 60px rgba(255, 105, 180, 0.4),
+                    0 40px 100px rgba(255, 20, 147, 0.3),
+                    0 0 100px rgba(255, 215, 0, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 20px 80px rgba(255, 105, 180, 0.6),
+                    0 40px 120px rgba(255, 20, 147, 0.5),
+                    0 0 150px rgba(255, 215, 0, 0.5);
+            }
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        @keyframes borderRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .day-number {
-            font-size: 1.5em;
-            color: #d63384;
+            font-size: 1.6em;
+            color: #ffd700;
             margin-bottom: 25px;
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+            animation: textShimmer 3s ease-in-out infinite;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes textShimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
         }
 
         .special-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 5em;
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
+            font-size: 5.5em;
+            color: #ffffff;
+            margin-bottom: 25px;
             animation: pulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.5), 0 0 50px rgba(255, 215, 0, 0.4);
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.08); }
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .name {
             font-family: 'Dancing Script', cursive;
-            font-size: 4em;
-            color: #e91e63;
-            margin: 30px 0;
+            font-size: 4.5em;
+            color: #ffd700;
+            margin: 35px 0;
             font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            animation: nameGlow 3s ease-in-out infinite;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6);
+        }
+
+        @keyframes nameGlow {
+            0%, 100% { 
+                text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6);
+            }
+            50% { 
+                text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 215, 0, 0.8);
+            }
         }
 
         .message {
-            font-size: 1.6em;
-            line-height: 2;
-            color: #333;
-            margin: 40px 0;
+            font-size: 1.7em;
+            line-height: 2.2;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 45px 0;
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 2s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .poem {
             font-family: 'Dancing Script', cursive;
-            font-size: 1.8em;
-            line-height: 2.2;
-            color: #555;
-            margin: 30px 0;
+            font-size: 2em;
+            line-height: 2.4;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 40px 0;
             font-style: italic;
+            position: relative;
+            z-index: 1;
+            animation: poemFade 3s ease-in-out infinite;
+            padding: 20px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes poemFade {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; }
         }
 
         .big-heart {
-            font-size: 5em;
-            margin: 30px 0;
-            animation: heartbeat 1.5s ease-in-out infinite;
+            font-size: 6em;
+            margin: 35px 0;
+            animation: heartbeat 1.5s ease-in-out infinite, heartFloat 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.6));
+            display: inline-block;
+        }
+
+        .big-heart::before {
+            content: attr(data-heart);
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 1em;
+            opacity: 0.5;
+            animation: heartPulse 1.5s ease-in-out infinite;
+            filter: blur(10px);
         }
 
         @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.3); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.2); }
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.4) rotate(-5deg); }
+            50% { transform: scale(1) rotate(0deg); }
+            75% { transform: scale(1.3) rotate(5deg); }
+        }
+
+        @keyframes heartFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 0.2; }
         }
 
         .sparkles {
@@ -162,29 +348,64 @@
 
         .sparkle {
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background: white;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #ffd700, #ff69b4);
             border-radius: 50%;
             animation: sparkle 2s ease-out forwards;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        .sparkle::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
+            border-radius: 50%;
+            animation: sparkleInner 2s ease-out forwards;
         }
 
         @keyframes sparkle {
             0% {
                 opacity: 1;
-                transform: scale(0) translateY(0);
+                transform: scale(0) translateY(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5) translateY(-50px) rotate(180deg);
             }
             100% {
                 opacity: 0;
-                transform: scale(2) translateY(-100px);
+                transform: scale(0) translateY(-100px) rotate(360deg);
             }
+        }
+
+        @keyframes sparkleInner {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(2); opacity: 0.8; }
+            100% { transform: scale(4); opacity: 0; }
         }
 
         .signature {
             font-family: 'Dancing Script', cursive;
-            font-size: 2em;
-            color: #d63384;
-            margin-top: 30px;
+            font-size: 2.2em;
+            color: #ffd700;
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+            animation: signatureGlow 2s ease-in-out infinite;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+
+        @keyframes signatureGlow {
+            0%, 100% { 
+                text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 215, 0, 0.8);
+            }
+            50% { 
+                text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 215, 0, 1);
+            }
         }
 
         @media (max-width: 768px) {
@@ -192,45 +413,64 @@
                 padding: 15px;
             }
             .card {
-                padding: 50px 40px;
+                padding: 60px 50px;
                 max-width: 100%;
                 width: 100%;
+                border-radius: 40px;
+            }
+            .card::after {
+                border-radius: 40px;
             }
             .special-title {
-                font-size: 3.5em;
+                font-size: 4em;
             }
             .name {
-                font-size: 3em;
+                font-size: 3.5em;
             }
             .message {
-                font-size: 1.3em;
-            }
-            .poem {
                 font-size: 1.4em;
             }
-            .signature {
+            .poem {
                 font-size: 1.6em;
+                padding: 15px;
+            }
+            .signature {
+                font-size: 1.8em;
+            }
+            .big-heart {
+                font-size: 5em;
             }
         }
 
         @media (max-width: 480px) {
             .card {
-                padding: 40px 30px;
+                padding: 50px 35px;
+                border-radius: 35px;
+            }
+            .card::after {
+                border-radius: 35px;
             }
             .special-title {
-                font-size: 2.8em;
+                font-size: 3.2em;
             }
             .name {
-                font-size: 2.5em;
+                font-size: 2.8em;
             }
             .message {
-                font-size: 1.1em;
-            }
-            .poem {
                 font-size: 1.2em;
             }
-            .signature {
+            .poem {
                 font-size: 1.4em;
+                padding: 12px;
+            }
+            .signature {
+                font-size: 1.5em;
+            }
+            .big-heart {
+                font-size: 4em;
+            }
+            .day-number {
+                font-size: 1.3em;
             }
         }
     </style>
@@ -241,7 +481,7 @@
     
     <div class="card">
         <div class="day-number">Day 14 - Final Day! 💖</div>
-        <div class="big-heart">💖</div>
+        <div class="big-heart" data-heart="💖">💖</div>
         <h1 class="special-title">Happy Valentine's Day</h1>
         <div class="name">My Dearest Shobha</div>
         <p class="message">
@@ -256,7 +496,7 @@
             Today and always,<br>
             I love you more than words can say.
         </div>
-        <div class="big-heart">❤️</div>
+        <div class="big-heart" data-heart="❤️">❤️</div>
         <div class="signature">With all my love, forever and always 💕</div>
     </div>
 
@@ -288,20 +528,35 @@
         }
 
         // Initialize hearts
-        for (let i = 0; i < 30; i++) {
-            setTimeout(() => createHeart(), i * 300);
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => createHeart(), i * 200);
         }
-        setInterval(createHeart, 1500);
+        setInterval(createHeart, 1000);
 
         // Create continuous sparkles
-        setInterval(createSparkle, 200);
+        setInterval(createSparkle, 150);
 
         // Create burst of sparkles on load
         setTimeout(() => {
-            for (let i = 0; i < 100; i++) {
-                setTimeout(() => createSparkle(), i * 30);
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => createSparkle(), i * 20);
             }
         }, 500);
+
+        // Add interactive sparkles on card hover
+        const card = document.querySelector('.card');
+        card.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.7) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                const rect = card.getBoundingClientRect();
+                sparkle.style.left = (e.clientX - rect.left) + 'px';
+                sparkle.style.top = (e.clientY - rect.top) + 'px';
+                sparkle.style.animationDuration = '1s';
+                card.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 1000);
+            }
+        });
     </script>
 </body>
 </html>
