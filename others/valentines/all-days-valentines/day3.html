@@ -20,8 +20,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             position: relative;
+            padding: 20px;
         }
 
         .floating-hearts {
@@ -66,6 +68,7 @@
             box-shadow: 0 25px 70px rgba(219, 39, 119, 0.3);
             text-align: center;
             border: 3px solid #ff69b4;
+            margin: 20px 0;
         }
 
         .day-number {
@@ -108,6 +111,41 @@
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .card {
+                padding: 40px 30px;
+                max-width: 100%;
+                width: 100%;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            .name {
+                font-size: 2em;
+            }
+            .message {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .name {
+                font-size: 1.6em;
+            }
+            .message {
+                font-size: 1em;
+            }
         }
     </style>
 </head>

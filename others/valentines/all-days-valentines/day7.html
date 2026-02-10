@@ -20,8 +20,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             position: relative;
+            padding: 20px;
         }
 
         .ocean {
@@ -79,6 +81,7 @@
             width: 90%;
             box-shadow: 0 25px 70px rgba(0, 150, 255, 0.4);
             text-align: center;
+            margin: 20px 0;
         }
 
         .day-number {
@@ -118,6 +121,41 @@
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .card {
+                padding: 40px 30px;
+                max-width: 100%;
+                width: 100%;
+            }
+            h1 {
+                font-size: 3em;
+            }
+            .name {
+                font-size: 2.2em;
+            }
+            .message {
+                font-size: 1.5em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            .name {
+                font-size: 1.8em;
+            }
+            .message {
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>
