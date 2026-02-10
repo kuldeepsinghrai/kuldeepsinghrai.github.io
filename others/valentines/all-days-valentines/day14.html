@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 14 - For Shobha 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .card {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 40px;
+            padding: 70px 60px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            border: 5px solid #ffd700;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .day-number {
+            font-size: 1.5em;
+            color: #d63384;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .special-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5em;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4em;
+            color: #e91e63;
+            margin: 30px 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            font-size: 1.6em;
+            line-height: 2;
+            color: #333;
+            margin: 40px 0;
+        }
+
+        .poem {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8em;
+            line-height: 2.2;
+            color: #555;
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        .big-heart {
+            font-size: 5em;
+            margin: 30px 0;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.3); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.2); }
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 2s ease-out forwards;
+        }
+
+        @keyframes sparkle {
+            0% {
+                opacity: 1;
+                transform: scale(0) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2) translateY(-100px);
+            }
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2em;
+            color: #d63384;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    <div class="sparkles" id="sparkles"></div>
+    
+    <div class="card">
+        <div class="day-number">Day 14 - Final Day! 💖</div>
+        <div class="big-heart">💖</div>
+        <h1 class="special-title">Happy Valentine's Day</h1>
+        <div class="name">My Dearest Shobha</div>
+        <p class="message">
+            These 14 days have been a journey of love,<br>
+            each day reminding me how blessed I am to have you.
+        </p>
+        <div class="poem">
+            You are my light, my joy, my everything.<br>
+            In your eyes, I found my home.<br>
+            In your smile, I found my happiness.<br>
+            In your love, I found my forever.<br><br>
+            Today and always,<br>
+            I love you more than words can say.
+        </div>
+        <div class="big-heart">❤️</div>
+        <div class="signature">With all my love, forever and always 💕</div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            const hearts = ['💖', '❤️', '💕', '💗', '💓', '💝', '💘'];
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 6) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 10000);
+        }
+
+        // Create sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 0.5 + 's';
+            document.getElementById('sparkles').appendChild(sparkle);
+            
+            setTimeout(() => sparkle.remove(), 2000);
+        }
+
+        // Initialize hearts
+        for (let i = 0; i < 30; i++) {
+            setTimeout(() => createHeart(), i * 300);
+        }
+        setInterval(createHeart, 1500);
+
+        // Create continuous sparkles
+        setInterval(createSparkle, 200);
+
+        // Create burst of sparkles on load
+        setTimeout(() => {
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => createSparkle(), i * 30);
+            }
+        }, 500);
+    </script>
+</body>
+</html>
+

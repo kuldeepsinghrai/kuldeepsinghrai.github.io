@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3 - For Shobha 💗</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffd6e8 50%, #ffc0e1 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 25px;
+            animation: float 8s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .card {
+            position: relative;
+            z-index: 10;
+            background: white;
+            border-radius: 25px;
+            padding: 50px 45px;
+            max-width: 550px;
+            width: 90%;
+            box-shadow: 0 25px 70px rgba(219, 39, 119, 0.3);
+            text-align: center;
+            border: 3px solid #ff69b4;
+        }
+
+        .day-number {
+            font-size: 1em;
+            color: #d63384;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-size: 3.2em;
+            color: #c2185b;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .name {
+            font-size: 2.5em;
+            color: #e91e63;
+            margin: 25px 0;
+            font-weight: 600;
+        }
+
+        .message {
+            font-size: 1.4em;
+            line-height: 2;
+            color: #555;
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        .decorative-heart {
+            font-size: 2.5em;
+            margin: 15px;
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="hearts"></div>
+    
+    <div class="card">
+        <div class="day-number">Day 3 of 14</div>
+        <div>
+            <span class="decorative-heart">💕</span>
+            <span class="decorative-heart" style="animation-delay: 0.2s;">💖</span>
+            <span class="decorative-heart" style="animation-delay: 0.4s;">💗</span>
+        </div>
+        <h1>My Sweetheart</h1>
+        <div class="name">Shobha</div>
+        <p class="message">
+            Every moment with you<br>
+            is a treasure I hold dear.<br>
+            Your love makes every day special.
+        </p>
+        <div>
+            <span class="decorative-heart">💝</span>
+            <span class="decorative-heart" style="animation-delay: 0.3s;">💓</span>
+            <span class="decorative-heart" style="animation-delay: 0.6s;">❤️</span>
+        </div>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            const hearts = ['💖', '❤️', '💕', '💗', '💓'];
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 6) + 's';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 9000);
+        }
+
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => createHeart(), i * 400);
+        }
+        setInterval(createHeart, 2000);
+    </script>
+</body>
+</html>
+

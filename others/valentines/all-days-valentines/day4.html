@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 4 - For Shobha 💝</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Parisienne', cursive;
+            background: linear-gradient(45deg, #ff6b9d, #c44569, #f8b500, #ff6b9d);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 40px;
+            padding: 60px 50px;
+            max-width: 520px;
+            width: 90%;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 182, 193, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .day-number {
+            font-size: 1.3em;
+            color: #d63384;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 4em;
+            color: #e91e63;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 3em;
+            color: #c2185b;
+            margin: 25px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .message {
+            font-size: 1.8em;
+            line-height: 1.8;
+            color: #555;
+            margin: 35px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .butterfly {
+            font-size: 3em;
+            margin: 20px;
+            display: inline-block;
+            animation: flutter 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes flutter {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(-5deg); }
+            50% { transform: translateY(-10px) rotate(0deg); }
+            75% { transform: translateY(-15px) rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="day-number">Day 4 of 14</div>
+        <div class="butterfly">🦋</div>
+        <h1>My Darling</h1>
+        <div class="name">Shobha</div>
+        <p class="message">
+            Like a butterfly,<br>
+            you bring color and joy to my world.<br>
+            Your presence makes everything beautiful.
+        </p>
+        <div class="butterfly" style="animation-delay: 0.5s;">💐</div>
+    </div>
+</body>
+</html>
+
