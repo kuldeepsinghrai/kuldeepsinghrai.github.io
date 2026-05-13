@@ -1,346 +1,1210 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuldeep Singh · App Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 
-  <head>
+:root{
+  --blue:#007AFF;
+  --green:#34C759;
+  --red:#FF3B30;
+  --orange:#FF9500;
+  --purple:#AF52DE;
+  --teal:#5AC8FA;
+  --gray:#8E8E93;
+  --gray2:#AEAEB2;
+  --gray3:#C7C7CC;
+  --gray4:#D1D1D6;
+  --gray5:#E5E5EA;
+  --gray6:#F2F2F7;
+  --label:rgba(0,0,0,1);
+  --label2:rgba(60,60,67,0.6);
+  --label3:rgba(60,60,67,0.3);
+  --sep:rgba(60,60,67,0.18);
+  --fn:-apple-system,'Inter',sans-serif;
+}
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+body{
+  background:linear-gradient(145deg,#0d1117 0%,#161b22 50%,#0d1117 100%);
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--fn);
+  padding:30px 16px 50px;
+  overflow-x:hidden;
+  user-select:none;
+}
 
-    <title>Kuldeep Singh Rai</title>
+/* ── PHONE ── */
+.wrap{display:flex;flex-direction:column;align-items:center;gap:14px;}
 
-    <link rel="icon" href="assets/img/profile.jpg" type="image/x-icon">
+.phone{
+  width:393px;height:852px;
+  background:#1c1c1e;
+  border-radius:56px;
+  padding:2.5px;
+  position:relative;
+  box-shadow:
+    0 0 0 .5px rgba(255,255,255,.18),
+    0 0 0 1px #000,
+    0 50px 100px rgba(0,0,0,.8),
+    0 100px 200px rgba(0,0,0,.5),
+    inset 0 0 0 1px rgba(255,255,255,.04);
+  flex-shrink:0;
+}
+.phone::before{
+  content:'';position:absolute;
+  left:-3.5px;top:128px;
+  width:3.5px;height:34px;
+  background:#2c2c2e;border-radius:2px 0 0 2px;
+  box-shadow:0 48px 0 #2c2c2e,0 96px 0 #2c2c2e;
+}
+.phone::after{
+  content:'';position:absolute;
+  right:-3.5px;top:168px;
+  width:3.5px;height:74px;
+  background:#2c2c2e;border-radius:0 2px 2px 0;
+}
 
-    <!-- Bootstrap core CSS -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+.screen{
+  width:100%;height:100%;
+  border-radius:54px;
+  overflow:hidden;
+  position:relative;
+  background:#000;
+}
 
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/vendor/devicons/css/devicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+/* ── DYNAMIC ISLAND ── */
+.di{
+  position:absolute;top:12px;left:50%;
+  transform:translateX(-50%);
+  z-index:1000;
+  background:#000;
+  border-radius:22px;
+  width:126px;height:37px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  cursor:pointer;
+  transition:width .5s cubic-bezier(.34,1.4,.64,1),
+             height .5s cubic-bezier(.34,1.4,.64,1),
+             border-radius .5s cubic-bezier(.34,1.4,.64,1);
+  overflow:hidden;
+}
+.di.pill{width:260px;}
+.di.expanded{width:354px;height:88px;border-radius:30px;top:10px;}
+.di-cam{
+  width:12px;height:12px;background:#111;
+  border-radius:50%;border:2px solid #2a2a2a;
+  position:relative;flex-shrink:0;
+  transition:opacity .3s;
+}
+.di-cam::after{
+  content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:4px;height:4px;background:#0a2540;border-radius:50%;
+}
+.di-notif{
+  display:none;flex:1;
+  align-items:center;gap:9px;
+  padding:0 10px 0 0;
+  opacity:0;
+  transition:opacity .25s .2s;
+}
+.di.pill .di-notif,.di.expanded .di-notif{display:flex;opacity:1;}
+.di.expanded .di-notif{padding:14px 14px 14px 4px;align-items:flex-start;flex-direction:row;}
+.di-n-icon{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.di-n-text{flex:1;min-width:0;}
+.di-n-title{font-size:12.5px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.di-n-body{font-size:11px;color:rgba(255,255,255,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.di-n-time{font-size:10px;color:rgba(255,255,255,.35);flex-shrink:0;padding-top:2px;}
 
-    <link href="assets/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+/* ── STATUS BAR ── */
+.sb{
+  position:absolute;top:0;left:0;right:0;
+  height:59px;z-index:500;
+  display:flex;align-items:flex-end;
+  justify-content:space-between;
+  padding:0 32px 10px;
+  pointer-events:none;
+}
+.sb-t{font-size:15px;font-weight:600;letter-spacing:-.2px;}
+.sb-r{display:flex;align-items:center;gap:6px;}
+.sig{display:flex;align-items:flex-end;gap:2px;height:12px;}
+.sig span{width:3px;border-radius:1px;}
+.batt{
+  width:26px;height:13px;
+  border:1.5px solid currentColor;
+  border-radius:4px;padding:2px;
+  position:relative;opacity:.9;
+}
+.batt::after{
+  content:'';position:absolute;
+  right:-5px;top:50%;transform:translateY(-50%);
+  width:3px;height:6px;
+  border-radius:0 2px 2px 0;
+  background:currentColor;opacity:.4;
+}
+.batt-f{width:72%;height:100%;border-radius:1.5px;}
+.sb.dark .sb-t,.sb.dark .sig span,.sb.dark svg{color:#fff;}
+.sb.dark .batt-f{background:#34C759;}
+.sb.dark .batt{border-color:rgba(255,255,255,.75);}
+.sb.light .sb-t,.sb.light svg{color:#000;}
+.sb.light .sig span{background:#000;}
+.sb.light .batt{border-color:rgba(0,0,0,.5);}
+.sb.light .batt-f{background:#34C759;}
+.sb.light .batt::after{background:rgba(0,0,0,.4);}
 
-    <!-- Custom styles for this template -->
-    <link href="assets/css/resume.min.css" rel="stylesheet">
+/* ── LOCK SCREEN ── */
+#lock{
+  position:absolute;inset:0;z-index:400;
+  border-radius:54px;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;
+  transition:transform .65s cubic-bezier(.32,.72,0,1),opacity .4s;
+}
+#lock.out{transform:translateY(-102%);opacity:0;pointer-events:none;}
 
-  </head>
+.lk-wall{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 25% 20%,rgba(100,80,220,.5),transparent 50%),
+    radial-gradient(ellipse at 75% 65%,rgba(40,130,255,.4),transparent 50%),
+    radial-gradient(ellipse at 50% 95%,rgba(220,80,120,.25),transparent 50%),
+    linear-gradient(180deg,#0a0a2a,#12084a 50%,#080e2a);
+}
 
-  <body id="page-top">
+.lk-time-block{
+  margin-top:82px;
+  text-align:center;
+  position:relative;z-index:1;
+}
+.lk-h{font-size:82px;font-weight:200;color:#fff;letter-spacing:-4px;line-height:1;font-variant-numeric:tabular-nums;}
+.lk-d{font-size:18px;font-weight:400;color:rgba(255,255,255,.82);margin-top:6px;}
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        <span class="d-block d-lg-none">Kuldeep Singh Rai</span>
-        <span class="d-none d-lg-block">
-          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="">
-        </span>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#education">Education</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
-          </li>
+.lk-notifs{
+  margin-top:24px;width:352px;
+  display:flex;flex-direction:column;gap:9px;
+  position:relative;z-index:1;
+}
+.lk-n{
+  background:rgba(255,255,255,.16);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:16px;padding:13px 15px;
+  display:flex;gap:11px;align-items:flex-start;
+  animation:nslide .5s cubic-bezier(.34,1.3,.64,1) both;
+}
+.lk-n:nth-child(2){animation-delay:.08s;}
+.lk-n:nth-child(3){animation-delay:.16s;}
+@keyframes nslide{from{opacity:0;transform:translateY(18px) scale(.96);}to{opacity:1;transform:none;}}
+.lk-n-ico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.lk-n-app{font-size:11px;font-weight:600;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.5px;margin-bottom:1px;}
+.lk-n-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:2px;}
+.lk-n-body{font-size:13px;color:rgba(255,255,255,.72);line-height:1.35;}
+.lk-n-t{font-size:11px;color:rgba(255,255,255,.4);flex-shrink:0;margin-top:2px;}
 
+.lk-bottom{
+  margin-top:auto;margin-bottom:28px;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  position:relative;z-index:1;width:100%;
+}
+.lk-row{display:flex;justify-content:space-between;width:280px;}
+.lk-btn{
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(255,255,255,.16);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+}
+.lk-hint{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+}
+.lk-up{animation:upbounce 2s ease-in-out infinite;}
+@keyframes upbounce{0%,100%{transform:translateY(5px);opacity:.35;}50%{transform:translateY(-3px);opacity:.9;}}
+.lk-bar{width:134px;height:5px;background:rgba(255,255,255,.3);border-radius:3px;cursor:pointer;}
 
-<!-- Uncomment to add Interest and Awards Section -->
-<!-- 
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#awards">Awards</a>
-          </li> -->
+/* ── HOME SCREEN ── */
+#home{
+  position:absolute;inset:0;z-index:300;
+  border-radius:54px;overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:transform .45s cubic-bezier(.32,.72,0,1),
+             opacity .3s;
+  transform-origin:50% 50%;
+}
+#home.scaled{transform:scale(.92) translateY(2%);opacity:0;pointer-events:none;}
 
+.hw{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 20% 10%,rgba(90,140,255,.4),transparent 55%),
+    radial-gradient(ellipse at 80% 80%,rgba(150,90,255,.3),transparent 55%),
+    radial-gradient(ellipse at 55% 45%,rgba(255,200,80,.1),transparent 60%),
+    linear-gradient(160deg,#c8d8f8 0%,#d8c8f8 50%,#c8d8f8 100%);
+}
 
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="https://drive.google.com/file/d/1sCWV4LSbFSSGDClj5Iokuipy4p5A94_H/view?usp=sharing" target="_blank">Download CV</a>
-          </li>
+.home-body{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  position:relative;z-index:1;
+  padding-top:59px;
+  overscroll-behavior:none;
+}
+.home-body::-webkit-scrollbar{display:none;}
 
+.page{
+  padding:16px 20px 8px;
+  min-height:calc(852px - 59px - 98px);
+}
 
-          <!-- Uncomment to add Cli nav item -->
-          <!-- 
-                    <li class="nav-item">
-                      <a class="nav-link js-scroll-trigger" href="/cli.html">CLI Mode</a>
-                    </li> -->
+/* Profile widget */
+.pw{
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.85);
+  border-radius:22px;
+  padding:15px;margin-bottom:14px;
+  display:flex;gap:12px;align-items:center;
+  cursor:pointer;
+  box-shadow:0 2px 16px rgba(0,0,0,.08);
+  transition:transform .12s cubic-bezier(.34,1.56,.64,1);
+}
+.pw:active{transform:scale(.97);}
+.pw-av{
+  width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,#34C759,#007AFF);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:800;color:#fff;flex-shrink:0;
+  letter-spacing:-1px;
+}
+.pw-name{font-size:15px;font-weight:700;color:rgba(10,10,30,.9);}
+.pw-role{font-size:12px;color:rgba(10,10,30,.5);font-weight:500;margin-top:1px;}
+.pw-loc{font-size:11px;color:rgba(10,10,30,.38);margin-top:2px;}
 
-        </ul>
+/* Search */
+.srch{
+  background:rgba(118,118,128,.14);
+  border-radius:12px;height:36px;
+  display:flex;align-items:center;padding:0 12px;gap:7px;
+  margin-bottom:14px;cursor:pointer;
+}
+.srch span{font-size:15px;color:rgba(60,60,67,.5);}
+
+/* App grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px 10px;
+}
+.ai{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  cursor:pointer;position:relative;
+}
+.ai-ico{
+  width:62px;height:62px;border-radius:15.5px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(0,0,0,.2),
+             0 1px 3px rgba(0,0,0,.15),
+             inset 0 1px 0 rgba(255,255,255,.35);
+  position:relative;overflow:hidden;
+  transition:transform .12s cubic-bezier(.34,1.56,.64,1);
+  flex-shrink:0;
+}
+.ai-ico::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,transparent 48%);
+  pointer-events:none;z-index:10;border-radius:15.5px;
+}
+.ai-ico svg{width:34px;height:34px;position:relative;z-index:1;}
+.ai:active .ai-ico{transform:scale(.84);}
+.ai-lbl{
+  font-size:11px;font-weight:500;
+  color:rgba(20,20,40,.85);
+  text-align:center;width:68px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  text-shadow:0 1px 2px rgba(255,255,255,.6);
+}
+.bdg{
+  position:absolute;top:-3px;right:-3px;
+  background:#FF3B30;color:#fff;
+  font-size:9px;font-weight:700;
+  padding:1.5px 5px;border-radius:10px;
+  min-width:17px;line-height:13px;text-align:center;
+  border:2px solid transparent;z-index:20;
+}
+
+/* Dock */
+.dock{padding:8px 18px 30px;flex-shrink:0;position:relative;z-index:2;}
+.dock-in{
+  background:rgba(255,255,255,.52);
+  backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);
+  border:1px solid rgba(255,255,255,.72);
+  border-radius:30px;padding:12px 16px;
+  display:flex;justify-content:space-around;align-items:center;
+  box-shadow:0 2px 20px rgba(0,0,0,.1);
+}
+.di2{
+  width:58px;height:58px;border-radius:14.5px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.35);
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .12s cubic-bezier(.34,1.56,.64,1);
+}
+.di2::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,transparent 48%);
+  border-radius:14.5px;z-index:10;
+}
+.di2 svg{width:30px;height:30px;position:relative;z-index:1;}
+.di2:active{transform:scale(.86);}
+
+/* Page dots */
+.dots{
+  display:flex;justify-content:center;gap:6px;
+  padding:6px 0 10px;position:relative;z-index:2;
+}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(20,20,40,.28);}
+.dot.on{background:rgba(20,20,40,.68);}
+
+/* ── APP VIEWS ── */
+.av{
+  position:absolute;inset:0;z-index:350;
+  border-radius:54px;overflow:hidden;
+  display:none;flex-direction:column;
+  transform:translateY(105%);
+  transition:transform .55s cubic-bezier(.32,.72,0,1);
+}
+.av.show{display:flex;}
+.av.visible{transform:translateY(0);}
+.av.closing{transform:translateY(105%);}
+
+/* Nav bar */
+.nav{
+  height:88px;display:flex;align-items:flex-end;
+  padding:0 20px 12px;flex-shrink:0;
+  position:relative;z-index:10;
+}
+.nav-back{
+  display:flex;align-items:center;gap:5px;
+  color:var(--blue);font-size:17px;font-weight:400;
+  cursor:pointer;padding:8px 0;
+  transition:opacity .15s;
+}
+.nav-back:active{opacity:.5;}
+.nav-title{
+  position:absolute;left:50%;bottom:12px;transform:translateX(-50%);
+  font-size:17px;font-weight:600;color:#000;white-space:nowrap;
+}
+
+/* Scrollable content */
+.ac{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:none;}
+.ac::-webkit-scrollbar{display:none;}
+
+/* Home indicator */
+.hi{
+  height:34px;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.hb{
+  width:134px;height:5px;
+  background:rgba(0,0,0,.18);border-radius:3px;
+  cursor:pointer;transition:background .2s;
+}
+.hb:active{background:rgba(0,0,0,.35);}
+
+/* ── iOS COMPONENTS ── */
+.sec-lbl{
+  font-size:13px;font-weight:400;color:var(--label2);
+  padding:0 20px 6px;text-transform:uppercase;letter-spacing:.4px;
+}
+.ios-list{
+  background:#fff;
+  border-top:.5px solid var(--sep);
+  border-bottom:.5px solid var(--sep);
+}
+.ios-row{
+  display:flex;align-items:center;
+  padding:12px 20px;
+  border-bottom:.5px solid rgba(60,60,67,.1);
+  gap:13px;cursor:pointer;
+  transition:background .08s;
+  background:#fff;text-decoration:none;
+}
+.ios-row:last-child{border-bottom:none;}
+.ios-row:active{background:#e5e5ea;}
+.rr-ico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.rr-label{font-size:17px;color:#000;flex:1;}
+.rr-val{font-size:16px;color:var(--label2);}
+.rr-chev{color:var(--gray3);flex-shrink:0;}
+
+.gap{height:20px;}
+.bpad{height:24px;}
+
+/* ABOUT */
+#avAbout{background:#f2f2f7;}
+.a-hero{
+  background:#fff;padding:28px 20px 22px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  border-bottom:.5px solid var(--sep);
+}
+.a-ring{
+  width:88px;height:88px;border-radius:50%;
+  padding:2.5px;
+  background:linear-gradient(135deg,#34C759,#007AFF,#AF52DE);
+  margin-bottom:14px;
+}
+.a-ring-in{
+  width:100%;height:100%;border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;font-weight:700;color:var(--blue);
+}
+.a-name{font-size:24px;font-weight:700;color:#000;margin-bottom:4px;}
+.a-role{font-size:14px;color:var(--blue);font-weight:600;margin-bottom:8px;}
+.a-loc{font-size:13px;color:var(--label2);display:flex;align-items:center;justify-content:center;gap:4px;}
+
+.stats3{
+  display:flex;background:#fff;
+  border-top:.5px solid var(--sep);border-bottom:.5px solid var(--sep);
+  margin-top:20px;
+}
+.s3{flex:1;padding:16px 10px;text-align:center;border-right:.5px solid rgba(60,60,67,.1);}
+.s3:last-child{border-right:none;}
+.s3-n{font-size:26px;font-weight:700;color:var(--blue);display:block;}
+.s3-l{font-size:11px;color:var(--label2);font-weight:500;margin-top:2px;}
+
+.bio-card{
+  background:#fff;margin-top:20px;
+  border-top:.5px solid var(--sep);border-bottom:.5px solid var(--sep);
+  padding:16px 20px;
+}
+.bio-text{font-size:15px;color:#000;line-height:1.6;}
+
+/* EXPERIENCE */
+#avExp{background:#f2f2f7;}
+.exp-card{
+  background:#fff;
+  border-top:.5px solid var(--sep);border-bottom:.5px solid var(--sep);
+  margin-bottom:1px;overflow:hidden;
+}
+.exp-hd{
+  padding:16px 20px;display:flex;gap:13px;align-items:flex-start;
+  cursor:pointer;transition:background .08s;
+}
+.exp-hd:active{background:#f5f5f5;}
+.exp-badge{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:800;color:#fff;flex-shrink:0;
+  box-shadow:0 2px 8px rgba(0,0,0,.14);
+}
+.exp-inf{flex:1;}
+.exp-role{font-size:16px;font-weight:600;color:#000;margin-bottom:2px;}
+.exp-co{font-size:14px;color:var(--label2);margin-bottom:2px;}
+.exp-dt{font-size:12px;color:var(--label3);}
+.exp-chev{color:var(--gray3);transition:transform .3s;flex-shrink:0;margin-top:4px;}
+.exp-chev.open{transform:rotate(90deg);}
+.exp-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);background:#fafafa;}
+.exp-body.open{max-height:560px;}
+.exp-bi{padding:4px 20px 18px 81px;}
+.eb{font-size:14px;color:#000;line-height:1.55;padding:3px 0 3px 14px;position:relative;}
+.eb::before{content:'•';position:absolute;left:0;color:var(--blue);font-weight:700;}
+.etags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.etag{font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px;background:rgba(0,122,255,.1);color:var(--blue);}
+
+/* SKILLS */
+#avSkills{background:#f2f2f7;}
+.sk-row{
+  display:flex;align-items:center;
+  padding:13px 20px;background:#fff;
+  border-bottom:.5px solid rgba(60,60,67,.1);
+}
+.sk-row:last-child{border-bottom:none;}
+.sk-ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-right:13px;font-size:16px;flex-shrink:0;}
+.sk-name{font-size:16px;color:#000;flex:1;}
+.sk-bar{width:96px;height:5.5px;background:var(--gray5);border-radius:3px;overflow:hidden;}
+.sk-fill{height:100%;border-radius:3px;}
+.wf-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 20px;font-size:16px;color:#000;
+  background:#fff;border-bottom:.5px solid rgba(60,60,67,.1);
+}
+.wf-item:last-child{border-bottom:none;}
+.wf-tag{font-size:12px;font-weight:600;padding:3px 9px;border-radius:20px;background:rgba(0,122,255,.1);color:var(--blue);}
+
+/* EDUCATION */
+#avEdu{background:#f2f2f7;}
+.edu-row{
+  background:#fff;border-top:.5px solid var(--sep);border-bottom:.5px solid var(--sep);
+  padding:16px 20px;display:flex;gap:14px;align-items:center;margin-bottom:1px;
+}
+.edu-ico{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.edu-deg{font-size:15.5px;font-weight:600;color:#000;margin-bottom:2px;}
+.edu-sch{font-size:13.5px;color:var(--label2);margin-bottom:2px;}
+.edu-yr{font-size:12px;color:var(--label3);}
+.cert-row{
+  background:#fff;border-top:.5px solid var(--sep);border-bottom:.5px solid var(--sep);
+  padding:16px 20px;display:flex;gap:14px;align-items:center;
+  cursor:pointer;transition:background .08s;
+}
+.cert-row:active{background:#f5f5f5;}
+
+/* CONNECT */
+#avConnect{background:#f2f2f7;}
+
+/* RESUME */
+#avResume{background:#f2f2f7;}
+.res-preview{
+  background:#fff;margin:20px;
+  border-radius:14px;overflow:hidden;
+  box-shadow:0 2px 18px rgba(0,0,0,.12);
+  border:.5px solid rgba(0,0,0,.1);
+  cursor:pointer;transition:opacity .15s;
+}
+.res-preview:active{opacity:.75;}
+.res-thumb{
+  width:100%;height:150px;
+  background:linear-gradient(135deg,#f0f4ff,#e8eeff);
+  display:flex;align-items:center;justify-content:center;
+  border-bottom:.5px solid rgba(0,0,0,.07);
+  flex-direction:column;gap:8px;
+}
+.res-meta{padding:14px 16px;}
+.res-ttl{font-size:16px;font-weight:600;color:#000;margin-bottom:3px;}
+.res-sub{font-size:13px;color:var(--label2);}
+.dl-btn{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  background:var(--blue);color:#fff;
+  font-size:17px;font-weight:600;
+  padding:16px;margin:0 20px 12px;
+  border-radius:14px;cursor:pointer;
+  transition:opacity .15s;text-decoration:none;
+}
+.dl-btn:active{opacity:.75;}
+
+/* PRESS RIPPLE */
+@keyframes rp{from{transform:scale(0);opacity:.3;}to{transform:scale(4);opacity:0;}}
+.rip{
+  position:absolute;width:40px;height:40px;border-radius:50%;
+  background:rgba(0,0,0,.12);pointer-events:none;
+  transform:scale(0);animation:rp .45s ease-out forwards;
+}
+
+.hint{color:rgba(255,255,255,.22);font-size:10px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="phone">
+<div class="screen">
+
+<!-- DYNAMIC ISLAND -->
+<div class="di" id="di" onclick="diTap()">
+  <div class="di-cam"></div>
+  <div class="di-notif" id="din">
+    <div class="di-n-icon" id="din-ico"></div>
+    <div class="di-n-text">
+      <div class="di-n-title" id="din-title"></div>
+      <div class="di-n-body" id="din-body"></div>
+    </div>
+    <div class="di-n-time" id="din-time">now</div>
+  </div>
+</div>
+
+<!-- STATUS BAR -->
+<div class="sb dark" id="sb">
+  <span class="sb-t" id="sbt">9:41</span>
+  <div class="sb-r">
+    <div class="sig">
+      <span style="height:3px;opacity:.4"></span>
+      <span style="height:6px;opacity:.6"></span>
+      <span style="height:9px;opacity:.8"></span>
+      <span style="height:12px;"></span>
+    </div>
+    <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" opacity=".9">
+      <path d="M8 2.4C10 2.4 11.8 3.2 13.1 4.5L14.5 3.1C12.8 1.5 10.5.5 8 .5 5.5.5 3.2 1.5 1.5 3.1l1.4 1.4C4.2 3.2 6 2.4 8 2.4z" opacity=".4"/>
+      <path d="M8 5.2C9.2 5.2 10.3 5.7 11.1 6.5L12.5 5.1C11.3 3.9 9.7 3.2 8 3.2 6.3 3.2 4.7 3.9 3.5 5.1L4.9 6.5C5.7 5.7 6.8 5.2 8 5.2z" opacity=".7"/>
+      <circle cx="8" cy="10" r="2"/>
+    </svg>
+    <div class="batt"><div class="batt-f"></div></div>
+  </div>
+</div>
+
+<!-- ══ LOCK SCREEN ══ -->
+<div id="lock">
+  <div class="lk-wall"></div>
+  <!-- lock status bar -->
+  <div class="sb dark" style="position:absolute;top:0;left:0;right:0;z-index:10;pointer-events:none;">
+    <span class="sb-t" id="lkt">9:41</span>
+    <div class="sb-r">
+      <div class="sig"><span style="height:3px;background:#fff;opacity:.4;border-radius:1px"></span><span style="height:6px;background:#fff;opacity:.6;border-radius:1px"></span><span style="height:9px;background:#fff;opacity:.8;border-radius:1px"></span><span style="height:12px;background:#fff;border-radius:1px"></span></div>
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="white" opacity=".9"><path d="M8 5.2C9.2 5.2 10.3 5.7 11.1 6.5L12.5 5.1C11.3 3.9 9.7 3.2 8 3.2 6.3 3.2 4.7 3.9 3.5 5.1L4.9 6.5C5.7 5.7 6.8 5.2 8 5.2z"/><circle cx="8" cy="10" r="2"/></svg>
+      <div class="batt" style="border-color:rgba(255,255,255,.7)"><div class="batt-f" style="background:#34C759"></div></div>
+    </div>
+  </div>
+
+  <div class="lk-time-block">
+    <div class="lk-h" id="lkh">9:41</div>
+    <div class="lk-d" id="lkd">Tuesday, May 13</div>
+  </div>
+
+  <div class="lk-notifs">
+    <div class="lk-n">
+      <div class="lk-n-ico" style="background:#007AFF">💼</div>
+      <div style="flex:1">
+        <div class="lk-n-app">Portfolio</div>
+        <div class="lk-n-title">New LinkedIn visitor</div>
+        <div class="lk-n-body">Someone viewed your profile</div>
       </div>
-    </nav>
+      <div class="lk-n-t">now</div>
+    </div>
+    <div class="lk-n">
+      <div class="lk-n-ico" style="background:#24292E">📱</div>
+      <div style="flex:1">
+        <div class="lk-n-app">GitHub</div>
+        <div class="lk-n-title">New star on repo ⭐</div>
+        <div class="lk-n-body">android-mvvm-template</div>
+      </div>
+      <div class="lk-n-t">2m</div>
+    </div>
+    <div class="lk-n">
+      <div class="lk-n-ico" style="background:#FF9500">✉️</div>
+      <div style="flex:1">
+        <div class="lk-n-app">Mail</div>
+        <div class="lk-n-title">Interview Invitation</div>
+        <div class="lk-n-body">Exciting Android role for you</div>
+      </div>
+      <div class="lk-n-t">15m</div>
+    </div>
+  </div>
 
-    <div class="container-fluid p-0">
+  <div class="lk-bottom">
+    <div class="lk-row">
+      <div class="lk-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+      <div class="lk-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+    </div>
+    <div class="lk-hint">
+      <div class="lk-up"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+      <span style="color:rgba(255,255,255,.4);font-size:13px;">Swipe up to unlock</span>
+    </div>
+    <div class="lk-bar" onclick="unlock()"></div>
+  </div>
+</div>
 
-      <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
-        <div class="my-auto">
-          <h1 class="mb-0">Kuldeep
-            <span class="text-primary">Singh</span>
-          </h1>
-          <div class="subheading mb-5">New Delhi, India · +91 9871831349 ·
-            <a href="mailto:imkuldeepsinghrai@gmail.com">imkuldeepsinghrai@gmail.com</a>
+<!-- ══ HOME SCREEN ══ -->
+<div id="home">
+  <div class="hw"></div>
+  <div class="home-body">
+    <div class="page">
+
+      <!-- Profile widget -->
+      <div class="pw" onclick="openApp('About')">
+        <div class="pw-av">KS</div>
+        <div>
+          <div class="pw-name">Kuldeep Singh</div>
+          <div class="pw-role">Android Developer</div>
+          <div class="pw-loc">📍 New Delhi, India</div>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="srch">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(60,60,67,.5)" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <span>Search</span>
+      </div>
+
+      <!-- Apps: Social row -->
+      <div class="grid" style="margin-bottom:18px;">
+        <div class="ai" onclick="openLink('https://linkedin.com/in/kuldeepsinghrai')">
+          <div class="ai-ico" style="background:#0A66C2"><svg viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg></div>
+          <span class="ai-lbl">LinkedIn</span>
+        </div>
+        <div class="ai" onclick="openLink('https://github.com/kuldeepsinghrai')">
+          <div class="ai-ico" style="background:#24292E">
+            <div class="bdg">3</div>
+            <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.254-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.394.1 2.646.64.699 1.026 1.591 1.026 2.682 0 3.841-2.337 4.687-4.565 4.935.359.308.678.92.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.165 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
           </div>
-          <p class="mb-5">I am an Android developer skilled in building smooth and user-friendly mobile apps using Java, Kotlin, Jetpack Compose, and MVVM architecture. I enjoy solving problems and creating apps that give users a great experience.
-
-I have worked with startups, which taught me to be adaptable, creative, and proactive in different work settings. I like learning new technologies and always bring fresh ideas to my work.
-
-I hold a NIELIT A Level diploma (equivalent to BCA) and am currently pursuing the NIELIT B Level (equivalent to MCA).
-          </p>
-          <ul class="list-inline list-social-icons mb-0">
-
-            <li class="list-inline-item">
-              <a href="https://www.linkedin.com/in/kuldeepsinghrai/" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-
-            <li class="list-inline-item">
-              <a href="https://github.com/kuldeepsinghrai" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-
-            <li class="list-inline-item">
-              <a href="https://instagram.com/imkuldeepsinghrai" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-
-            <li class="list-inline-item">
-              <a href="https://wa.me/+919871831349" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-whatsapp fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-
-          </ul>
+          <span class="ai-lbl">GitHub</span>
         </div>
-      </section>
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">
-        <div class="my-auto">
-          <h2 class="mb-5">Experience</h2>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Android Developer</h3>
-              <div class="subheading mb-3">Stock Register</div>
-              <p>As a vital member of the Android team, I focus on maintaining our native Kotlin-based application. Employing MVVM architecture, I ensure clear code separation and modularity while integrating Room for seamless data management. Collaborating closely with the product team, I transform design concepts into intuitive UI components. Implementing Jetpack Compose for declarative UI programming enhances user experience and simplifies development. Simultaneously, I leverage Retrofit for efficient network communication, enabling real-time updates and smooth backend integration. Active participation in code reviews and swift bug resolution helps maintain or improve the app's performance, while my role also involves publishing updates on the Google Play Store via the Play Console for a seamless user experience.</p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">August 2023 - Present</span>
-            </div>
+        <div class="ai" onclick="openLink('https://instagram.com/imkuldeepsinghrai')">
+          <div class="ai-ico" style="background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%)"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+          <span class="ai-lbl">Instagram</span>
+        </div>
+        <div class="ai" onclick="openLink('https://wa.me/+919871831349')">
+          <div class="ai-ico" style="background:#25D366">
+            <div class="bdg">!</div>
+            <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           </div>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Android Developer Intern</h3>
-              <div class="subheading mb-3">Bijnis</div>
-              <p>I've played a pivotal role in developing and maintaining a versatile native Android app, employing Java and Kotlin. Collaborating closely with designers, I've crafted intuitive, visually appealing interfaces. Integration of RESTful APIs using Gson, coupled with efficient networking through Retrofit and OkHttp libraries, has ensured seamless backend communication. Comprehensive unit tests using JUnit uphold app stability while managing user behavior logging via Segment and CleverTap drives insightful analytics. Active Agile participation, code reviews for bug identification, and troubleshooting for optimal performance are integral aspects of my contributions to the team.</p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">September 2022 - August 2023</span>
-            </div>
-          </div>
-
+          <span class="ai-lbl">WhatsApp</span>
         </div>
 
-      </section>
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="education">
-        <div class="my-auto">
-          <h2 class="mb-5">Education</h2>
-
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">National Institute of Electronics & Information Technology</h3>
-              <div class="subheading mb-3">B Level (PGDCA)</div>
-              <div>Computer Software Engineering</div>
-             <!--  <p>GPA: 8.23</p> -->
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">January 2025 - Present</span>
-            </div>
-          </div>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">National Institute of Electronics & Information Technology</h3>
-              <div class="subheading mb-3">A Level (ADCA)</div>
-              <div>Computer Science Undergraduate Diploma</div>
-             <!--  <p>GPA: 8.23</p> -->
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">June 2023 - July 2024</span>
-            </div>
-          </div>
-
+        <!-- Portfolio apps -->
+        <div class="ai" onclick="openApp('About')">
+          <div class="ai-ico" style="background:linear-gradient(145deg,#007AFF,#5856D6)"><svg viewBox="0 0 24 24" fill="white"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg></div>
+          <span class="ai-lbl">About</span>
         </div>
-      </section>
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
-        <div class="my-auto">
-          <h2 class="mb-5">Skills</h2>
-
-          <div class="subheading mb-3">Programming Languages &amp; Tools</div>
-          <ul class="list-inline list-icons">
-
-            <li class="list-inline-item">
-              <i class="devicon-kotlin-plain"></i>
-            </li>
-
-            <li class="list-inline-item">
-              <i class="devicon-java-plain"></i>
-            </li>
-
-            <li class="list-inline-item">
-              <i class="devicon-android-plain"></i>
-            </li>
-
-
-            <li class="list-inline-item">
-              <i class="devicon-androidstudio-plain"></i>
-            </li>
-
-
-            <li class="list-inline-item">
-              <i class="devicon-gradle-plain"></i>
-            </li>
-
-            <li class="list-inline-item">  
-              <i class="devicon-git-plain"></i>           
-            </li>
-          
-            <li class="list-inline-item">
-              <i class="devicon-github-plain"></i>
-            </li>
-
-            <li class="list-inline-item">
-              <i class="devicon-linux-plain"></i>
-            </li>
-
-            <li class="list-inline-item">
-              <i class="devicon-docker-plain"></i>
-            </li>
-
-
-         
-           
-          </ul>
-
-          <div class="subheading mb-3">Workflow</div>
-          <ul class="fa-ul mb-0">
-
-            <li>
-              <b><i class="fa-li fa fa-check"></i>Android Development:</b> Android Studio, Android SDK, XML</li>
-      
-          <li>
-              <b><i class="fa-li fa fa-check"></i>Libraries &amp; Framework:</b> Retrofit, Gson, SQLite, Room Persistence Library, Firebase</li>
-      
-          <li>
-              <b><i class="fa-li fa fa-check"></i>Build Tools &amp; Dependency Management:</b> Gradle, Git</li>
-      
-          <li>
-              <b><i class="fa-li fa fa-check"></i>Architectural Patterns &amp; Components:</b> MVVM, Android Jetpack Components, Jetpack Compose</li>
-      
-          <li>
-              <b><i class="fa-li fa fa-check"></i>Networking:</b> RESTful APIs, Firebase</li>
-      
-          <li>
-              <b><i class="fa-li fa fa-check"></i>Data Formats &amp; Persistence:</b> JSON, SQLite, Room Persistence Library</li>
-      
-          <li>
-              <b><i class="fa-li fa fa-check"></i>Version Control:</b> Git, Github, Bitbucket</li>
-      
-          <li>
-              <b><i class="fa-li fa fa-check"></i>Project Management:</b> Jira</li>
-      
-          </ul>
+        <div class="ai" onclick="openApp('Exp')">
+          <div class="ai-ico" style="background:linear-gradient(145deg,#FF9500,#FF6B00)"><svg viewBox="0 0 24 24" fill="white"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+          <span class="ai-lbl">Experience</span>
         </div>
-      </section>
-
-         
-    <!-- Uncomment to add Interest Section -->
-
-<!-- 
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="interests">
-        <div class="my-auto">
-          <h2 class="mb-5">Interests</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium dignissimos dolorum, sequi eum excepturi quia, placeat voluptatibus earum dolor eaque facilis.</p>
-          <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, quasi! In iure ea distinctio voluptas, possimus dolores, vel dicta sunt quaerat natus nesciunt officiis? Aliquam corrupti facilis molestiae. Officia, nobis blanditiis.</p>
+        <div class="ai" onclick="openApp('Skills')">
+          <div class="ai-ico" style="background:linear-gradient(145deg,#AF52DE,#5E5CE6)"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <span class="ai-lbl">Skills</span>
         </div>
-      </section> -->
-
-      <!-- Uncomment to add Awards Section -->
-<!-- 
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="awards">
-        <div class="my-auto">
-          <h2 class="mb-5">Awards &amp; Certifications</h2>
-          <ul class="fa-ul mb-0">
-            <li>
-              <i class="fa-li fa fa-trophy text-warning"></i>
-              Lorem ipsum dolor sit.</li>
-            <li>
-              <i class="fa-li fa fa-trophy text-warning"></i>
-              Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
-            <li>
-              <i class="fa-li fa fa-trophy text-warning"></i>
-            
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima.</li>
-            <li>
-              <i class="fa-li fa fa-trophy text-warning"></i>
-            
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus.</li>
-            <li>
-              <i class="fa-li fa fa-trophy text-warning"></i>
-      
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, nulla.</li>
-            <li>
-            <li>
-              <i class="fa-li fa fa-trophy text-warning"></i>
-             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum.</li>
-            <li>
-              <i class="fa-li fa fa-trophy text-warning"></i>
-             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum, itaque.</li>
-          </ul>
+        <div class="ai" onclick="openApp('Edu')">
+          <div class="ai-ico" style="background:linear-gradient(145deg,#34C759,#30B0C7)"><svg viewBox="0 0 24 24" fill="white"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+          <span class="ai-lbl">Education</span>
         </div>
-      </section> -->
+
+        <div class="ai" onclick="openApp('Connect')">
+          <div class="ai-ico" style="background:linear-gradient(145deg,#5AC8FA,#007AFF)"><svg viewBox="0 0 24 24" fill="white"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+          <span class="ai-lbl">Connect</span>
+        </div>
+        <div class="ai" onclick="openApp('Resume')">
+          <div class="ai-ico" style="background:linear-gradient(145deg,#FF3B30,#FF6060)"><svg viewBox="0 0 24 24" fill="white"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="white" stroke-width="1.5"/><line x1="16" y1="13" x2="8" y2="13" stroke="white" stroke-width="1.5"/><line x1="16" y1="17" x2="8" y2="17" stroke="white" stroke-width="1.5"/></svg></div>
+          <span class="ai-lbl">Resume</span>
+        </div>
+      </div>
 
     </div>
+  </div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <div class="dots"><div class="dot on"></div><div class="dot"></div></div>
 
-    <!-- Plugin JavaScript -->
-    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Dock -->
+  <div class="dock">
+    <div class="dock-in">
+      <div class="di2" style="background:linear-gradient(145deg,#007AFF,#5856D6)" onclick="openApp('About')"><svg viewBox="0 0 24 24" fill="white" width="30" height="30"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg></div>
+      <div class="di2" style="background:linear-gradient(145deg,#FF9500,#FF6B00)" onclick="openApp('Exp')"><svg viewBox="0 0 24 24" fill="white" width="30" height="30"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+      <div class="di2" style="background:linear-gradient(145deg,#34C759,#30B0C7)" onclick="openApp('Edu')"><svg viewBox="0 0 24 24" fill="white" width="30" height="30"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+      <div class="di2" style="background:linear-gradient(145deg,#FF3B30,#FF6060)" onclick="openApp('Resume')"><svg viewBox="0 0 24 24" fill="white" width="30" height="30"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="white" stroke-width="1.5"/></svg></div>
+    </div>
+  </div>
+</div>
 
-    <!-- Custom scripts for this template -->
-    <script src="assets/js/resume.min.js"></script>
+<!-- ══ ABOUT ══ -->
+<div id="avAbout" class="av">
+  <div style="background:#f2f2f7;height:59px;flex-shrink:0;position:relative;">
+    <div class="sb light" style="pointer-events:none;"><span class="sb-t" id="sbt2">9:41</span><div class="sb-r"><div class="sig"><span style="height:3px;opacity:.4;"></span><span style="height:6px;opacity:.6;"></span><span style="height:9px;opacity:.8;"></span><span style="height:12px;"></span></div><div class="batt"><div class="batt-f"></div></div></div></div>
+  </div>
+  <div class="nav" style="background:#f2f2f7;border-bottom:.5px solid var(--sep);">
+    <div class="nav-back" onclick="closeApp('About')"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M10 1L1.5 9 10 17" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
+    <span class="nav-title">About</span>
+  </div>
+  <div class="ac" style="background:#f2f2f7;">
+    <div class="a-hero">
+      <div class="a-ring"><div class="a-ring-in">KS</div></div>
+      <div class="a-name">Kuldeep Singh</div>
+      <div class="a-role">Android Developer</div>
+      <div class="a-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>New Delhi, India</div>
+    </div>
+    <div class="stats3">
+      <div class="s3"><span class="s3-n">2+</span><div class="s3-l">Years</div></div>
+      <div class="s3"><span class="s3-n">2</span><div class="s3-l">Companies</div></div>
+      <div class="s3"><span class="s3-n">∞</span><div class="s3-l">Bugs Fixed</div></div>
+    </div>
+    <div class="bio-card">
+      <div class="bio-text">Android Developer skilled in building smooth, user-friendly apps with Java, Kotlin, Jetpack Compose &amp; MVVM. Worked with startups — adaptable, creative, and always learning new technologies.</div>
+    </div>
+    <div class="gap"></div>
+    <div class="sec-lbl">Contact</div>
+    <div class="ios-list">
+      <a class="ios-row" href="tel:+919871831349">
+        <div class="rr-ico" style="background:#34C759"><svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.7A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
+        <span class="rr-label">+91 98718 31349</span>
+        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+      <a class="ios-row" href="mailto:imkuldeepsinghrai@gmail.com">
+        <div class="rr-ico" style="background:#007AFF"><svg width="17" height="17" viewBox="0 0 24 24" fill="white"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg></div>
+        <span class="rr-label" style="font-size:14px;">imkuldeepsinghrai@gmail.com</span>
+        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+    <div class="gap"></div>
+    <div class="sec-lbl">Links</div>
+    <div class="ios-list">
+      <div class="ios-row" onclick="openLink('https://linkedin.com/in/kuldeepsinghrai')">
+        <div class="rr-ico" style="background:#0A66C2"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg></div>
+        <span class="rr-label">LinkedIn</span>
+        <span class="rr-val">kuldeepsinghrai</span>
+        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+      <div class="ios-row" onclick="openLink('https://github.com/kuldeepsinghrai')">
+        <div class="rr-ico" style="background:#24292E"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.254-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.394.1 2.646.64.699 1.026 1.591 1.026 2.682 0 3.841-2.337 4.687-4.565 4.935.359.308.678.92.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.165 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg></div>
+        <span class="rr-label">GitHub</span>
+        <span class="rr-val">kuldeepsinghrai</span>
+        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+    <div class="bpad"></div>
+  </div>
+  <div class="hi" style="background:#f2f2f7;"><div class="hb" id="hb-About"></div></div>
+</div>
 
-  </body>
+<!-- ══ EXPERIENCE ══ -->
+<div id="avExp" class="av">
+  <div style="background:#f2f2f7;height:59px;flex-shrink:0;"></div>
+  <div class="nav" style="background:#f2f2f7;border-bottom:.5px solid var(--sep);">
+    <div class="nav-back" onclick="closeApp('Exp')"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M10 1L1.5 9 10 17" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
+    <span class="nav-title">Experience</span>
+  </div>
+  <div class="ac" style="background:#f2f2f7;">
+    <div class="gap"></div>
+    <div class="sec-lbl">Work History</div>
+    <div class="exp-card">
+      <div class="exp-hd" onclick="toggleExp('e1','ei1')">
+        <div class="exp-badge" style="background:linear-gradient(135deg,#34C759,#1e8f3e)">SR</div>
+        <div class="exp-inf">
+          <div class="exp-role">Android Developer</div>
+          <div class="exp-co">Stock Register · Remote</div>
+          <div class="exp-dt">August 2023 – Present</div>
+        </div>
+        <svg id="ei1" class="exp-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C7C7CC" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+      <div class="exp-body" id="e1">
+        <div class="exp-bi">
+          <div class="eb">Maintained native Kotlin app with MVVM architecture &amp; Room DB</div>
+          <div class="eb">Built PDF &amp; Excel export for reports, bills &amp; bulk item uploads</div>
+          <div class="eb">Multi-currency support &amp; staff role-based access levels</div>
+          <div class="eb">Initiated Jetpack Compose migration; shipped features end-to-end</div>
+          <div class="eb">Published updates on Google Play Console</div>
+          <div class="eb">Worked closely with founder on UX-focused features</div>
+          <div class="etags"><span class="etag">Kotlin</span><span class="etag">MVVM</span><span class="etag">Compose</span><span class="etag">Room</span><span class="etag">Retrofit</span><span class="etag">Play Console</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="gap"></div>
+    <div class="exp-card">
+      <div class="exp-hd" onclick="toggleExp('e2','ei2')">
+        <div class="exp-badge" style="background:linear-gradient(135deg,#007AFF,#0051c3)">BJ</div>
+        <div class="exp-inf">
+          <div class="exp-role">Android Developer Intern</div>
+          <div class="exp-co">Bijnis · New Delhi</div>
+          <div class="exp-dt">September 2022 – August 2023</div>
+        </div>
+        <svg id="ei2" class="exp-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C7C7CC" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+      <div class="exp-body" id="e2">
+        <div class="exp-bi">
+          <div class="eb">Built &amp; maintained native Android app using Java &amp; Kotlin</div>
+          <div class="eb">Led the Java → Kotlin migration of entire codebase</div>
+          <div class="eb">Integrated RESTful APIs via Retrofit, OkHttp &amp; Gson</div>
+          <div class="eb">User analytics with Segment &amp; CleverTap integrations</div>
+          <div class="eb">Wrote JUnit tests; participated in Agile sprints</div>
+          <div class="eb">Code reviews, bug fixing &amp; performance improvements</div>
+          <div class="etags"><span class="etag">Java</span><span class="etag">Kotlin</span><span class="etag">Retrofit</span><span class="etag">OkHttp</span><span class="etag">JUnit</span><span class="etag">Agile</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="bpad"></div>
+  </div>
+  <div class="hi" style="background:#f2f2f7;"><div class="hb" id="hb-Exp"></div></div>
+</div>
 
+<!-- ══ SKILLS ══ -->
+<div id="avSkills" class="av">
+  <div style="background:#f2f2f7;height:59px;flex-shrink:0;"></div>
+  <div class="nav" style="background:#f2f2f7;border-bottom:.5px solid var(--sep);">
+    <div class="nav-back" onclick="closeApp('Skills')"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M10 1L1.5 9 10 17" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
+    <span class="nav-title">Skills</span>
+  </div>
+  <div class="ac" style="background:#f2f2f7;">
+    <div class="gap"></div>
+    <div class="sec-lbl">Programming Languages</div>
+    <div class="ios-list">
+      <div class="sk-row"><div class="sk-ico" style="background:rgba(175,82,222,.12)">🟣</div><span class="sk-name">Kotlin</span><div class="sk-bar"><div class="sk-fill" style="width:92%;background:#AF52DE"></div></div></div>
+      <div class="sk-row"><div class="sk-ico" style="background:rgba(255,149,0,.12)">🟠</div><span class="sk-name">Java</span><div class="sk-bar"><div class="sk-fill" style="width:88%;background:#FF9500"></div></div></div>
+    </div>
+    <div class="gap"></div>
+    <div class="sec-lbl">Android</div>
+    <div class="ios-list">
+      <div class="sk-row"><div class="sk-ico" style="background:rgba(52,199,89,.12)">🟢</div><span class="sk-name">Jetpack Compose</span><div class="sk-bar"><div class="sk-fill" style="width:85%;background:#34C759"></div></div></div>
+      <div class="sk-row"><div class="sk-ico" style="background:rgba(0,122,255,.12)">🔵</div><span class="sk-name">MVVM + Jetpack</span><div class="sk-bar"><div class="sk-fill" style="width:87%;background:#007AFF"></div></div></div>
+      <div class="sk-row"><div class="sk-ico" style="background:rgba(90,200,250,.12)">🔷</div><span class="sk-name">Retrofit / APIs</span><div class="sk-bar"><div class="sk-fill" style="width:84%;background:#5AC8FA"></div></div></div>
+      <div class="sk-row"><div class="sk-ico" style="background:rgba(255,59,48,.12)">🔴</div><span class="sk-name">Room / SQLite</span><div class="sk-bar"><div class="sk-fill" style="width:80%;background:#FF3B30"></div></div></div>
+      <div class="sk-row"><div class="sk-ico" style="background:rgba(255,149,0,.12)">🔥</div><span class="sk-name">Firebase</span><div class="sk-bar"><div class="sk-fill" style="width:76%;background:#FF9500"></div></div></div>
+    </div>
+    <div class="gap"></div>
+    <div class="sec-lbl">Tools & Workflow</div>
+    <div class="ios-list">
+      <div class="wf-item">Android Studio <span class="wf-tag">IDE</span></div>
+      <div class="wf-item">Git / GitHub / Bitbucket <span class="wf-tag">VCS</span></div>
+      <div class="wf-item">Gradle <span class="wf-tag">Build</span></div>
+      <div class="wf-item">Jira / Agile / Scrum <span class="wf-tag">PM</span></div>
+      <div class="wf-item">Gson / OkHttp <span class="wf-tag">Network</span></div>
+      <div class="wf-item">Segment / CleverTap <span class="wf-tag">Analytics</span></div>
+      <div class="wf-item">JUnit <span class="wf-tag">Testing</span></div>
+    </div>
+    <div class="bpad"></div>
+  </div>
+  <div class="hi" style="background:#f2f2f7;"><div class="hb" id="hb-Skills"></div></div>
+</div>
+
+<!-- ══ EDUCATION ══ -->
+<div id="avEdu" class="av">
+  <div style="background:#f2f2f7;height:59px;flex-shrink:0;"></div>
+  <div class="nav" style="background:#f2f2f7;border-bottom:.5px solid var(--sep);">
+    <div class="nav-back" onclick="closeApp('Edu')"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M10 1L1.5 9 10 17" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
+    <span class="nav-title">Education</span>
+  </div>
+  <div class="ac" style="background:#f2f2f7;">
+    <div class="gap"></div>
+    <div class="sec-lbl">Degrees</div>
+    <div class="edu-row"><div class="edu-ico" style="background:rgba(0,122,255,.1)">🎓</div><div><div class="edu-deg">B Level · PGDCA (MCA equiv.)</div><div class="edu-sch">NIELIT — Computer Software Engineering</div><div class="edu-yr">January 2025 – Present</div></div></div>
+    <div class="edu-row"><div class="edu-ico" style="background:rgba(52,199,89,.1)">📜</div><div><div class="edu-deg">A Level · ADCA (BCA equiv.)</div><div class="edu-sch">NIELIT — Computer Science</div><div class="edu-yr">June 2023 – July 2024</div></div></div>
+    <div class="edu-row" style="border-bottom:.5px solid var(--sep);"><div class="edu-ico" style="background:rgba(175,82,222,.1)">🏛️</div><div><div class="edu-deg">B.A. Programme</div><div class="edu-sch">Indira Gandhi National Open University</div><div class="edu-yr">IGNOU</div></div></div>
+    <div class="gap"></div>
+    <div class="sec-lbl">Certifications</div>
+    <div class="cert-row" onclick="openLink('https://credential.net/9daf46fb-2d1e-46f8-a886-6ef701cb2abf')">
+      <div class="edu-ico" style="background:rgba(52,199,89,.1);width:46px;height:46px;border-radius:12px;font-size:22px;flex-shrink:0;">🏅</div>
+      <div style="flex:1;">
+        <div class="edu-deg">SRE Fundamentals with Google</div>
+        <div class="edu-sch" style="color:var(--blue);">Uplimit · Verified Certificate</div>
+        <div class="edu-yr">November 2025</div>
+      </div>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C7C7CC" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+    </div>
+    <div class="bpad"></div>
+  </div>
+  <div class="hi" style="background:#f2f2f7;"><div class="hb" id="hb-Edu"></div></div>
+</div>
+
+<!-- ══ CONNECT ══ -->
+<div id="avConnect" class="av">
+  <div style="background:#f2f2f7;height:59px;flex-shrink:0;"></div>
+  <div class="nav" style="background:#f2f2f7;border-bottom:.5px solid var(--sep);">
+    <div class="nav-back" onclick="closeApp('Connect')"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M10 1L1.5 9 10 17" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
+    <span class="nav-title">Connect</span>
+  </div>
+  <div class="ac" style="background:#f2f2f7;">
+    <div class="gap"></div>
+    <div class="sec-lbl">Social &amp; Professional</div>
+    <div class="ios-list">
+      <div class="ios-row" onclick="openLink('https://linkedin.com/in/kuldeepsinghrai')">
+        <div class="rr-ico" style="background:#0A66C2"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg></div>
+        <span class="rr-label">LinkedIn</span>
+        <span class="rr-val" style="font-size:13px;">kuldeepsinghrai</span>
+        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+      <div class="ios-row" onclick="openLink('https://github.com/kuldeepsinghrai')">
+        <div class="rr-ico" style="background:#24292E"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.254-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.394.1 2.646.64.699 1.026 1.591 1.026 2.682 0 3.841-2.337 4.687-4.565 4.935.359.308.678.92.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.165 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg></div>
+        <span class="rr-label">GitHub</span>
+        <span class="rr-val" style="font-size:13px;">kuldeepsinghrai</span>
+        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+      <div class="ios-row" onclick="openLink('https://instagram.com/imkuldeepsinghrai')">
+        <div class="rr-ico" style="background:radial-gradient(circle at 30% 107%,#fdf497,#fd5949 45%,#d6249f 60%,#285AEB 90%)"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+        <span class="rr-label">Instagram</span>
+        <span class="rr-val" style="font-size:13px;">imkuldeepsinghrai</span>
+        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+      <div class="ios-row" onclick="openLink('https://wa.me/+919871831349')">
+        <div class="rr-ico" style="background:#25D366"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+        <span class="rr-label">WhatsApp</span>
+        <span class="rr-val" style="font-size:13px;">+91 98718 31349</span>
+        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+    <div class="bpad"></div>
+  </div>
+  <div class="hi" style="background:#f2f2f7;"><div class="hb" id="hb-Connect"></div></div>
+</div>
+
+<!-- ══ RESUME ══ -->
+<div id="avResume" class="av">
+  <div style="background:#f2f2f7;height:59px;flex-shrink:0;"></div>
+  <div class="nav" style="background:#f2f2f7;border-bottom:.5px solid var(--sep);">
+    <div class="nav-back" onclick="closeApp('Resume')"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M10 1L1.5 9 10 17" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
+    <span class="nav-title">Resume</span>
+  </div>
+  <div class="ac" style="background:#f2f2f7;">
+    <div class="res-preview" onclick="openLink('https://drive.google.com/file/d/1sCWV4LSbFSSGDClj5Iokuipy4p5A94_H/view?usp=sharing')">
+      <div class="res-thumb">
+        <div style="font-size:44px;">📄</div>
+        <div style="font-size:13px;color:var(--label2);">Kuldeep_Singh_Resume.pdf</div>
+      </div>
+      <div class="res-meta">
+        <div class="res-ttl">Kuldeep Singh — Android Developer</div>
+        <div class="res-sub">Last updated 2025 · Google Drive</div>
+      </div>
+    </div>
+    <a class="dl-btn" href="https://drive.google.com/file/d/1sCWV4LSbFSSGDClj5Iokuipy4p5A94_H/view?usp=sharing" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Resume
+    </a>
+    <div class="gap"></div>
+    <div class="sec-lbl">Share</div>
+    <div class="ios-list">
+      <div class="ios-row" onclick="openLink('https://drive.google.com/file/d/1sCWV4LSbFSSGDClj5Iokuipy4p5A94_H/view?usp=sharing')">
+        <div class="rr-ico" style="background:#007AFF"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+        <span class="rr-label">Open in Google Drive</span>
+        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+    <div class="bpad"></div>
+  </div>
+  <div class="hi" style="background:#f2f2f7;"><div class="hb" id="hb-Resume"></div></div>
+</div>
+
+</div><!-- /screen -->
+</div><!-- /phone -->
+<div class="hint">Swipe up to unlock · Tap apps · Home bar to go back · ESC closes app</div>
+</div>
+
+<script>
+// ── CLOCK ──
+function tick(){
+  const n = new Date();
+  const h = n.getHours(), m = n.getMinutes();
+  const t = h + ':' + (m<10?'0'+m:m);
+  ['sbt','sbt2','lkt'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=t;});
+  document.getElementById('lkh').textContent = t;
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const mons=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('lkd').textContent = days[n.getDay()]+', '+mons[n.getMonth()]+' '+n.getDate();
+}
+tick(); setInterval(tick,15000);
+
+// ── LOCK / UNLOCK ──
+let unlocked = false;
+function unlock(){
+  if(unlocked) return;
+  unlocked = true;
+  const l = document.getElementById('lock');
+  l.classList.add('out');
+  setTimeout(()=>l.style.display='none', 700);
+  diShow('📱','Portfolio','Welcome, let\'s explore!');
+}
+
+// Swipe-up on lock (mouse + touch)
+const lk = document.getElementById('lock');
+let sy0=0;
+lk.addEventListener('mousedown',e=>{sy0=e.clientY;});
+lk.addEventListener('mouseup',e=>{if(sy0-e.clientY>45)unlock();});
+lk.addEventListener('touchstart',e=>{sy0=e.touches[0].clientY;},{passive:true});
+lk.addEventListener('touchend',e=>{if(sy0-e.changedTouches[0].clientY>50)unlock();},{passive:true});
+
+// ── DYNAMIC ISLAND ──
+let diT=null, diExpanded=false;
+function diShow(icon,title,body,dur=3500){
+  const di=document.getElementById('di');
+  document.getElementById('din-ico').textContent=icon;
+  document.getElementById('din-title').textContent=title;
+  document.getElementById('din-body').textContent=body;
+  di.classList.remove('expanded'); di.classList.add('pill');
+  clearTimeout(diT);
+  diT=setTimeout(()=>{di.classList.remove('pill'); diExpanded=false;},dur);
+}
+function diTap(){
+  const di=document.getElementById('di');
+  if(di.classList.contains('pill')){
+    di.classList.remove('pill'); di.classList.add('expanded'); diExpanded=true;
+    clearTimeout(diT);
+    diT=setTimeout(()=>{di.classList.remove('expanded'); diExpanded=false;},5000);
+  } else if(di.classList.contains('expanded')){
+    di.classList.remove('expanded'); diExpanded=false;
+  }
+}
+setTimeout(()=>diShow('✉️','Mail','Interview invitation received'),1400);
+
+// ── APP OPEN / CLOSE ──
+let curApp=null;
+const diNotifs={
+  'About':['👤','About','Viewing profile'],
+  'Exp':['💼','Experience','Work history'],
+  'Skills':['⚡','Skills','Tech stack'],
+  'Edu':['🎓','Education','Academic info'],
+  'Connect':['🔗','Connect','Social links'],
+  'Resume':['📄','Resume','Download CV']
+};
+
+function openApp(name){
+  if(!unlocked)return;
+  const v=document.getElementById('av'+name);
+  const home=document.getElementById('home');
+  if(!v)return;
+  curApp=name;
+  home.classList.add('scaled');
+  v.classList.add('show');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    v.style.transition='transform .52s cubic-bezier(.32,.72,0,1)';
+    v.classList.add('visible');
+  }));
+  if(diNotifs[name]) diShow(...diNotifs[name]);
+}
+
+function closeApp(name){
+  const v=document.getElementById('av'+name);
+  const home=document.getElementById('home');
+  if(!v)return;
+  v.style.transition='transform .48s cubic-bezier(.32,.72,0,1)';
+  v.classList.remove('visible');
+  v.classList.add('closing');
+  home.classList.remove('scaled');
+  setTimeout(()=>{
+    v.classList.remove('show','closing');
+    v.style.transform='';
+    curApp=null;
+  },500);
+}
+
+// Home bar swipe-up to close
+document.querySelectorAll('.hb').forEach(bar=>{
+  let s=0;
+  bar.addEventListener('mousedown',e=>{s=e.clientY;});
+  document.addEventListener('mouseup',e=>{
+    if(s&&s-e.clientY>18&&curApp){closeApp(curApp);s=0;}
+  });
+  bar.addEventListener('touchstart',e=>{s=e.touches[0].clientY;},{passive:true});
+  bar.addEventListener('touchend',e=>{
+    if(s-e.changedTouches[0].clientY>18&&curApp){closeApp(curApp);s=0;}
+  },{passive:true});
+  bar.addEventListener('click',()=>{if(curApp)closeApp(curApp);});
+});
+
+// ── EXPERIENCE EXPAND ──
+function toggleExp(id,iconId){
+  const b=document.getElementById(id), i=document.getElementById(iconId);
+  b.classList.toggle('open'); i.classList.toggle('open');
+}
+
+// ── OPEN LINK ──
+function openLink(url){window.open(url,'_blank');}
+
+// ── ESC to close ──
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&curApp)closeApp(curApp);});
+
+// ── VISUAL TAP FEEDBACK ──
+document.querySelectorAll('.ai,.di2,.ios-row,.exp-hd,.pw,.cert-row').forEach(el=>{
+  el.addEventListener('pointerdown',function(){this.style.opacity='.72';this.style.transition='opacity .06s';});
+  el.addEventListener('pointerup',function(){this.style.opacity='1';});
+  el.addEventListener('pointerleave',function(){this.style.opacity='1';});
+  el.addEventListener('pointercancel',function(){this.style.opacity='1';});
+});
+
+// App icon jiggle on long press (iOS style)
+let jiggleTimer=null;
+document.querySelectorAll('.ai').forEach(el=>{
+  el.addEventListener('pointerdown',()=>{
+    jiggleTimer=setTimeout(()=>{
+      document.querySelectorAll('.ai-ico').forEach(ico=>{
+        ico.style.animation='jiggle .18s ease-in-out infinite alternate';
+      });
+    },600);
+  });
+  el.addEventListener('pointerup',()=>{clearTimeout(jiggleTimer);});
+  el.addEventListener('pointerleave',()=>{clearTimeout(jiggleTimer);});
+});
+document.addEventListener('pointerup',()=>{
+  document.querySelectorAll('.ai-ico').forEach(ico=>ico.style.animation='');
+  clearTimeout(jiggleTimer);
+});
+
+// Inject jiggle keyframe
+const style=document.createElement('style');
+style.textContent='@keyframes jiggle{from{transform:rotate(-2deg);}to{transform:rotate(2deg);}}';
+document.head.appendChild(style);
+</script>
+</body>
 </html>
