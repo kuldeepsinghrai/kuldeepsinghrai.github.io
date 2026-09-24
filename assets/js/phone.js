@@ -397,6 +397,7 @@ function openApp(id, from, fromPop) {
   const app = document.getElementById(id);
   if (!app || !APPS.includes(app) || st.app || st.sw || st.locked || st.cover || home.classList.contains('jiggle')) return;
   closeOverlays();
+  settleRecents();
   const fresh = !recents.includes(app);
   if (fresh) resetApp(app); else recents.splice(recents.indexOf(app), 1);
   recents.push(app);
@@ -418,6 +419,7 @@ function openApp(id, from, fromPop) {
 function closeApp(fromPop) {
   const app = st.app;
   if (!app) return;
+  settleRecents();
   st.app = null;
   home.style.visibility = '';
   home.getAnimations().forEach(a => a.cancel());
@@ -435,7 +437,8 @@ function closeApp(fromPop) {
 const goHome = () => closeApp();
 
 // Swipe up on the home indicator: the card follows your finger. Pause mid-swipe for the App Switcher.
-let armed = false, holdT = 0;
+// Swipe sideways along it to hop between recent apps.
+let armed = false, holdT = 0, hzAxis = null;
 function arm(on) {
   armed = on;
   if (on) { haptic(); sw.hidden = false; requestAnimationFrame(() => sw.classList.add('show')); return; }
@@ -443,9 +446,14 @@ function arm(on) {
   setTimeout(() => { if (!armed && !st.sw) sw.hidden = true; }, T(360));
 }
 drag(homezone, {
-  start: () => st.sw || !!st.app || (recents.length > 0 && spot.hidden && !st.cc && !home.classList.contains('jiggle')),
+  start: () => {
+    hzAxis = null;
+    return st.sw || !!st.app || (recents.length > 0 && spot.hidden && !st.cc && !home.classList.contains('jiggle'));
+  },
   move: (dx, dy) => {
     if (st.sw) return;
+    hzAxis ||= st.app && Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+    if (hzAxis === 'x') return qsMove(dx);
     const up = Math.max(0, -dy);
     clearTimeout(holdT);
     if (!armed && up > 70) holdT = setTimeout(() => arm(true), 160);
@@ -464,6 +472,7 @@ drag(homezone, {
   end: (dx, dy, vx, vy, moved) => {
     clearTimeout(holdT);
     if (st.sw) return swHome();
+    if (hzAxis === 'x') return qsEnd(dx, vx);
     if (armed) { armed = false; return enterSwitcher(); }
     const app = st.app;
     if (!app) return;
@@ -517,6 +526,7 @@ function enterSwitcher() {
   const cur = st.app;
   if (st.sw || (!cur && !recents.length)) return;
   closeOverlays();
+  settleRecents();
   st.sw = true;
   st.app = null;
   swFrom = cur;
@@ -535,16 +545,20 @@ function enterSwitcher() {
       Object.assign(a.style, { clipPath: 'none', borderRadius: (a._rad || R()) + 'px' });
       anim(a, to, { d: 480 });
     } else {
-      unpark(a);
-      const splash = $('.splash', a);
-      splash.getAnimations().forEach(x => x.cancel()); // a just-closed app may still be fading its icon in
-      splash.style.opacity = 0;
+      showCard(a);
       const off = cur ? `translate(${cardX(i) - 140}px, ${cardTop()}px)` : `translate(${cardX(i)}px, ${cardTop() + 180}px)`;
       anim(a, [{ ...to, transform: `${off} scale(${SWK})`, opacity: 0 }, to], { d: 480 });
     }
   });
   sync();
   haptic();
+}
+// Show a backgrounded app as a live card (no launch-screen icon over it)
+function showCard(a) {
+  unpark(a);
+  const splash = $('.splash', a);
+  splash.getAnimations().forEach(x => x.cancel()); // a just-closed app may still be fading its icon in
+  splash.style.opacity = 0;
 }
 function hideSw() {
   sw.classList.remove('show');
@@ -634,6 +648,56 @@ drag(sw, {
   },
 });
 swL.addEventListener('click', e => { const b = e.target.closest('[data-sw]'); if (b) swOpen(document.getElementById(b.dataset.sw)); });
+
+/* ── QUICK SWITCH (swipe along the home bar) ──────────────── */
+let qs = null, qsT = 0, qsApp = null;
+const qsFrame = (off, k) => {
+  const W = screen.clientWidth;
+  return { transform: `translate(${(W - W * k) / 2 + off}px, ${(H() - H() * k) / 2}px) scale(${k})`, clipPath: `inset(0px 0px 0px 0px round ${Math.max(R(), 36) / k}px)` };
+};
+// Like iOS, recents only reorder once you settle in an app, so repeated swipes keep walking back
+function settleRecents() {
+  clearTimeout(qsT);
+  if (qs) { qsT = setTimeout(settleRecents, 500); return; }
+  if (qsApp && recents.includes(qsApp)) { recents.splice(recents.indexOf(qsApp), 1); recents.push(qsApp); }
+  qsApp = null;
+}
+function qsMove(dx) {
+  const cur = st.app, dir = dx > 0 ? -1 : 1; // swipe right → the older app slides in from the left
+  const nb = recents[recents.indexOf(cur) + dir] || null;
+  if (!qs) { qs = {}; home.style.visibility = ''; sw.hidden = false; requestAnimationFrame(() => sw.classList.add('show')); }
+  if (qs.nb && qs.nb !== nb) park(qs.nb); // changed direction mid-swipe
+  if (nb && nb !== qs.nb) { showCard(nb); nb.style.zIndex = 11; }
+  Object.assign(qs, { cur, nb, dir });
+  const W = screen.clientWidth, x = nb ? dx : dx / 3, k = 1 - .08 * Math.min(1, Math.abs(x) / (W * .5)); // rubber-band when nothing is there
+  [cur, nb].forEach(a => a?.getAnimations().forEach(an => an.cancel()));
+  Object.assign(cur.style, qsFrame(x, k));
+  if (nb) Object.assign(nb.style, qsFrame(x + dir * (W * k + 16), k));
+}
+function qsEnd(dx, vx) {
+  if (!qs) return;
+  const { cur, nb, dir } = qs, W = screen.clientWidth;
+  qs = null;
+  hideSw();
+  const go = !!nb && (Math.abs(dx) > W * .3 || vx * -dir > .35);
+  const [inn, out] = go ? [nb, cur] : [cur, nb];
+  if (go) {
+    st.app = nb;
+    qsApp = nb;
+    clearTimeout(qsT);
+    qsT = setTimeout(settleRecents, 2000);
+    syncHistory(nb);
+    sync();
+    haptic();
+  }
+  anim(inn, FULL(), { d: 380 }).then(() => {
+    if (st.app !== inn) return;
+    inn.removeAttribute('style');
+    inn.classList.add('shown');
+    home.style.visibility = 'hidden';
+  });
+  if (out) anim(out, qsFrame((go ? -dir : dir) * (W + 16), .92), { d: 380 }).then(() => { if (st.app !== out) park(out); });
+}
 
 /* ── IN-APP NAVIGATION (push / pop with edge-swipe back) ──── */
 function pushView(v) {
