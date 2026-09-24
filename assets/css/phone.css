@@ -235,7 +235,8 @@ button.widget:active { transform: scale(.96); }
 .we-head { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; opacity: .85; }
 .we-head svg { width: 15px; height: 15px; }
 .we-item { display: grid; grid-template-columns: 1fr auto; column-gap: 8px; padding-left: 12px; border-left: 3px solid var(--c); line-height: 1.25; }
-.we-item b { font-size: 15px; font-weight: 600; }
+.we-item > * { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.we-item b { font-size: 14px; font-weight: 600; }
 .we-item span { grid-column: 1; font-size: 13px; opacity: .8; }
 .we-item em { grid-column: 1 / -1; font-style: normal; font-size: 12px; opacity: .65; }
 
