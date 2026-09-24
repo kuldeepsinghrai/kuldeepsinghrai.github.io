@@ -1,40 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuldeep Singh Rai</title>
-    <link rel="icon" href="assets/img/profile.jpg" type="image/x-icon">
-    <link rel="stylesheet" href="assets/css/cli_index.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kuldeep Singh · Terminal</title>
+<meta name="description" content="Kuldeep Singh, App Developer — terminal portfolio. Type help to explore experience, skills, education and contact details.">
+<meta name="theme-color" content="#1c1c1f">
+<link rel="icon" href="assets/img/avatar.jpg">
+<link rel="stylesheet" href="assets/css/cli.css">
 </head>
-<body oncontextmenu="return false;">
-    <button style="position: absolute; top: 10px; right: 10px" onclick="switchMode()">Normal Mode</button>
-    <div id="terminal"></div>
-    <script src="assets/scripts/cli_terminal.js"></script>
-    <script src="assets/scripts/cli_index.js"></script>
-    <script>
-       /* document.onkeydown = function(e) {
-            if(event.keyCode == 123) {
-                alert('Hey Nyc Trick but not permitted');
-                return false;
-            }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-                alert('Hey Nyc Trick but not permitted');
-                return false;
-            }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-                alert('Hey Nyc Trick but not permitted');
-                return false;
-            }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-                alert('Hey Nyc Trick but not permitted');
-                return false;
-            }
-            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-                alert('Hey Nyc Trick but not permitted');
-                return false;
-            }
-        }*/
-    </script>
+<body>
+<main class="desk">
+  <section class="win" id="win" aria-label="Terminal">
+    <header class="bar" id="bar">
+      <div class="lights">
+        <button class="light close" id="btnClose" title="Close (back to the iPhone portfolio)" aria-label="Close terminal and open the iPhone portfolio"></button>
+        <button class="light min" id="btnMin" title="Minimize" aria-label="Minimize"></button>
+        <button class="light max" id="btnMax" title="Zoom" aria-label="Zoom"></button>
+      </div>
+      <div class="title" id="title">kuldeep — -zsh — 80×24</div>
+    </header>
+    <div class="term" id="term">
+      <div id="out" role="log" aria-live="polite"></div>
+      <div class="line" id="line" aria-hidden="true"><span class="prompt"><b class="g">kuldeep@portfolio</b> <b class="b">~</b> % </span><span id="before"></span><span class="cursor" id="cur"> </span><span id="after"></span></div>
+    </div>
+    <nav class="keys" id="keys" aria-label="Quick commands">
+      <button data-cmd="help">help</button><button data-cmd="about">about</button><button data-cmd="experience">experience</button><button data-cmd="skills">skills</button><button data-cmd="education">education</button><button data-cmd="contact">contact</button><button data-cmd="resume">resume</button><button data-cmd="clear">clear</button>
+    </nav>
+  </section>
+  <button class="dock" id="dock" hidden aria-label="Restore terminal"><span>&gt;_</span></button>
+</main>
+<input id="cmd" class="cmd" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" aria-label="Terminal command">
+<noscript><p class="noscript">This terminal needs JavaScript. <a href="./">Open the iPhone portfolio instead.</a></p></noscript>
+<script src="assets/js/cli.js"></script>
 </body>
 </html>
