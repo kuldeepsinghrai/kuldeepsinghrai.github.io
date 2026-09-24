@@ -2,1209 +2,487 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kuldeep Singh · App Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-
-:root{
-  --blue:#007AFF;
-  --green:#34C759;
-  --red:#FF3B30;
-  --orange:#FF9500;
-  --purple:#AF52DE;
-  --teal:#5AC8FA;
-  --gray:#8E8E93;
-  --gray2:#AEAEB2;
-  --gray3:#C7C7CC;
-  --gray4:#D1D1D6;
-  --gray5:#E5E5EA;
-  --gray6:#F2F2F7;
-  --label:rgba(0,0,0,1);
-  --label2:rgba(60,60,67,0.6);
-  --label3:rgba(60,60,67,0.3);
-  --sep:rgba(60,60,67,0.18);
-  --fn:-apple-system,'Inter',sans-serif;
-}
-
-body{
-  background:linear-gradient(145deg,#0d1117 0%,#161b22 50%,#0d1117 100%);
-  min-height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--fn);
-  padding:30px 16px 50px;
-  overflow-x:hidden;
-  user-select:none;
-}
-
-/* ── PHONE ── */
-.wrap{display:flex;flex-direction:column;align-items:center;gap:14px;}
-
-.phone{
-  width:393px;height:852px;
-  background:#1c1c1e;
-  border-radius:56px;
-  padding:2.5px;
-  position:relative;
-  box-shadow:
-    0 0 0 .5px rgba(255,255,255,.18),
-    0 0 0 1px #000,
-    0 50px 100px rgba(0,0,0,.8),
-    0 100px 200px rgba(0,0,0,.5),
-    inset 0 0 0 1px rgba(255,255,255,.04);
-  flex-shrink:0;
-}
-.phone::before{
-  content:'';position:absolute;
-  left:-3.5px;top:128px;
-  width:3.5px;height:34px;
-  background:#2c2c2e;border-radius:2px 0 0 2px;
-  box-shadow:0 48px 0 #2c2c2e,0 96px 0 #2c2c2e;
-}
-.phone::after{
-  content:'';position:absolute;
-  right:-3.5px;top:168px;
-  width:3.5px;height:74px;
-  background:#2c2c2e;border-radius:0 2px 2px 0;
-}
-
-.screen{
-  width:100%;height:100%;
-  border-radius:54px;
-  overflow:hidden;
-  position:relative;
-  background:#000;
-}
-
-/* ── DYNAMIC ISLAND ── */
-.di{
-  position:absolute;top:12px;left:50%;
-  transform:translateX(-50%);
-  z-index:1000;
-  background:#000;
-  border-radius:22px;
-  width:126px;height:37px;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  cursor:pointer;
-  transition:width .5s cubic-bezier(.34,1.4,.64,1),
-             height .5s cubic-bezier(.34,1.4,.64,1),
-             border-radius .5s cubic-bezier(.34,1.4,.64,1);
-  overflow:hidden;
-}
-.di.pill{width:260px;}
-.di.expanded{width:354px;height:88px;border-radius:30px;top:10px;}
-.di-cam{
-  width:12px;height:12px;background:#111;
-  border-radius:50%;border:2px solid #2a2a2a;
-  position:relative;flex-shrink:0;
-  transition:opacity .3s;
-}
-.di-cam::after{
-  content:'';position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:4px;height:4px;background:#0a2540;border-radius:50%;
-}
-.di-notif{
-  display:none;flex:1;
-  align-items:center;gap:9px;
-  padding:0 10px 0 0;
-  opacity:0;
-  transition:opacity .25s .2s;
-}
-.di.pill .di-notif,.di.expanded .di-notif{display:flex;opacity:1;}
-.di.expanded .di-notif{padding:14px 14px 14px 4px;align-items:flex-start;flex-direction:row;}
-.di-n-icon{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
-.di-n-text{flex:1;min-width:0;}
-.di-n-title{font-size:12.5px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.di-n-body{font-size:11px;color:rgba(255,255,255,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.di-n-time{font-size:10px;color:rgba(255,255,255,.35);flex-shrink:0;padding-top:2px;}
-
-/* ── STATUS BAR ── */
-.sb{
-  position:absolute;top:0;left:0;right:0;
-  height:59px;z-index:500;
-  display:flex;align-items:flex-end;
-  justify-content:space-between;
-  padding:0 32px 10px;
-  pointer-events:none;
-}
-.sb-t{font-size:15px;font-weight:600;letter-spacing:-.2px;}
-.sb-r{display:flex;align-items:center;gap:6px;}
-.sig{display:flex;align-items:flex-end;gap:2px;height:12px;}
-.sig span{width:3px;border-radius:1px;}
-.batt{
-  width:26px;height:13px;
-  border:1.5px solid currentColor;
-  border-radius:4px;padding:2px;
-  position:relative;opacity:.9;
-}
-.batt::after{
-  content:'';position:absolute;
-  right:-5px;top:50%;transform:translateY(-50%);
-  width:3px;height:6px;
-  border-radius:0 2px 2px 0;
-  background:currentColor;opacity:.4;
-}
-.batt-f{width:72%;height:100%;border-radius:1.5px;}
-.sb.dark .sb-t,.sb.dark .sig span,.sb.dark svg{color:#fff;}
-.sb.dark .batt-f{background:#34C759;}
-.sb.dark .batt{border-color:rgba(255,255,255,.75);}
-.sb.light .sb-t,.sb.light svg{color:#000;}
-.sb.light .sig span{background:#000;}
-.sb.light .batt{border-color:rgba(0,0,0,.5);}
-.sb.light .batt-f{background:#34C759;}
-.sb.light .batt::after{background:rgba(0,0,0,.4);}
-
-/* ── LOCK SCREEN ── */
-#lock{
-  position:absolute;inset:0;z-index:400;
-  border-radius:54px;overflow:hidden;
-  display:flex;flex-direction:column;align-items:center;
-  transition:transform .65s cubic-bezier(.32,.72,0,1),opacity .4s;
-}
-#lock.out{transform:translateY(-102%);opacity:0;pointer-events:none;}
-
-.lk-wall{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse at 25% 20%,rgba(100,80,220,.5),transparent 50%),
-    radial-gradient(ellipse at 75% 65%,rgba(40,130,255,.4),transparent 50%),
-    radial-gradient(ellipse at 50% 95%,rgba(220,80,120,.25),transparent 50%),
-    linear-gradient(180deg,#0a0a2a,#12084a 50%,#080e2a);
-}
-
-.lk-time-block{
-  margin-top:82px;
-  text-align:center;
-  position:relative;z-index:1;
-}
-.lk-h{font-size:82px;font-weight:200;color:#fff;letter-spacing:-4px;line-height:1;font-variant-numeric:tabular-nums;}
-.lk-d{font-size:18px;font-weight:400;color:rgba(255,255,255,.82);margin-top:6px;}
-
-.lk-notifs{
-  margin-top:24px;width:352px;
-  display:flex;flex-direction:column;gap:9px;
-  position:relative;z-index:1;
-}
-.lk-n{
-  background:rgba(255,255,255,.16);
-  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border:1px solid rgba(255,255,255,.22);
-  border-radius:16px;padding:13px 15px;
-  display:flex;gap:11px;align-items:flex-start;
-  animation:nslide .5s cubic-bezier(.34,1.3,.64,1) both;
-}
-.lk-n:nth-child(2){animation-delay:.08s;}
-.lk-n:nth-child(3){animation-delay:.16s;}
-@keyframes nslide{from{opacity:0;transform:translateY(18px) scale(.96);}to{opacity:1;transform:none;}}
-.lk-n-ico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.lk-n-app{font-size:11px;font-weight:600;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.5px;margin-bottom:1px;}
-.lk-n-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:2px;}
-.lk-n-body{font-size:13px;color:rgba(255,255,255,.72);line-height:1.35;}
-.lk-n-t{font-size:11px;color:rgba(255,255,255,.4);flex-shrink:0;margin-top:2px;}
-
-.lk-bottom{
-  margin-top:auto;margin-bottom:28px;
-  display:flex;flex-direction:column;align-items:center;gap:14px;
-  position:relative;z-index:1;width:100%;
-}
-.lk-row{display:flex;justify-content:space-between;width:280px;}
-.lk-btn{
-  width:52px;height:52px;border-radius:50%;
-  background:rgba(255,255,255,.16);
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,.2);
-  display:flex;align-items:center;justify-content:center;
-}
-.lk-hint{
-  display:flex;flex-direction:column;align-items:center;gap:5px;
-}
-.lk-up{animation:upbounce 2s ease-in-out infinite;}
-@keyframes upbounce{0%,100%{transform:translateY(5px);opacity:.35;}50%{transform:translateY(-3px);opacity:.9;}}
-.lk-bar{width:134px;height:5px;background:rgba(255,255,255,.3);border-radius:3px;cursor:pointer;}
-
-/* ── HOME SCREEN ── */
-#home{
-  position:absolute;inset:0;z-index:300;
-  border-radius:54px;overflow:hidden;
-  display:flex;flex-direction:column;
-  transition:transform .45s cubic-bezier(.32,.72,0,1),
-             opacity .3s;
-  transform-origin:50% 50%;
-}
-#home.scaled{transform:scale(.92) translateY(2%);opacity:0;pointer-events:none;}
-
-.hw{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse at 20% 10%,rgba(90,140,255,.4),transparent 55%),
-    radial-gradient(ellipse at 80% 80%,rgba(150,90,255,.3),transparent 55%),
-    radial-gradient(ellipse at 55% 45%,rgba(255,200,80,.1),transparent 60%),
-    linear-gradient(160deg,#c8d8f8 0%,#d8c8f8 50%,#c8d8f8 100%);
-}
-
-.home-body{
-  flex:1;overflow-y:auto;overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-  position:relative;z-index:1;
-  padding-top:59px;
-  overscroll-behavior:none;
-}
-.home-body::-webkit-scrollbar{display:none;}
-
-.page{
-  padding:16px 20px 8px;
-  min-height:calc(852px - 59px - 98px);
-}
-
-/* Profile widget */
-.pw{
-  background:rgba(255,255,255,.7);
-  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border:1px solid rgba(255,255,255,.85);
-  border-radius:22px;
-  padding:15px;margin-bottom:14px;
-  display:flex;gap:12px;align-items:center;
-  cursor:pointer;
-  box-shadow:0 2px 16px rgba(0,0,0,.08);
-  transition:transform .12s cubic-bezier(.34,1.56,.64,1);
-}
-.pw:active{transform:scale(.97);}
-.pw-av{
-  width:52px;height:52px;border-radius:50%;
-  background:linear-gradient(135deg,#34C759,#007AFF);
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;font-weight:800;color:#fff;flex-shrink:0;
-  letter-spacing:-1px;
-}
-.pw-name{font-size:15px;font-weight:700;color:rgba(10,10,30,.9);}
-.pw-role{font-size:12px;color:rgba(10,10,30,.5);font-weight:500;margin-top:1px;}
-.pw-loc{font-size:11px;color:rgba(10,10,30,.38);margin-top:2px;}
-
-/* Search */
-.srch{
-  background:rgba(118,118,128,.14);
-  border-radius:12px;height:36px;
-  display:flex;align-items:center;padding:0 12px;gap:7px;
-  margin-bottom:14px;cursor:pointer;
-}
-.srch span{font-size:15px;color:rgba(60,60,67,.5);}
-
-/* App grid */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px 10px;
-}
-.ai{
-  display:flex;flex-direction:column;align-items:center;gap:5px;
-  cursor:pointer;position:relative;
-}
-.ai-ico{
-  width:62px;height:62px;border-radius:15.5px;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 12px rgba(0,0,0,.2),
-             0 1px 3px rgba(0,0,0,.15),
-             inset 0 1px 0 rgba(255,255,255,.35);
-  position:relative;overflow:hidden;
-  transition:transform .12s cubic-bezier(.34,1.56,.64,1);
-  flex-shrink:0;
-}
-.ai-ico::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,transparent 48%);
-  pointer-events:none;z-index:10;border-radius:15.5px;
-}
-.ai-ico svg{width:34px;height:34px;position:relative;z-index:1;}
-.ai:active .ai-ico{transform:scale(.84);}
-.ai-lbl{
-  font-size:11px;font-weight:500;
-  color:rgba(20,20,40,.85);
-  text-align:center;width:68px;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  text-shadow:0 1px 2px rgba(255,255,255,.6);
-}
-.bdg{
-  position:absolute;top:-3px;right:-3px;
-  background:#FF3B30;color:#fff;
-  font-size:9px;font-weight:700;
-  padding:1.5px 5px;border-radius:10px;
-  min-width:17px;line-height:13px;text-align:center;
-  border:2px solid transparent;z-index:20;
-}
-
-/* Dock */
-.dock{padding:8px 18px 30px;flex-shrink:0;position:relative;z-index:2;}
-.dock-in{
-  background:rgba(255,255,255,.52);
-  backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);
-  border:1px solid rgba(255,255,255,.72);
-  border-radius:30px;padding:12px 16px;
-  display:flex;justify-content:space-around;align-items:center;
-  box-shadow:0 2px 20px rgba(0,0,0,.1);
-}
-.di2{
-  width:58px;height:58px;border-radius:14.5px;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 14px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.35);
-  cursor:pointer;position:relative;overflow:hidden;
-  transition:transform .12s cubic-bezier(.34,1.56,.64,1);
-}
-.di2::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,transparent 48%);
-  border-radius:14.5px;z-index:10;
-}
-.di2 svg{width:30px;height:30px;position:relative;z-index:1;}
-.di2:active{transform:scale(.86);}
-
-/* Page dots */
-.dots{
-  display:flex;justify-content:center;gap:6px;
-  padding:6px 0 10px;position:relative;z-index:2;
-}
-.dot{width:7px;height:7px;border-radius:50%;background:rgba(20,20,40,.28);}
-.dot.on{background:rgba(20,20,40,.68);}
-
-/* ── APP VIEWS ── */
-.av{
-  position:absolute;inset:0;z-index:350;
-  border-radius:54px;overflow:hidden;
-  display:none;flex-direction:column;
-  transform:translateY(105%);
-  transition:transform .55s cubic-bezier(.32,.72,0,1);
-}
-.av.show{display:flex;}
-.av.visible{transform:translateY(0);}
-.av.closing{transform:translateY(105%);}
-
-/* Nav bar */
-.nav{
-  height:88px;display:flex;align-items:flex-end;
-  padding:0 20px 12px;flex-shrink:0;
-  position:relative;z-index:10;
-}
-.nav-back{
-  display:flex;align-items:center;gap:5px;
-  color:var(--blue);font-size:17px;font-weight:400;
-  cursor:pointer;padding:8px 0;
-  transition:opacity .15s;
-}
-.nav-back:active{opacity:.5;}
-.nav-title{
-  position:absolute;left:50%;bottom:12px;transform:translateX(-50%);
-  font-size:17px;font-weight:600;color:#000;white-space:nowrap;
-}
-
-/* Scrollable content */
-.ac{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:none;}
-.ac::-webkit-scrollbar{display:none;}
-
-/* Home indicator */
-.hi{
-  height:34px;display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
-.hb{
-  width:134px;height:5px;
-  background:rgba(0,0,0,.18);border-radius:3px;
-  cursor:pointer;transition:background .2s;
-}
-.hb:active{background:rgba(0,0,0,.35);}
-
-/* ── iOS COMPONENTS ── */
-.sec-lbl{
-  font-size:13px;font-weight:400;color:var(--label2);
-  padding:0 20px 6px;text-transform:uppercase;letter-spacing:.4px;
-}
-.ios-list{
-  background:#fff;
-  border-top:.5px solid var(--sep);
-  border-bottom:.5px solid var(--sep);
-}
-.ios-row{
-  display:flex;align-items:center;
-  padding:12px 20px;
-  border-bottom:.5px solid rgba(60,60,67,.1);
-  gap:13px;cursor:pointer;
-  transition:background .08s;
-  background:#fff;text-decoration:none;
-}
-.ios-row:last-child{border-bottom:none;}
-.ios-row:active{background:#e5e5ea;}
-.rr-ico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.rr-label{font-size:17px;color:#000;flex:1;}
-.rr-val{font-size:16px;color:var(--label2);}
-.rr-chev{color:var(--gray3);flex-shrink:0;}
-
-.gap{height:20px;}
-.bpad{height:24px;}
-
-/* ABOUT */
-#avAbout{background:#f2f2f7;}
-.a-hero{
-  background:#fff;padding:28px 20px 22px;
-  display:flex;flex-direction:column;align-items:center;text-align:center;
-  border-bottom:.5px solid var(--sep);
-}
-.a-ring{
-  width:88px;height:88px;border-radius:50%;
-  padding:2.5px;
-  background:linear-gradient(135deg,#34C759,#007AFF,#AF52DE);
-  margin-bottom:14px;
-}
-.a-ring-in{
-  width:100%;height:100%;border-radius:50%;
-  background:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:26px;font-weight:700;color:var(--blue);
-}
-.a-name{font-size:24px;font-weight:700;color:#000;margin-bottom:4px;}
-.a-role{font-size:14px;color:var(--blue);font-weight:600;margin-bottom:8px;}
-.a-loc{font-size:13px;color:var(--label2);display:flex;align-items:center;justify-content:center;gap:4px;}
-
-.stats3{
-  display:flex;background:#fff;
-  border-top:.5px solid var(--sep);border-bottom:.5px solid var(--sep);
-  margin-top:20px;
-}
-.s3{flex:1;padding:16px 10px;text-align:center;border-right:.5px solid rgba(60,60,67,.1);}
-.s3:last-child{border-right:none;}
-.s3-n{font-size:26px;font-weight:700;color:var(--blue);display:block;}
-.s3-l{font-size:11px;color:var(--label2);font-weight:500;margin-top:2px;}
-
-.bio-card{
-  background:#fff;margin-top:20px;
-  border-top:.5px solid var(--sep);border-bottom:.5px solid var(--sep);
-  padding:16px 20px;
-}
-.bio-text{font-size:15px;color:#000;line-height:1.6;}
-
-/* EXPERIENCE */
-#avExp{background:#f2f2f7;}
-.exp-card{
-  background:#fff;
-  border-top:.5px solid var(--sep);border-bottom:.5px solid var(--sep);
-  margin-bottom:1px;overflow:hidden;
-}
-.exp-hd{
-  padding:16px 20px;display:flex;gap:13px;align-items:flex-start;
-  cursor:pointer;transition:background .08s;
-}
-.exp-hd:active{background:#f5f5f5;}
-.exp-badge{
-  width:48px;height:48px;border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;font-weight:800;color:#fff;flex-shrink:0;
-  box-shadow:0 2px 8px rgba(0,0,0,.14);
-}
-.exp-inf{flex:1;}
-.exp-role{font-size:16px;font-weight:600;color:#000;margin-bottom:2px;}
-.exp-co{font-size:14px;color:var(--label2);margin-bottom:2px;}
-.exp-dt{font-size:12px;color:var(--label3);}
-.exp-chev{color:var(--gray3);transition:transform .3s;flex-shrink:0;margin-top:4px;}
-.exp-chev.open{transform:rotate(90deg);}
-.exp-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);background:#fafafa;}
-.exp-body.open{max-height:560px;}
-.exp-bi{padding:4px 20px 18px 81px;}
-.eb{font-size:14px;color:#000;line-height:1.55;padding:3px 0 3px 14px;position:relative;}
-.eb::before{content:'•';position:absolute;left:0;color:var(--blue);font-weight:700;}
-.etags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
-.etag{font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px;background:rgba(0,122,255,.1);color:var(--blue);}
-
-/* SKILLS */
-#avSkills{background:#f2f2f7;}
-.sk-row{
-  display:flex;align-items:center;
-  padding:13px 20px;background:#fff;
-  border-bottom:.5px solid rgba(60,60,67,.1);
-}
-.sk-row:last-child{border-bottom:none;}
-.sk-ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-right:13px;font-size:16px;flex-shrink:0;}
-.sk-name{font-size:16px;color:#000;flex:1;}
-.sk-bar{width:96px;height:5.5px;background:var(--gray5);border-radius:3px;overflow:hidden;}
-.sk-fill{height:100%;border-radius:3px;}
-.wf-item{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 20px;font-size:16px;color:#000;
-  background:#fff;border-bottom:.5px solid rgba(60,60,67,.1);
-}
-.wf-item:last-child{border-bottom:none;}
-.wf-tag{font-size:12px;font-weight:600;padding:3px 9px;border-radius:20px;background:rgba(0,122,255,.1);color:var(--blue);}
-
-/* EDUCATION */
-#avEdu{background:#f2f2f7;}
-.edu-row{
-  background:#fff;border-top:.5px solid var(--sep);border-bottom:.5px solid var(--sep);
-  padding:16px 20px;display:flex;gap:14px;align-items:center;margin-bottom:1px;
-}
-.edu-ico{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.edu-deg{font-size:15.5px;font-weight:600;color:#000;margin-bottom:2px;}
-.edu-sch{font-size:13.5px;color:var(--label2);margin-bottom:2px;}
-.edu-yr{font-size:12px;color:var(--label3);}
-.cert-row{
-  background:#fff;border-top:.5px solid var(--sep);border-bottom:.5px solid var(--sep);
-  padding:16px 20px;display:flex;gap:14px;align-items:center;
-  cursor:pointer;transition:background .08s;
-}
-.cert-row:active{background:#f5f5f5;}
-
-/* CONNECT */
-#avConnect{background:#f2f2f7;}
-
-/* RESUME */
-#avResume{background:#f2f2f7;}
-.res-preview{
-  background:#fff;margin:20px;
-  border-radius:14px;overflow:hidden;
-  box-shadow:0 2px 18px rgba(0,0,0,.12);
-  border:.5px solid rgba(0,0,0,.1);
-  cursor:pointer;transition:opacity .15s;
-}
-.res-preview:active{opacity:.75;}
-.res-thumb{
-  width:100%;height:150px;
-  background:linear-gradient(135deg,#f0f4ff,#e8eeff);
-  display:flex;align-items:center;justify-content:center;
-  border-bottom:.5px solid rgba(0,0,0,.07);
-  flex-direction:column;gap:8px;
-}
-.res-meta{padding:14px 16px;}
-.res-ttl{font-size:16px;font-weight:600;color:#000;margin-bottom:3px;}
-.res-sub{font-size:13px;color:var(--label2);}
-.dl-btn{
-  display:flex;align-items:center;justify-content:center;gap:9px;
-  background:var(--blue);color:#fff;
-  font-size:17px;font-weight:600;
-  padding:16px;margin:0 20px 12px;
-  border-radius:14px;cursor:pointer;
-  transition:opacity .15s;text-decoration:none;
-}
-.dl-btn:active{opacity:.75;}
-
-/* PRESS RIPPLE */
-@keyframes rp{from{transform:scale(0);opacity:.3;}to{transform:scale(4);opacity:0;}}
-.rip{
-  position:absolute;width:40px;height:40px;border-radius:50%;
-  background:rgba(0,0,0,.12);pointer-events:none;
-  transform:scale(0);animation:rp .45s ease-out forwards;
-}
-
-.hint{color:rgba(255,255,255,.22);font-size:10px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;text-align:center;}
-</style>
+<meta name="description" content="Android Developer skilled in building smooth, user-friendly apps with Java, Kotlin, Jetpack Compose & MVVM.">
+<meta property="og:title" content="Kuldeep Singh · App Developer">
+<meta property="og:description" content="Android Developer skilled in building smooth, user-friendly apps with Java, Kotlin, Jetpack Compose & MVVM.">
+<meta property="og:image" content="https://kuldeepsinghrai.in/assets/img/avatar.jpg">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="assets/img/avatar.jpg">
+<link rel="apple-touch-icon" href="assets/img/avatar.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/phone.css">
 </head>
 <body>
-<div class="wrap">
-<div class="phone">
-<div class="screen">
 
-<!-- DYNAMIC ISLAND -->
-<div class="di" id="di" onclick="diTap()">
-  <div class="di-cam"></div>
-  <div class="di-notif" id="din">
-    <div class="di-n-icon" id="din-ico"></div>
-    <div class="di-n-text">
-      <div class="di-n-title" id="din-title"></div>
-      <div class="di-n-body" id="din-body"></div>
-    </div>
-    <div class="di-n-time" id="din-time">now</div>
-  </div>
-</div>
+<!-- ICONS (SF Symbols-style) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-person" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4.4 0-9 2.2-9 5.5V22h18v-2.5c0-3.3-4.6-5.5-9-5.5z"/></symbol>
+  <symbol id="i-case" viewBox="0 0 24 24"><path fill="currentColor" d="M9 3h6a2 2 0 0 1 2 2v1h3a2 2 0 0 1 2 2v4H2V8a2 2 0 0 1 2-2h3V5a2 2 0 0 1 2-2zm0 3h6V5H9v1zM2 13.5h8V15a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-1.5h8V19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.5z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M8 6.5 2.5 12 8 17.5M16 6.5l5.5 5.5-5.5 5.5M13.8 4l-3.6 16"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3 1 8.5 12 14l9-4.5V16h2V8.5L12 3zM5 12.6V16c0 2 3.1 3.8 7 3.8s7-1.8 7-3.8v-3.4L12 16l-7-3.4z"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path fill="currentColor" d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm7 1.5V9h5.5L13 3.5zM8 13v1.6h8V13H8zm0 3.6v1.6h8v-1.6H8z"/></symbol>
+  <symbol id="i-bubble" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3C6.5 3 2 6.8 2 11.4c0 2.6 1.4 4.9 3.7 6.4-.2 1.2-.8 2.4-1.9 3.4 2 .1 3.9-.6 5.3-1.7.9.2 1.9.3 2.9.3 5.5 0 10-3.8 10-8.4S17.5 3 12 3z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v.4l-10 6.2L2 6.4V6a2 2 0 0 1 2-2zm-2 4.8 10 6.1 10-6.1V18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.8z"/></symbol>
+  <symbol id="i-li" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></symbol>
+  <symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.254-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.394.1 2.646.64.699 1.026 1.591 1.026 2.682 0 3.841-2.337 4.687-4.565 4.935.359.308.678.92.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.165 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" d="M10.5 17.5a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM15.5 15.5l5 5"/></symbol>
+  <symbol id="i-chev-r" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-chev-l" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" d="M15 4 7 12l8 8"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></symbol>
+  <symbol id="i-torch" viewBox="0 0 24 24"><path fill="currentColor" d="M7 2h10v3.5l-2.5 4V21a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1V9.5L7 5.5V2zm5 10a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path fill="currentColor" d="M9 3.5h6l1.6 2.5H20a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.4L9 3.5zM12 17.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4zm0-2a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4z"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 14.5V3M8 6.5 12 2.5l4 4M8.5 10H6.5a1.5 1.5 0 0 0-1.5 1.5v8A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5v-8a1.5 1.5 0 0 0-1.5-1.5h-2"/></symbol>
+  <symbol id="i-dl" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m-5-5 5 5 5-5M4 20h16"/></symbol>
+  <symbol id="i-open" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M8 16 17 7M9 6.5h8.5V15"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M8.5 8.5h11v12h-11zM15.5 8.5v-5h-11v12h4"/></symbol>
+  <symbol id="i-apps" viewBox="0 0 24 24"><path fill="currentColor" d="M4 3h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm11 0h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM4 14h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1zm11 0h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1z"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path fill="currentColor" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></symbol>
+  <symbol id="i-cell" viewBox="0 0 24 24"><path fill="currentColor" d="M12 11a2 2 0 0 0-1 3.7V21h2v-6.3A2 2 0 0 0 12 11zM7.8 7.8l-1.4-1.4a8 8 0 0 0 0 11.2l1.4-1.4a6 6 0 0 1 0-8.4zm8.4 0a6 6 0 0 1 0 8.4l1.4 1.4a8 8 0 0 0 0-11.2l-1.4 1.4z"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4.5c3.9 0 7.4 1.5 10 4l-1.9 2A11.7 11.7 0 0 0 12 7.2c-3.1 0-6 1.2-8.1 3.3l-1.9-2c2.6-2.5 6.1-4 10-4zm0 5.3c2.4 0 4.6.9 6.2 2.5l-1.9 1.9a6.1 6.1 0 0 0-8.6 0l-1.9-1.9A8.8 8.8 0 0 1 12 9.8zm0 5.3c1 0 1.9.4 2.5 1L12 19.8 9.5 16.1c.6-.6 1.5-1 2.5-1z"/></symbol>
+  <symbol id="i-bt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m6.5 7 11 10L12 22V2l5.5 5-11 10"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><path fill="currentColor" d="M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm-1-5.5h2V5h-2zm0 17.5h2v3.5h-2zM1.5 11H5v2H1.5zM19 11h3.5v2H19zM4.2 5.6l1.4-1.4 2.5 2.5-1.4 1.4zm11.7 11.7 1.4-1.4 2.5 2.5-1.4 1.4zM4.2 18.4l2.5-2.5 1.4 1.4-2.5 2.5zM15.9 6.7l2.5-2.5 1.4 1.4-2.5 2.5z"/></symbol>
+  <symbol id="i-speaker" viewBox="0 0 24 24"><path fill="currentColor" d="M3 9h4l5-4.5v15L7 15H3V9zm12.5-1.2a6 6 0 0 1 0 8.4l-1.4-1.4a4 4 0 0 0 0-5.6l1.4-1.4z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a1.5 1.5 0 0 1 1.5 1.5v.7A6.5 6.5 0 0 1 18.5 10.5v4.2l2 2.8v1H3.5v-1l2-2.8v-4.2a6.5 6.5 0 0 1 5-6.3v-.7A1.5 1.5 0 0 1 12 2zm-2.5 17.5h5a2.5 2.5 0 0 1-5 0z"/></symbol>
+  <symbol id="i-rot" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M20 12a8 8 0 1 1-2.6-5.9M20 3v4h-4"/><rect x="9.5" y="11" width="5" height="4" rx="1" fill="currentColor"/><path d="M10.5 11V9.8a1.5 1.5 0 0 1 3 0V11" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2 2 7v2h20V7L12 2zM4 10.5h3v7H4zm6.5 0h3v7h-3zm6.5 0h3v7h-3zM2 19h20v3H2z"/></symbol>
+  <symbol id="i-seal" viewBox="0 0 24 24"><path fill="currentColor" d="m12 1.5 2.4 1.8 3-.2.9 2.9 2.5 1.7-1 2.8 1 2.8-2.5 1.7-.9 2.9-3-.2L12 20l-2.4-1.8-3 .2-.9-2.9-2.5-1.7 1-2.8-1-2.8 2.5-1.7.9-2.9 3 .2L12 1.5zm-1.2 12.3L8 11l-1.4 1.4 4.2 4.2 7-7L16.4 8.2l-5.6 5.6z"/></symbol>
+  <symbol id="i-del" viewBox="0 0 24 24"><path fill="currentColor" d="M8.5 4H20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H8.5L2 12l6.5-8zm3.7 4.3-1.4 1.4 2.3 2.3-2.3 2.3 1.4 1.4 2.3-2.3 2.3 2.3 1.4-1.4-2.3-2.3 2.3-2.3-1.4-1.4-2.3 2.3-2.3-2.3z"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m-6 6 6-6 6 6"/></symbol>
+</svg>
 
-<!-- STATUS BAR -->
-<div class="sb dark" id="sb">
-  <span class="sb-t" id="sbt">9:41</span>
-  <div class="sb-r">
-    <div class="sig">
-      <span style="height:3px;opacity:.4"></span>
-      <span style="height:6px;opacity:.6"></span>
-      <span style="height:9px;opacity:.8"></span>
-      <span style="height:12px;"></span>
-    </div>
-    <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" opacity=".9">
-      <path d="M8 2.4C10 2.4 11.8 3.2 13.1 4.5L14.5 3.1C12.8 1.5 10.5.5 8 .5 5.5.5 3.2 1.5 1.5 3.1l1.4 1.4C4.2 3.2 6 2.4 8 2.4z" opacity=".4"/>
-      <path d="M8 5.2C9.2 5.2 10.3 5.7 11.1 6.5L12.5 5.1C11.3 3.9 9.7 3.2 8 3.2 6.3 3.2 4.7 3.9 3.5 5.1L4.9 6.5C5.7 5.7 6.8 5.2 8 5.2z" opacity=".7"/>
-      <circle cx="8" cy="10" r="2"/>
-    </svg>
-    <div class="batt"><div class="batt-f"></div></div>
-  </div>
-</div>
+<main class="stage">
+<div class="fit" id="fit">
+<div class="device" id="device">
+  <button class="hw hw-action" data-hw="action" aria-label="Action button"></button>
+  <button class="hw hw-volup" data-hw="up" aria-label="Volume up"></button>
+  <button class="hw hw-voldown" data-hw="down" aria-label="Volume down"></button>
+  <button class="hw hw-power" data-hw="power" aria-label="Side button (lock)"></button>
+  <span class="hw hw-cam" aria-hidden="true"></span>
 
-<!-- ══ LOCK SCREEN ══ -->
-<div id="lock">
-  <div class="lk-wall"></div>
-  <!-- lock status bar -->
-  <div class="sb dark" style="position:absolute;top:0;left:0;right:0;z-index:10;pointer-events:none;">
-    <span class="sb-t" id="lkt">9:41</span>
-    <div class="sb-r">
-      <div class="sig"><span style="height:3px;background:#fff;opacity:.4;border-radius:1px"></span><span style="height:6px;background:#fff;opacity:.6;border-radius:1px"></span><span style="height:9px;background:#fff;opacity:.8;border-radius:1px"></span><span style="height:12px;background:#fff;border-radius:1px"></span></div>
-      <svg width="16" height="12" viewBox="0 0 16 12" fill="white" opacity=".9"><path d="M8 5.2C9.2 5.2 10.3 5.7 11.1 6.5L12.5 5.1C11.3 3.9 9.7 3.2 8 3.2 6.3 3.2 4.7 3.9 3.5 5.1L4.9 6.5C5.7 5.7 6.8 5.2 8 5.2z"/><circle cx="8" cy="10" r="2"/></svg>
-      <div class="batt" style="border-color:rgba(255,255,255,.7)"><div class="batt-f" style="background:#34C759"></div></div>
-    </div>
-  </div>
+  <div class="bezel">
+  <div class="screen" id="screen" data-theme="light">
 
-  <div class="lk-time-block">
-    <div class="lk-h" id="lkh">9:41</div>
-    <div class="lk-d" id="lkd">Tuesday, May 13</div>
-  </div>
+    <!-- ══ HOME SCREEN ══ -->
+    <div id="home" class="home" aria-label="Home Screen">
+      <div class="wall"></div>
+      <div class="pages" id="pages">
 
-  <div class="lk-notifs">
-    <div class="lk-n">
-      <div class="lk-n-ico" style="background:#007AFF">💼</div>
-      <div style="flex:1">
-        <div class="lk-n-app">Portfolio</div>
-        <div class="lk-n-title">New LinkedIn visitor</div>
-        <div class="lk-n-body">Someone viewed your profile</div>
-      </div>
-      <div class="lk-n-t">now</div>
-    </div>
-    <div class="lk-n">
-      <div class="lk-n-ico" style="background:#24292E">📱</div>
-      <div style="flex:1">
-        <div class="lk-n-app">GitHub</div>
-        <div class="lk-n-title">New star on repo ⭐</div>
-        <div class="lk-n-body">android-mvvm-template</div>
-      </div>
-      <div class="lk-n-t">2m</div>
-    </div>
-    <div class="lk-n">
-      <div class="lk-n-ico" style="background:#FF9500">✉️</div>
-      <div style="flex:1">
-        <div class="lk-n-app">Mail</div>
-        <div class="lk-n-title">Interview Invitation</div>
-        <div class="lk-n-body">Exciting Android role for you</div>
-      </div>
-      <div class="lk-n-t">15m</div>
-    </div>
-  </div>
+        <!-- Page 1 -->
+        <div class="page">
+          <button class="widget w-profile" data-open="about" aria-label="Profile widget: open About">
+            <img src="assets/img/avatar.jpg" alt="" draggable="false">
+            <span class="wp-text">
+              <span class="wp-name">Kuldeep Singh</span>
+              <span class="wp-role">App Developer</span>
+              <span class="wp-loc"><svg><use href="#i-pin"/></svg>New Delhi, India</span>
+            </span>
+          </button>
+          <span class="wlabel">Profile</span>
 
-  <div class="lk-bottom">
-    <div class="lk-row">
-      <div class="lk-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-      <div class="lk-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-    </div>
-    <div class="lk-hint">
-      <div class="lk-up"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
-      <span style="color:rgba(255,255,255,.4);font-size:13px;">Swipe up to unlock</span>
-    </div>
-    <div class="lk-bar" onclick="unlock()"></div>
-  </div>
-</div>
-
-<!-- ══ HOME SCREEN ══ -->
-<div id="home">
-  <div class="hw"></div>
-  <div class="home-body">
-    <div class="page">
-
-      <!-- Profile widget -->
-      <div class="pw" onclick="openApp('About')">
-        <div class="pw-av">KS</div>
-        <div>
-          <div class="pw-name">Kuldeep Singh</div>
-          <div class="pw-role">App Developer</div>
-          <div class="pw-loc">📍 New Delhi, India</div>
-        </div>
-      </div>
-
-      <!-- Search -->
-      <div class="srch">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(60,60,67,.5)" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <span>Search</span>
-      </div>
-
-      <!-- Apps: Social row -->
-      <div class="grid" style="margin-bottom:18px;">
-        <div class="ai" onclick="openLink('https://linkedin.com/in/kuldeepsinghrai')">
-          <div class="ai-ico" style="background:#0A66C2"><svg viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg></div>
-          <span class="ai-lbl">LinkedIn</span>
-        </div>
-        <div class="ai" onclick="openLink('https://github.com/kuldeepsinghrai')">
-          <div class="ai-ico" style="background:#24292E">
-            <div class="bdg">3</div>
-            <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.254-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.394.1 2.646.64.699 1.026 1.591 1.026 2.682 0 3.841-2.337 4.687-4.565 4.935.359.308.678.92.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.165 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          <div class="grid">
+            <button class="icon" data-open="about"><span class="ico g-about"><svg><use href="#i-person"/></svg></span><span class="lbl">About</span></button>
+            <button class="icon" data-open="exp"><span class="ico g-exp"><svg><use href="#i-case"/></svg></span><span class="lbl">Experience</span></button>
+            <button class="icon" data-open="skills"><span class="ico g-skills"><svg><use href="#i-code"/></svg></span><span class="lbl">Skills</span></button>
+            <button class="icon" data-open="edu"><span class="ico g-edu"><svg><use href="#i-cap"/></svg></span><span class="lbl">Education</span></button>
+            <button class="icon" data-open="connect"><span class="ico g-connect"><svg><use href="#i-bubble"/></svg></span><span class="lbl">Connect</span></button>
+            <a class="icon" href="https://linkedin.com/in/kuldeepsinghrai" target="_blank" rel="noopener"><span class="ico g-li"><svg><use href="#i-li"/></svg></span><span class="lbl">LinkedIn</span></a>
+            <a class="icon" href="https://github.com/kuldeepsinghrai" target="_blank" rel="noopener"><span class="ico g-gh"><svg><use href="#i-gh"/></svg><b class="badge">3</b></span><span class="lbl">GitHub</span></a>
+            <a class="icon" href="https://instagram.com/imkuldeepsinghrai" target="_blank" rel="noopener"><span class="ico g-ig"><svg><use href="#i-ig"/></svg></span><span class="lbl">Instagram</span></a>
           </div>
-          <span class="ai-lbl">GitHub</span>
         </div>
-        <div class="ai" onclick="openLink('https://instagram.com/imkuldeepsinghrai')">
-          <div class="ai-ico" style="background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%)"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
-          <span class="ai-lbl">Instagram</span>
-        </div>
-        <div class="ai" onclick="openLink('https://wa.me/+919871831349')">
-          <div class="ai-ico" style="background:#25D366">
-            <div class="bdg">!</div>
-            <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+        <!-- Page 2: widgets -->
+        <div class="page page-w">
+          <div class="wrow">
+            <div>
+              <div class="widget w-clock" aria-label="Clock: New Delhi">
+                <div class="dial" id="dial">
+                  <i class="h" id="hh"></i><i class="m" id="mh"></i><i class="s" id="sh"></i>
+                </div>
+              </div>
+              <span class="wlabel">Clock</span>
+            </div>
+            <div>
+              <button class="widget w-rings" data-open="skills" aria-label="Skills widget">
+                <svg viewBox="0 0 100 100" class="rings">
+                  <circle class="rt" cx="50" cy="50" r="42" style="--c:#bf5af2"/><circle class="rv" cx="50" cy="50" r="42" pathLength="100" style="--c:#bf5af2;--v:92"/>
+                  <circle class="rt" cx="50" cy="50" r="30" style="--c:#ff9f0a"/><circle class="rv" cx="50" cy="50" r="30" pathLength="100" style="--c:#ff9f0a;--v:88"/>
+                  <circle class="rt" cx="50" cy="50" r="18" style="--c:#30d158"/><circle class="rv" cx="50" cy="50" r="18" pathLength="100" style="--c:#30d158;--v:85"/>
+                </svg>
+                <span class="rl"><i style="--c:#bf5af2"></i>Kotlin</span>
+                <span class="rl"><i style="--c:#ff9f0a"></i>Java</span>
+                <span class="rl"><i style="--c:#30d158"></i>Jetpack Compose</span>
+              </button>
+              <span class="wlabel">Skills</span>
+            </div>
           </div>
-          <span class="ai-lbl">WhatsApp</span>
-        </div>
 
-        <!-- Portfolio apps -->
-        <div class="ai" onclick="openApp('About')">
-          <div class="ai-ico" style="background:linear-gradient(145deg,#007AFF,#5856D6)"><svg viewBox="0 0 24 24" fill="white"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg></div>
-          <span class="ai-lbl">About</span>
-        </div>
-        <div class="ai" onclick="openApp('Exp')">
-          <div class="ai-ico" style="background:linear-gradient(145deg,#FF9500,#FF6B00)"><svg viewBox="0 0 24 24" fill="white"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
-          <span class="ai-lbl">Experience</span>
-        </div>
-        <div class="ai" onclick="openApp('Skills')">
-          <div class="ai-ico" style="background:linear-gradient(145deg,#AF52DE,#5E5CE6)"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-          <span class="ai-lbl">Skills</span>
-        </div>
-        <div class="ai" onclick="openApp('Edu')">
-          <div class="ai-ico" style="background:linear-gradient(145deg,#34C759,#30B0C7)"><svg viewBox="0 0 24 24" fill="white"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-          <span class="ai-lbl">Education</span>
-        </div>
+          <button class="widget w-exp" data-open="exp" aria-label="Experience widget">
+            <span class="we-head"><svg><use href="#i-case"/></svg>Experience</span>
+            <span class="we-item" style="--c:#34c759"><b>Android Developer</b><span>Stock Register · Remote</span><em>August 2023 – Present</em></span>
+            <span class="we-item" style="--c:#0a84ff"><b>Android Developer Intern</b><span>Bijnis · New Delhi</span><em>September 2022 – August 2023</em></span>
+          </button>
+          <span class="wlabel">Experience</span>
 
-        <div class="ai" onclick="openApp('Connect')">
-          <div class="ai-ico" style="background:linear-gradient(145deg,#5AC8FA,#007AFF)"><svg viewBox="0 0 24 24" fill="white"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-          <span class="ai-lbl">Connect</span>
-        </div>
-        <div class="ai" onclick="openApp('Resume')">
-          <div class="ai-ico" style="background:linear-gradient(145deg,#FF3B30,#FF6060)"><svg viewBox="0 0 24 24" fill="white"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="white" stroke-width="1.5"/><line x1="16" y1="13" x2="8" y2="13" stroke="white" stroke-width="1.5"/><line x1="16" y1="17" x2="8" y2="17" stroke="white" stroke-width="1.5"/></svg></div>
-          <span class="ai-lbl">Resume</span>
+          <div class="wrow">
+            <div>
+              <button class="widget w-small w-edu" data-open="edu" aria-label="Education widget">
+                <svg class="ws-ico"><use href="#i-cap"/></svg>
+                <b>B Level · PGDCA (MCA equiv.)</b>
+                <span>NIELIT</span>
+                <em>January 2025 – Present</em>
+              </button>
+              <span class="wlabel">Education</span>
+            </div>
+            <div>
+              <button class="widget w-small w-cert" data-open="edu" aria-label="Certification widget">
+                <svg class="ws-ico"><use href="#i-seal"/></svg>
+                <b>SRE Fundamentals with Google</b>
+                <span>Uplimit</span>
+                <em>November 2025</em>
+              </button>
+              <span class="wlabel">Certification</span>
+            </div>
+          </div>
         </div>
       </div>
 
-    </div>
-  </div>
+      <button class="spill" id="spill" aria-label="Search">
+        <span class="sp-s"><svg><use href="#i-search"/></svg>Search</span>
+        <span class="sp-d" aria-hidden="true"><i class="on"></i><i></i></span>
+      </button>
 
-  <div class="dots"><div class="dot on"></div><div class="dot"></div></div>
+      <div class="dock">
+        <button class="icon" data-open="phone"><span class="ico g-phone"><svg><use href="#i-phone"/></svg></span><span class="lbl">Phone</span></button>
+        <button class="icon" data-open="mail"><span class="ico g-mail"><svg><use href="#i-mail"/></svg></span><span class="lbl">Mail</span></button>
+        <a class="icon" href="https://wa.me/+919871831349" target="_blank" rel="noopener"><span class="ico g-wa"><svg><use href="#i-wa"/></svg></span><span class="lbl">WhatsApp</span></a>
+        <button class="icon" data-open="resume"><span class="ico g-resume"><svg><use href="#i-doc"/></svg></span><span class="lbl">Resume</span></button>
+      </div>
 
-  <!-- Dock -->
-  <div class="dock">
-    <div class="dock-in">
-      <div class="di2" style="background:linear-gradient(145deg,#007AFF,#5856D6)" onclick="openApp('About')"><svg viewBox="0 0 24 24" fill="white" width="30" height="30"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg></div>
-      <div class="di2" style="background:linear-gradient(145deg,#FF9500,#FF6B00)" onclick="openApp('Exp')"><svg viewBox="0 0 24 24" fill="white" width="30" height="30"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
-      <div class="di2" style="background:linear-gradient(145deg,#34C759,#30B0C7)" onclick="openApp('Edu')"><svg viewBox="0 0 24 24" fill="white" width="30" height="30"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-      <div class="di2" style="background:linear-gradient(145deg,#FF3B30,#FF6060)" onclick="openApp('Resume')"><svg viewBox="0 0 24 24" fill="white" width="30" height="30"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8" fill="none" stroke="white" stroke-width="1.5"/></svg></div>
+      <button class="done-btn" id="doneBtn">Done</button>
     </div>
-  </div>
+
+    <!-- ══ APPS ══ -->
+    <!-- ABOUT -->
+    <section class="app" id="about" data-name="About" data-ico="g-about" aria-label="About" hidden>
+      <div class="splash g-about"><svg><use href="#i-person"/></svg></div>
+      <div class="view root">
+        <header class="nav"><span class="nav-t">About</span></header>
+        <div class="scroll">
+          <div class="hero">
+            <div class="ring"><img src="assets/img/avatar.jpg" alt="Kuldeep Singh" draggable="false"></div>
+            <h2 class="h-name">Kuldeep Singh</h2>
+            <p class="h-role">App Developer</p>
+            <p class="h-loc"><svg><use href="#i-pin"/></svg>New Delhi, India</p>
+          </div>
+          <div class="stats">
+            <div><b>2+</b><span>Years</span></div>
+            <div><b>2</b><span>Companies</span></div>
+            <div><b>∞</b><span>Bugs Fixed</span></div>
+          </div>
+          <div class="group"><p class="bio">Android Developer skilled in building smooth, user-friendly apps with Java, Kotlin, Jetpack Compose &amp; MVVM. Worked with startups — adaptable, creative, and always learning new technologies.</p></div>
+          <p class="gh">Contact</p>
+          <div class="group">
+            <a class="cell" href="tel:+919871831349"><span class="ci" style="--c:#34c759"><svg><use href="#i-phone"/></svg></span><span class="ct">+91 98718 31349</span><svg class="chev"><use href="#i-chev-r"/></svg></a>
+            <a class="cell" href="mailto:imkuldeepsinghrai@gmail.com"><span class="ci" style="--c:#007aff"><svg><use href="#i-mail"/></svg></span><span class="ct">imkuldeepsinghrai@gmail.com</span><svg class="chev"><use href="#i-chev-r"/></svg></a>
+          </div>
+          <p class="gh">Links</p>
+          <div class="group">
+            <a class="cell" href="https://linkedin.com/in/kuldeepsinghrai" target="_blank" rel="noopener"><span class="ci" style="--c:#0a66c2"><svg><use href="#i-li"/></svg></span><span class="ct">LinkedIn</span><span class="cv">kuldeepsinghrai</span><svg class="chev"><use href="#i-chev-r"/></svg></a>
+            <a class="cell" href="https://github.com/kuldeepsinghrai" target="_blank" rel="noopener"><span class="ci" style="--c:#24292e"><svg><use href="#i-gh"/></svg></span><span class="ct">GitHub</span><span class="cv">kuldeepsinghrai</span><svg class="chev"><use href="#i-chev-r"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="app" id="exp" data-name="Experience" data-ico="g-exp" aria-label="Experience" hidden>
+      <div class="splash g-exp"><svg><use href="#i-case"/></svg></div>
+      <div class="view root">
+        <header class="nav"><span class="nav-t">Experience</span></header>
+        <div class="scroll">
+          <h1 class="lt">Experience</h1>
+          <p class="gh">Work History</p>
+          <div class="group">
+            <button class="cell tall" data-push="exp-sr">
+              <span class="co" style="--c1:#34C759;--c2:#1e8f3e">SR</span>
+              <span class="cx"><b>Android Developer</b><span>Stock Register · Remote</span><em>August 2023 – Present</em></span>
+              <svg class="chev"><use href="#i-chev-r"/></svg>
+            </button>
+            <button class="cell tall" data-push="exp-bj">
+              <span class="co" style="--c1:#007AFF;--c2:#0051c3">B</span>
+              <span class="cx"><b>Android Developer Intern</b><span>Bijnis · New Delhi</span><em>September 2022 – August 2023</em></span>
+              <svg class="chev"><use href="#i-chev-r"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="view" id="exp-sr" hidden>
+        <header class="nav"><button class="back"><svg><use href="#i-chev-l"/></svg><span>Experience</span></button><span class="nav-t">Stock Register</span></header>
+        <div class="scroll">
+          <div class="xhero">
+            <span class="co big" style="--c1:#34C759;--c2:#1e8f3e">SR</span>
+            <h2>Android Developer</h2>
+            <p>Stock Register · Remote</p>
+            <p class="muted">August 2023 – Present</p>
+          </div>
+          <div class="group bullets">
+            <p>Maintained native Kotlin app with MVVM architecture &amp; Room DB</p>
+            <p>Built PDF &amp; Excel export for reports, bills &amp; bulk item uploads</p>
+            <p>Multi-currency support &amp; staff role-based access levels</p>
+            <p>Initiated Jetpack Compose migration; shipped features end-to-end</p>
+            <p>Published updates on Google Play Console</p>
+            <p>Worked closely with founder on UX-focused features</p>
+          </div>
+          <div class="tags"><span>Kotlin</span><span>MVVM</span><span>Compose</span><span>Room</span><span>Retrofit</span><span>Play Console</span></div>
+        </div>
+      </div>
+      <div class="view" id="exp-bj" hidden>
+        <header class="nav"><button class="back"><svg><use href="#i-chev-l"/></svg><span>Experience</span></button><span class="nav-t">Bijnis</span></header>
+        <div class="scroll">
+          <div class="xhero">
+            <span class="co big" style="--c1:#007AFF;--c2:#0051c3">B</span>
+            <h2>Android Developer Intern</h2>
+            <p>Bijnis · New Delhi</p>
+            <p class="muted">September 2022 – August 2023</p>
+          </div>
+          <div class="group bullets">
+            <p>Built &amp; maintained native Android app using Java &amp; Kotlin</p>
+            <p>Led the Java → Kotlin migration of entire codebase</p>
+            <p>Integrated RESTful APIs via Retrofit, OkHttp &amp; Gson</p>
+            <p>User analytics with Segment &amp; CleverTap integrations</p>
+            <p>Wrote JUnit tests; participated in Agile sprints</p>
+            <p>Code reviews, bug fixing &amp; performance improvements</p>
+          </div>
+          <div class="tags"><span>Java</span><span>Kotlin</span><span>Retrofit</span><span>OkHttp</span><span>JUnit</span><span>Agile</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="app" id="skills" data-name="Skills" data-ico="g-skills" aria-label="Skills" hidden>
+      <div class="splash g-skills"><svg><use href="#i-code"/></svg></div>
+      <div class="view root">
+        <header class="nav"><span class="nav-t">Skills</span></header>
+        <div class="scroll">
+          <h1 class="lt">Skills</h1>
+          <p class="gh">Programming Languages</p>
+          <div class="group">
+            <div class="cell"><span class="ci txt" style="--c:#AF52DE">K</span><span class="ct">Kotlin</span><span class="bar"><i style="--v:92%;--c:#AF52DE"></i></span></div>
+            <div class="cell"><span class="ci txt" style="--c:#FF9500">J</span><span class="ct">Java</span><span class="bar"><i style="--v:88%;--c:#FF9500"></i></span></div>
+          </div>
+          <p class="gh">Android</p>
+          <div class="group">
+            <div class="cell"><span class="ci txt" style="--c:#34C759">JC</span><span class="ct">Jetpack Compose</span><span class="bar"><i style="--v:85%;--c:#34C759"></i></span></div>
+            <div class="cell"><span class="ci txt" style="--c:#007AFF">MV</span><span class="ct">MVVM + Jetpack</span><span class="bar"><i style="--v:87%;--c:#007AFF"></i></span></div>
+            <div class="cell"><span class="ci txt" style="--c:#5AC8FA">API</span><span class="ct">Retrofit / APIs</span><span class="bar"><i style="--v:84%;--c:#5AC8FA"></i></span></div>
+            <div class="cell"><span class="ci txt" style="--c:#FF3B30">DB</span><span class="ct">Room / SQLite</span><span class="bar"><i style="--v:80%;--c:#FF3B30"></i></span></div>
+            <div class="cell"><span class="ci txt" style="--c:#FF9500">FB</span><span class="ct">Firebase</span><span class="bar"><i style="--v:76%;--c:#FF9500"></i></span></div>
+          </div>
+          <p class="gh">Tools &amp; Workflow</p>
+          <div class="group">
+            <div class="cell"><span class="ct">Android Studio</span><span class="chip">IDE</span></div>
+            <div class="cell"><span class="ct">Git / GitHub / Bitbucket</span><span class="chip">VCS</span></div>
+            <div class="cell"><span class="ct">Gradle</span><span class="chip">Build</span></div>
+            <div class="cell"><span class="ct">Jira / Agile / Scrum</span><span class="chip">PM</span></div>
+            <div class="cell"><span class="ct">Gson / OkHttp</span><span class="chip">Network</span></div>
+            <div class="cell"><span class="ct">Segment / CleverTap</span><span class="chip">Analytics</span></div>
+            <div class="cell"><span class="ct">JUnit</span><span class="chip">Testing</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="app" id="edu" data-name="Education" data-ico="g-edu" aria-label="Education" hidden>
+      <div class="splash g-edu"><svg><use href="#i-cap"/></svg></div>
+      <div class="view root">
+        <header class="nav"><span class="nav-t">Education</span></header>
+        <div class="scroll">
+          <h1 class="lt">Education</h1>
+          <p class="gh">Degrees</p>
+          <div class="group">
+            <div class="cell tall"><span class="ci lg" style="--c:#007AFF"><svg><use href="#i-cap"/></svg></span><span class="cx"><b>B Level · PGDCA (MCA equiv.)</b><span>NIELIT — Computer Software Engineering</span><em>January 2025 – Present</em></span></div>
+            <div class="cell tall"><span class="ci lg" style="--c:#34C759"><svg><use href="#i-doc"/></svg></span><span class="cx"><b>A Level · ADCA (BCA equiv.)</b><span>NIELIT — Computer Science</span><em>June 2023 – July 2024</em></span></div>
+            <div class="cell tall"><span class="ci lg" style="--c:#AF52DE"><svg><use href="#i-bank"/></svg></span><span class="cx"><b>B.A. Programme</b><span>Indira Gandhi National Open University</span><em>IGNOU</em></span></div>
+          </div>
+          <p class="gh">Certifications</p>
+          <a class="pass" href="https://credential.net/9daf46fb-2d1e-46f8-a886-6ef701cb2abf" target="_blank" rel="noopener">
+            <span class="pass-top"><svg><use href="#i-seal"/></svg>Uplimit · Verified Certificate</span>
+            <b>SRE Fundamentals with Google</b>
+            <span class="pass-bot"><em>November 2025</em><svg><use href="#i-open"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section class="app" id="resume" data-name="Resume" data-ico="g-resume" aria-label="Resume" hidden>
+      <div class="splash g-resume"><svg><use href="#i-doc"/></svg></div>
+      <div class="view root">
+        <header class="nav"><span class="nav-t">Resume</span><button class="nav-act" id="shareBtn" aria-label="Share"><svg><use href="#i-share"/></svg></button></header>
+        <div class="scroll">
+          <h1 class="lt">Resume</h1>
+          <div class="doc">
+            <span class="doc-ph"><svg><use href="#i-doc"/></svg>Kuldeep_Singh_Resume.pdf</span>
+            <iframe id="cv" title="Resume preview" data-src="https://drive.google.com/file/d/1sCWV4LSbFSSGDClj5Iokuipy4p5A94_H/preview" allow="autoplay"></iframe>
+          </div>
+          <div class="doc-meta"><b>Kuldeep Singh — App Developer</b><span>Last updated 2025 · Google Drive</span></div>
+          <a class="btn-primary" href="https://drive.google.com/file/d/1sCWV4LSbFSSGDClj5Iokuipy4p5A94_H/view?usp=sharing" target="_blank" rel="noopener"><svg><use href="#i-dl"/></svg>Download Resume</a>
+          <p class="gh">Share</p>
+          <div class="group">
+            <a class="cell" href="https://drive.google.com/file/d/1sCWV4LSbFSSGDClj5Iokuipy4p5A94_H/view?usp=sharing" target="_blank" rel="noopener"><span class="ci" style="--c:#007AFF"><svg><use href="#i-share"/></svg></span><span class="ct">Open in Google Drive</span><svg class="chev"><use href="#i-chev-r"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONNECT -->
+    <section class="app" id="connect" data-name="Connect" data-ico="g-connect" aria-label="Connect" hidden>
+      <div class="splash g-connect"><svg><use href="#i-bubble"/></svg></div>
+      <div class="view root">
+        <header class="nav"><span class="nav-t">Connect</span></header>
+        <div class="scroll">
+          <div class="poster">
+            <img src="assets/img/avatar.jpg" alt="Kuldeep Singh" draggable="false">
+            <h2>Kuldeep Singh</h2>
+            <p>App Developer</p>
+          </div>
+          <div class="acts">
+            <a href="https://wa.me/+919871831349" target="_blank" rel="noopener"><svg><use href="#i-bubble"/></svg>message</a>
+            <a href="tel:+919871831349"><svg><use href="#i-phone"/></svg>call</a>
+            <a href="mailto:imkuldeepsinghrai@gmail.com"><svg><use href="#i-mail"/></svg>mail</a>
+          </div>
+          <p class="gh">Social &amp; Professional</p>
+          <div class="group">
+            <a class="cell" href="https://linkedin.com/in/kuldeepsinghrai" target="_blank" rel="noopener"><span class="ci" style="--c:#0a66c2"><svg><use href="#i-li"/></svg></span><span class="ct">LinkedIn</span><span class="cv">kuldeepsinghrai</span><svg class="chev"><use href="#i-chev-r"/></svg></a>
+            <a class="cell" href="https://github.com/kuldeepsinghrai" target="_blank" rel="noopener"><span class="ci" style="--c:#24292e"><svg><use href="#i-gh"/></svg></span><span class="ct">GitHub</span><span class="cv">kuldeepsinghrai</span><svg class="chev"><use href="#i-chev-r"/></svg></a>
+            <a class="cell" href="https://instagram.com/imkuldeepsinghrai" target="_blank" rel="noopener"><span class="ci g-ig"><svg><use href="#i-ig"/></svg></span><span class="ct">Instagram</span><span class="cv">imkuldeepsinghrai</span><svg class="chev"><use href="#i-chev-r"/></svg></a>
+            <a class="cell" href="https://wa.me/+919871831349" target="_blank" rel="noopener"><span class="ci" style="--c:#25D366"><svg><use href="#i-wa"/></svg></span><span class="ct">WhatsApp</span><span class="cv">+91 98718 31349</span><svg class="chev"><use href="#i-chev-r"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHONE -->
+    <section class="app" id="phone" data-name="Phone" data-ico="g-phone" aria-label="Phone" hidden>
+      <div class="splash g-phone"><svg><use href="#i-phone"/></svg></div>
+      <div class="view root">
+        <div class="kp">
+          <p class="kp-num" id="kpNum" aria-live="polite">+91 98718 31349</p>
+          <p class="kp-who" id="kpWho">Kuldeep Singh</p>
+          <div class="kp-grid">
+            <button data-k="1"><b>1</b><span>&nbsp;</span></button><button data-k="2"><b>2</b><span>ABC</span></button><button data-k="3"><b>3</b><span>DEF</span></button>
+            <button data-k="4"><b>4</b><span>GHI</span></button><button data-k="5"><b>5</b><span>JKL</span></button><button data-k="6"><b>6</b><span>MNO</span></button>
+            <button data-k="7"><b>7</b><span>PQRS</span></button><button data-k="8"><b>8</b><span>TUV</span></button><button data-k="9"><b>9</b><span>WXYZ</span></button>
+            <button data-k="*"><b>∗</b></button><button data-k="0"><b>0</b><span>+</span></button><button data-k="#"><b>#</b></button>
+            <span></span>
+            <a class="kp-call" id="kpCall" href="tel:+919871831349" aria-label="Call"><svg><use href="#i-phone"/></svg></a>
+            <button class="kp-del" id="kpDel" aria-label="Delete"><svg><use href="#i-del"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIL -->
+    <section class="app" id="mail" data-name="Mail" data-ico="g-mail" aria-label="Mail" hidden>
+      <div class="splash g-mail"><svg><use href="#i-mail"/></svg></div>
+      <div class="view root compose">
+        <header class="nav"><button class="nav-l" data-home>Cancel</button><span class="nav-t">New Message</span><button class="send" id="mailSend" aria-label="Send"><svg><use href="#i-up"/></svg></button></header>
+        <div class="scroll">
+          <h1 class="lt">New Message</h1>
+          <div class="cf"><span>To:</span><span class="token">imkuldeepsinghrai@gmail.com</span></div>
+          <label class="cf"><span>Subject:</span><input id="mailSubj" autocomplete="off"></label>
+          <textarea id="mailBody" aria-label="Message body"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ SYSTEM UI ══ -->
+    <div class="sw" id="sw" hidden></div>
+    <div class="sw-labels" id="swL" hidden></div>
+    <div class="ctx" id="ctx" hidden><div class="ctx-bg"></div><div class="ctx-ico" id="ctxIco"></div><div class="ctx-menu" id="ctxMenu" role="menu"></div></div>
+
+    <div class="spot" id="spot" hidden>
+      <div class="spot-bar">
+        <label class="sfield"><svg><use href="#i-search"/></svg><input id="q" type="search" placeholder="Search" autocomplete="off" spellcheck="false" enterkeyhint="go" aria-label="Search portfolio"></label>
+        <button id="spotX">Cancel</button>
+      </div>
+      <div class="spot-res" id="spotRes"></div>
+    </div>
+
+    <div class="cc" id="cc" hidden>
+      <div class="cc-grid">
+        <div class="m m-conn">
+          <button class="tg" data-tg="air" aria-label="Airplane Mode" style="--on:#ff9f0a"><svg><use href="#i-plane"/></svg></button>
+          <button class="tg on" data-tg="cell" aria-label="Cellular Data" style="--on:#30d158"><svg><use href="#i-cell"/></svg></button>
+          <button class="tg on" data-tg="wifi" aria-label="Wi-Fi" style="--on:#0a84ff"><svg><use href="#i-wifi"/></svg></button>
+          <button class="tg on" data-tg="bt" aria-label="Bluetooth" style="--on:#0a84ff"><svg><use href="#i-bt"/></svg></button>
+        </div>
+        <div class="m sl" id="slBright" role="slider" tabindex="0" aria-label="Brightness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i></i><svg><use href="#i-sun"/></svg></div>
+        <div class="m sl" id="slVol" role="slider" tabindex="0" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><i></i><svg><use href="#i-speaker"/></svg></div>
+        <button class="m mt" data-tg="dark" aria-label="Dark Mode"><svg><use href="#i-moon"/></svg></button>
+        <button class="m mt" data-tg="torch" aria-label="Flashlight"><svg><use href="#i-torch"/></svg></button>
+        <button class="m mt" data-tg="silent" aria-label="Silent Mode"><svg><use href="#i-bell"/></svg></button>
+        <button class="m mt" data-tg="rot" aria-label="Orientation Lock"><svg><use href="#i-rot"/></svg></button>
+      </div>
+    </div>
+
+    <!-- LOCK SCREEN -->
+    <div class="lock" id="lock" aria-label="Lock Screen">
+      <div class="wall"></div>
+      <div class="lk-top">
+        <svg class="padlock" id="padlock" viewBox="0 0 24 24" aria-hidden="true"><path class="shackle" d="M8 11V7.5a4 4 0 0 1 8 0V11"/><rect x="5" y="10.5" width="14" height="10.5" rx="2.6"/></svg>
+        <p class="lk-date" id="lkDate">Tuesday, May 13</p>
+        <p class="lk-time" data-clock>9:41</p>
+      </div>
+      <div class="lk-notifs">
+        <button class="noti" data-open="about"><span class="ico n-ico g-about"><svg><use href="#i-person"/></svg></span><span class="n-txt"><span class="n-app">Portfolio</span><b>New LinkedIn visitor</b><span>Someone viewed your profile</span></span><time>now</time></button>
+        <button class="noti" data-href="https://github.com/kuldeepsinghrai"><span class="ico n-ico g-gh"><svg><use href="#i-gh"/></svg></span><span class="n-txt"><span class="n-app">GitHub</span><b>New star on repo ⭐</b><span>android-mvvm-template</span></span><time>2m</time></button>
+        <button class="noti" data-open="mail"><span class="ico n-ico g-mail"><svg><use href="#i-mail"/></svg></span><span class="n-txt"><span class="n-app">Mail</span><b>Interview Invitation</b><span>Exciting Android role for you</span></span><time>15m</time></button>
+      </div>
+      <div class="lk-bottom">
+        <button class="lk-btn" data-tg="torch" aria-label="Flashlight"><svg><use href="#i-torch"/></svg></button>
+        <button class="lk-cta" id="unlockBtn">Swipe up to open</button>
+        <button class="lk-btn" id="camBtn" aria-label="Camera"><svg><use href="#i-camera"/></svg></button>
+      </div>
+    </div>
+
+    <div class="banner" id="banner" role="status"><span class="ico b-ico g-about"><svg><use href="#i-person"/></svg></span><span class="b-txt"><b id="bTitle">Portfolio</b><span id="bBody"></span></span><time>now</time></div>
+
+    <div class="sb" id="sb" aria-hidden="true">
+      <span class="sb-l"><span data-clock>9:41</span></span>
+      <span class="sb-gap"></span>
+      <span class="sb-r">
+        <svg class="sb-plane"><use href="#i-plane"/></svg>
+        <span class="sb-cell"><i></i><i></i><i></i><i></i></span>
+        <svg class="sb-wifi"><use href="#i-wifi"/></svg>
+        <span class="sb-batt"><i id="battFill"></i></span>
+      </span>
+    </div>
+
+    <div class="island" id="island" role="button" aria-label="Dynamic Island"><span class="il-l" id="ilL"></span><span class="il-r" id="ilR"></span></div>
+    <div class="volhud" id="volhud" aria-hidden="true"><i></i></div>
+    <div class="hot hot-l" id="hotL" aria-hidden="true"></div>
+    <div class="hot hot-r" id="hotR" aria-hidden="true"></div>
+    <div class="homezone" id="homezone" role="button" tabindex="-1" aria-label="Go to Home Screen"><i></i></div>
+    <div class="dim" id="dim"></div>
+    <div class="off" id="off"></div>
+
+  </div><!-- /screen -->
+  </div><!-- /bezel -->
+</div><!-- /device -->
 </div>
+<p class="hint">Swipe up to unlock · drag the bottom bar up to go home, pause mid-swipe for the App Switcher · pull down top-right for Control Center · <kbd>Esc</kbd> goes back</p>
+</main>
 
-<!-- ══ ABOUT ══ -->
-<div id="avAbout" class="av">
-  <div style="background:#f2f2f7;height:59px;flex-shrink:0;position:relative;">
-    <div class="sb light" style="pointer-events:none;"><span class="sb-t" id="sbt2">9:41</span><div class="sb-r"><div class="sig"><span style="height:3px;opacity:.4;"></span><span style="height:6px;opacity:.6;"></span><span style="height:9px;opacity:.8;"></span><span style="height:12px;"></span></div><div class="batt"><div class="batt-f"></div></div></div></div>
-  </div>
-  <div class="nav" style="background:#f2f2f7;border-bottom:.5px solid var(--sep);">
-    <div class="nav-back" onclick="closeApp('About')"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M10 1L1.5 9 10 17" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
-    <span class="nav-title">About</span>
-  </div>
-  <div class="ac" style="background:#f2f2f7;">
-    <div class="a-hero">
-      <div class="a-ring"><div class="a-ring-in">KS</div></div>
-      <div class="a-name">Kuldeep Singh</div>
-      <div class="a-role">App Developer</div>
-      <div class="a-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>New Delhi, India</div>
-    </div>
-    <div class="stats3">
-      <div class="s3"><span class="s3-n">2+</span><div class="s3-l">Years</div></div>
-      <div class="s3"><span class="s3-n">2</span><div class="s3-l">Companies</div></div>
-      <div class="s3"><span class="s3-n">∞</span><div class="s3-l">Bugs Fixed</div></div>
-    </div>
-    <div class="bio-card">
-      <div class="bio-text">Android Developer skilled in building smooth, user-friendly apps with Java, Kotlin, Jetpack Compose &amp; MVVM. Worked with startups — adaptable, creative, and always learning new technologies.</div>
-    </div>
-    <div class="gap"></div>
-    <div class="sec-lbl">Contact</div>
-    <div class="ios-list">
-      <a class="ios-row" href="tel:+919871831349">
-        <div class="rr-ico" style="background:#34C759"><svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.7A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
-        <span class="rr-label">+91 98718 31349</span>
-        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-      </a>
-      <a class="ios-row" href="mailto:imkuldeepsinghrai@gmail.com">
-        <div class="rr-ico" style="background:#007AFF"><svg width="17" height="17" viewBox="0 0 24 24" fill="white"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg></div>
-        <span class="rr-label" style="font-size:14px;">imkuldeepsinghrai@gmail.com</span>
-        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-      </a>
-    </div>
-    <div class="gap"></div>
-    <div class="sec-lbl">Links</div>
-    <div class="ios-list">
-      <div class="ios-row" onclick="openLink('https://linkedin.com/in/kuldeepsinghrai')">
-        <div class="rr-ico" style="background:#0A66C2"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg></div>
-        <span class="rr-label">LinkedIn</span>
-        <span class="rr-val">kuldeepsinghrai</span>
-        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-      <div class="ios-row" onclick="openLink('https://github.com/kuldeepsinghrai')">
-        <div class="rr-ico" style="background:#24292E"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.254-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.394.1 2.646.64.699 1.026 1.591 1.026 2.682 0 3.841-2.337 4.687-4.565 4.935.359.308.678.92.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.165 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg></div>
-        <span class="rr-label">GitHub</span>
-        <span class="rr-val">kuldeepsinghrai</span>
-        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </div>
-    <div class="bpad"></div>
-  </div>
-  <div class="hi" style="background:#f2f2f7;"><div class="hb" id="hb-About"></div></div>
-</div>
-
-<!-- ══ EXPERIENCE ══ -->
-<div id="avExp" class="av">
-  <div style="background:#f2f2f7;height:59px;flex-shrink:0;"></div>
-  <div class="nav" style="background:#f2f2f7;border-bottom:.5px solid var(--sep);">
-    <div class="nav-back" onclick="closeApp('Exp')"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M10 1L1.5 9 10 17" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
-    <span class="nav-title">Experience</span>
-  </div>
-  <div class="ac" style="background:#f2f2f7;">
-    <div class="gap"></div>
-    <div class="sec-lbl">Work History</div>
-    <div class="exp-card">
-      <div class="exp-hd" onclick="toggleExp('e1','ei1')">
-        <div class="exp-badge" style="background:linear-gradient(135deg,#34C759,#1e8f3e)">SR</div>
-        <div class="exp-inf">
-          <div class="exp-role">Android Developer</div>
-          <div class="exp-co">Stock Register · Remote</div>
-          <div class="exp-dt">August 2023 – Present</div>
-        </div>
-        <svg id="ei1" class="exp-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C7C7CC" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-      <div class="exp-body" id="e1">
-        <div class="exp-bi">
-          <div class="eb">Maintained native Kotlin app with MVVM architecture &amp; Room DB</div>
-          <div class="eb">Built PDF &amp; Excel export for reports, bills &amp; bulk item uploads</div>
-          <div class="eb">Multi-currency support &amp; staff role-based access levels</div>
-          <div class="eb">Initiated Jetpack Compose migration; shipped features end-to-end</div>
-          <div class="eb">Published updates on Google Play Console</div>
-          <div class="eb">Worked closely with founder on UX-focused features</div>
-          <div class="etags"><span class="etag">Kotlin</span><span class="etag">MVVM</span><span class="etag">Compose</span><span class="etag">Room</span><span class="etag">Retrofit</span><span class="etag">Play Console</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="gap"></div>
-    <div class="exp-card">
-      <div class="exp-hd" onclick="toggleExp('e2','ei2')">
-        <div class="exp-badge" style="background:linear-gradient(135deg,#007AFF,#0051c3)">B</div>
-        <div class="exp-inf">
-          <div class="exp-role">Android Developer Intern</div>
-          <div class="exp-co">Bijnis · New Delhi</div>
-          <div class="exp-dt">September 2022 – August 2023</div>
-        </div>
-        <svg id="ei2" class="exp-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C7C7CC" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-      <div class="exp-body" id="e2">
-        <div class="exp-bi">
-          <div class="eb">Built &amp; maintained native Android app using Java &amp; Kotlin</div>
-          <div class="eb">Led the Java → Kotlin migration of entire codebase</div>
-          <div class="eb">Integrated RESTful APIs via Retrofit, OkHttp &amp; Gson</div>
-          <div class="eb">User analytics with Segment &amp; CleverTap integrations</div>
-          <div class="eb">Wrote JUnit tests; participated in Agile sprints</div>
-          <div class="eb">Code reviews, bug fixing &amp; performance improvements</div>
-          <div class="etags"><span class="etag">Java</span><span class="etag">Kotlin</span><span class="etag">Retrofit</span><span class="etag">OkHttp</span><span class="etag">JUnit</span><span class="etag">Agile</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="bpad"></div>
-  </div>
-  <div class="hi" style="background:#f2f2f7;"><div class="hb" id="hb-Exp"></div></div>
-</div>
-
-<!-- ══ SKILLS ══ -->
-<div id="avSkills" class="av">
-  <div style="background:#f2f2f7;height:59px;flex-shrink:0;"></div>
-  <div class="nav" style="background:#f2f2f7;border-bottom:.5px solid var(--sep);">
-    <div class="nav-back" onclick="closeApp('Skills')"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M10 1L1.5 9 10 17" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
-    <span class="nav-title">Skills</span>
-  </div>
-  <div class="ac" style="background:#f2f2f7;">
-    <div class="gap"></div>
-    <div class="sec-lbl">Programming Languages</div>
-    <div class="ios-list">
-      <div class="sk-row"><div class="sk-ico" style="background:rgba(175,82,222,.12)">🟣</div><span class="sk-name">Kotlin</span><div class="sk-bar"><div class="sk-fill" style="width:92%;background:#AF52DE"></div></div></div>
-      <div class="sk-row"><div class="sk-ico" style="background:rgba(255,149,0,.12)">🟠</div><span class="sk-name">Java</span><div class="sk-bar"><div class="sk-fill" style="width:88%;background:#FF9500"></div></div></div>
-    </div>
-    <div class="gap"></div>
-    <div class="sec-lbl">Android</div>
-    <div class="ios-list">
-      <div class="sk-row"><div class="sk-ico" style="background:rgba(52,199,89,.12)">🟢</div><span class="sk-name">Jetpack Compose</span><div class="sk-bar"><div class="sk-fill" style="width:85%;background:#34C759"></div></div></div>
-      <div class="sk-row"><div class="sk-ico" style="background:rgba(0,122,255,.12)">🔵</div><span class="sk-name">MVVM + Jetpack</span><div class="sk-bar"><div class="sk-fill" style="width:87%;background:#007AFF"></div></div></div>
-      <div class="sk-row"><div class="sk-ico" style="background:rgba(90,200,250,.12)">🔷</div><span class="sk-name">Retrofit / APIs</span><div class="sk-bar"><div class="sk-fill" style="width:84%;background:#5AC8FA"></div></div></div>
-      <div class="sk-row"><div class="sk-ico" style="background:rgba(255,59,48,.12)">🔴</div><span class="sk-name">Room / SQLite</span><div class="sk-bar"><div class="sk-fill" style="width:80%;background:#FF3B30"></div></div></div>
-      <div class="sk-row"><div class="sk-ico" style="background:rgba(255,149,0,.12)">🔥</div><span class="sk-name">Firebase</span><div class="sk-bar"><div class="sk-fill" style="width:76%;background:#FF9500"></div></div></div>
-    </div>
-    <div class="gap"></div>
-    <div class="sec-lbl">Tools & Workflow</div>
-    <div class="ios-list">
-      <div class="wf-item">Android Studio <span class="wf-tag">IDE</span></div>
-      <div class="wf-item">Git / GitHub / Bitbucket <span class="wf-tag">VCS</span></div>
-      <div class="wf-item">Gradle <span class="wf-tag">Build</span></div>
-      <div class="wf-item">Jira / Agile / Scrum <span class="wf-tag">PM</span></div>
-      <div class="wf-item">Gson / OkHttp <span class="wf-tag">Network</span></div>
-      <div class="wf-item">Segment / CleverTap <span class="wf-tag">Analytics</span></div>
-      <div class="wf-item">JUnit <span class="wf-tag">Testing</span></div>
-    </div>
-    <div class="bpad"></div>
-  </div>
-  <div class="hi" style="background:#f2f2f7;"><div class="hb" id="hb-Skills"></div></div>
-</div>
-
-<!-- ══ EDUCATION ══ -->
-<div id="avEdu" class="av">
-  <div style="background:#f2f2f7;height:59px;flex-shrink:0;"></div>
-  <div class="nav" style="background:#f2f2f7;border-bottom:.5px solid var(--sep);">
-    <div class="nav-back" onclick="closeApp('Edu')"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M10 1L1.5 9 10 17" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
-    <span class="nav-title">Education</span>
-  </div>
-  <div class="ac" style="background:#f2f2f7;">
-    <div class="gap"></div>
-    <div class="sec-lbl">Degrees</div>
-    <div class="edu-row"><div class="edu-ico" style="background:rgba(0,122,255,.1)">🎓</div><div><div class="edu-deg">B Level · PGDCA (MCA equiv.)</div><div class="edu-sch">NIELIT — Computer Software Engineering</div><div class="edu-yr">January 2025 – Present</div></div></div>
-    <div class="edu-row"><div class="edu-ico" style="background:rgba(52,199,89,.1)">📜</div><div><div class="edu-deg">A Level · ADCA (BCA equiv.)</div><div class="edu-sch">NIELIT — Computer Science</div><div class="edu-yr">June 2023 – July 2024</div></div></div>
-    <div class="edu-row" style="border-bottom:.5px solid var(--sep);"><div class="edu-ico" style="background:rgba(175,82,222,.1)">🏛️</div><div><div class="edu-deg">B.A. Programme</div><div class="edu-sch">Indira Gandhi National Open University</div><div class="edu-yr">IGNOU</div></div></div>
-    <div class="gap"></div>
-    <div class="sec-lbl">Certifications</div>
-    <div class="cert-row" onclick="openLink('https://credential.net/9daf46fb-2d1e-46f8-a886-6ef701cb2abf')">
-      <div class="edu-ico" style="background:rgba(52,199,89,.1);width:46px;height:46px;border-radius:12px;font-size:22px;flex-shrink:0;">🏅</div>
-      <div style="flex:1;">
-        <div class="edu-deg">SRE Fundamentals with Google</div>
-        <div class="edu-sch" style="color:var(--blue);">Uplimit · Verified Certificate</div>
-        <div class="edu-yr">November 2025</div>
-      </div>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C7C7CC" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-    </div>
-    <div class="bpad"></div>
-  </div>
-  <div class="hi" style="background:#f2f2f7;"><div class="hb" id="hb-Edu"></div></div>
-</div>
-
-<!-- ══ CONNECT ══ -->
-<div id="avConnect" class="av">
-  <div style="background:#f2f2f7;height:59px;flex-shrink:0;"></div>
-  <div class="nav" style="background:#f2f2f7;border-bottom:.5px solid var(--sep);">
-    <div class="nav-back" onclick="closeApp('Connect')"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M10 1L1.5 9 10 17" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
-    <span class="nav-title">Connect</span>
-  </div>
-  <div class="ac" style="background:#f2f2f7;">
-    <div class="gap"></div>
-    <div class="sec-lbl">Social &amp; Professional</div>
-    <div class="ios-list">
-      <div class="ios-row" onclick="openLink('https://linkedin.com/in/kuldeepsinghrai')">
-        <div class="rr-ico" style="background:#0A66C2"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg></div>
-        <span class="rr-label">LinkedIn</span>
-        <span class="rr-val" style="font-size:13px;">kuldeepsinghrai</span>
-        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-      <div class="ios-row" onclick="openLink('https://github.com/kuldeepsinghrai')">
-        <div class="rr-ico" style="background:#24292E"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.254-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.394.1 2.646.64.699 1.026 1.591 1.026 2.682 0 3.841-2.337 4.687-4.565 4.935.359.308.678.92.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.165 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg></div>
-        <span class="rr-label">GitHub</span>
-        <span class="rr-val" style="font-size:13px;">kuldeepsinghrai</span>
-        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-      <div class="ios-row" onclick="openLink('https://instagram.com/imkuldeepsinghrai')">
-        <div class="rr-ico" style="background:radial-gradient(circle at 30% 107%,#fdf497,#fd5949 45%,#d6249f 60%,#285AEB 90%)"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
-        <span class="rr-label">Instagram</span>
-        <span class="rr-val" style="font-size:13px;">imkuldeepsinghrai</span>
-        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-      <div class="ios-row" onclick="openLink('https://wa.me/+919871831349')">
-        <div class="rr-ico" style="background:#25D366"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
-        <span class="rr-label">WhatsApp</span>
-        <span class="rr-val" style="font-size:13px;">+91 98718 31349</span>
-        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </div>
-    <div class="bpad"></div>
-  </div>
-  <div class="hi" style="background:#f2f2f7;"><div class="hb" id="hb-Connect"></div></div>
-</div>
-
-<!-- ══ RESUME ══ -->
-<div id="avResume" class="av">
-  <div style="background:#f2f2f7;height:59px;flex-shrink:0;"></div>
-  <div class="nav" style="background:#f2f2f7;border-bottom:.5px solid var(--sep);">
-    <div class="nav-back" onclick="closeApp('Resume')"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M10 1L1.5 9 10 17" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
-    <span class="nav-title">Resume</span>
-  </div>
-  <div class="ac" style="background:#f2f2f7;">
-    <div class="res-preview" onclick="openLink('https://drive.google.com/file/d/1sCWV4LSbFSSGDClj5Iokuipy4p5A94_H/view?usp=sharing')">
-      <div class="res-thumb">
-        <div style="font-size:44px;">📄</div>
-        <div style="font-size:13px;color:var(--label2);">Kuldeep_Singh_Resume.pdf</div>
-      </div>
-      <div class="res-meta">
-        <div class="res-ttl">Kuldeep Singh — App Developer</div>
-        <div class="res-sub">Last updated 2025 · Google Drive</div>
-      </div>
-    </div>
-    <a class="dl-btn" href="https://drive.google.com/file/d/1sCWV4LSbFSSGDClj5Iokuipy4p5A94_H/view?usp=sharing" target="_blank">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Download Resume
-    </a>
-    <div class="gap"></div>
-    <div class="sec-lbl">Share</div>
-    <div class="ios-list">
-      <div class="ios-row" onclick="openLink('https://drive.google.com/file/d/1sCWV4LSbFSSGDClj5Iokuipy4p5A94_H/view?usp=sharing')">
-        <div class="rr-ico" style="background:#007AFF"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
-        <span class="rr-label">Open in Google Drive</span>
-        <svg class="rr-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </div>
-    <div class="bpad"></div>
-  </div>
-  <div class="hi" style="background:#f2f2f7;"><div class="hb" id="hb-Resume"></div></div>
-</div>
-
-</div><!-- /screen -->
-</div><!-- /phone -->
-<div class="hint">Swipe up to unlock · Tap apps · Home bar to go back · ESC closes app</div>
-</div>
-
-<script>
-// ── CLOCK ──
-function tick(){
-  const n = new Date();
-  const h = n.getHours(), m = n.getMinutes();
-  const t = h + ':' + (m<10?'0'+m:m);
-  ['sbt','sbt2','lkt'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=t;});
-  document.getElementById('lkh').textContent = t;
-  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const mons=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('lkd').textContent = days[n.getDay()]+', '+mons[n.getMonth()]+' '+n.getDate();
-}
-tick(); setInterval(tick,15000);
-
-// ── LOCK / UNLOCK ──
-let unlocked = false;
-function unlock(){
-  if(unlocked) return;
-  unlocked = true;
-  const l = document.getElementById('lock');
-  l.classList.add('out');
-  setTimeout(()=>l.style.display='none', 700);
-  diShow('📱','Portfolio','Welcome, let\'s explore!');
-}
-
-// Swipe-up on lock (mouse + touch)
-const lk = document.getElementById('lock');
-let sy0=0;
-lk.addEventListener('mousedown',e=>{sy0=e.clientY;});
-lk.addEventListener('mouseup',e=>{if(sy0-e.clientY>45)unlock();});
-lk.addEventListener('touchstart',e=>{sy0=e.touches[0].clientY;},{passive:true});
-lk.addEventListener('touchend',e=>{if(sy0-e.changedTouches[0].clientY>50)unlock();},{passive:true});
-
-// ── DYNAMIC ISLAND ──
-let diT=null, diExpanded=false;
-function diShow(icon,title,body,dur=3500){
-  const di=document.getElementById('di');
-  document.getElementById('din-ico').textContent=icon;
-  document.getElementById('din-title').textContent=title;
-  document.getElementById('din-body').textContent=body;
-  di.classList.remove('expanded'); di.classList.add('pill');
-  clearTimeout(diT);
-  diT=setTimeout(()=>{di.classList.remove('pill'); diExpanded=false;},dur);
-}
-function diTap(){
-  const di=document.getElementById('di');
-  if(di.classList.contains('pill')){
-    di.classList.remove('pill'); di.classList.add('expanded'); diExpanded=true;
-    clearTimeout(diT);
-    diT=setTimeout(()=>{di.classList.remove('expanded'); diExpanded=false;},5000);
-  } else if(di.classList.contains('expanded')){
-    di.classList.remove('expanded'); diExpanded=false;
-  }
-}
-setTimeout(()=>diShow('✉️','Mail','Interview invitation received'),1400);
-
-// ── APP OPEN / CLOSE ──
-let curApp=null;
-const diNotifs={
-  'About':['👤','About','Viewing profile'],
-  'Exp':['💼','Experience','Work history'],
-  'Skills':['⚡','Skills','Tech stack'],
-  'Edu':['🎓','Education','Academic info'],
-  'Connect':['🔗','Connect','Social links'],
-  'Resume':['📄','Resume','Download CV']
-};
-
-function openApp(name){
-  if(!unlocked)return;
-  const v=document.getElementById('av'+name);
-  const home=document.getElementById('home');
-  if(!v)return;
-  curApp=name;
-  home.classList.add('scaled');
-  v.classList.add('show');
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    v.style.transition='transform .52s cubic-bezier(.32,.72,0,1)';
-    v.classList.add('visible');
-  }));
-  if(diNotifs[name]) diShow(...diNotifs[name]);
-}
-
-function closeApp(name){
-  const v=document.getElementById('av'+name);
-  const home=document.getElementById('home');
-  if(!v)return;
-  v.style.transition='transform .48s cubic-bezier(.32,.72,0,1)';
-  v.classList.remove('visible');
-  v.classList.add('closing');
-  home.classList.remove('scaled');
-  setTimeout(()=>{
-    v.classList.remove('show','closing');
-    v.style.transform='';
-    curApp=null;
-  },500);
-}
-
-// Home bar swipe-up to close
-document.querySelectorAll('.hb').forEach(bar=>{
-  let s=0;
-  bar.addEventListener('mousedown',e=>{s=e.clientY;});
-  document.addEventListener('mouseup',e=>{
-    if(s&&s-e.clientY>18&&curApp){closeApp(curApp);s=0;}
-  });
-  bar.addEventListener('touchstart',e=>{s=e.touches[0].clientY;},{passive:true});
-  bar.addEventListener('touchend',e=>{
-    if(s-e.changedTouches[0].clientY>18&&curApp){closeApp(curApp);s=0;}
-  },{passive:true});
-  bar.addEventListener('click',()=>{if(curApp)closeApp(curApp);});
-});
-
-// ── EXPERIENCE EXPAND ──
-function toggleExp(id,iconId){
-  const b=document.getElementById(id), i=document.getElementById(iconId);
-  b.classList.toggle('open'); i.classList.toggle('open');
-}
-
-// ── OPEN LINK ──
-function openLink(url){window.open(url,'_blank');}
-
-// ── ESC to close ──
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&curApp)closeApp(curApp);});
-
-// ── VISUAL TAP FEEDBACK ──
-document.querySelectorAll('.ai,.di2,.ios-row,.exp-hd,.pw,.cert-row').forEach(el=>{
-  el.addEventListener('pointerdown',function(){this.style.opacity='.72';this.style.transition='opacity .06s';});
-  el.addEventListener('pointerup',function(){this.style.opacity='1';});
-  el.addEventListener('pointerleave',function(){this.style.opacity='1';});
-  el.addEventListener('pointercancel',function(){this.style.opacity='1';});
-});
-
-// App icon jiggle on long press (iOS style)
-let jiggleTimer=null;
-document.querySelectorAll('.ai').forEach(el=>{
-  el.addEventListener('pointerdown',()=>{
-    jiggleTimer=setTimeout(()=>{
-      document.querySelectorAll('.ai-ico').forEach(ico=>{
-        ico.style.animation='jiggle .18s ease-in-out infinite alternate';
-      });
-    },600);
-  });
-  el.addEventListener('pointerup',()=>{clearTimeout(jiggleTimer);});
-  el.addEventListener('pointerleave',()=>{clearTimeout(jiggleTimer);});
-});
-document.addEventListener('pointerup',()=>{
-  document.querySelectorAll('.ai-ico').forEach(ico=>ico.style.animation='');
-  clearTimeout(jiggleTimer);
-});
-
-// Inject jiggle keyframe
-const style=document.createElement('style');
-style.textContent='@keyframes jiggle{from{transform:rotate(-2deg);}to{transform:rotate(2deg);}}';
-document.head.appendChild(style);
-</script>
+<script src="assets/js/phone.js"></script>
 </body>
 </html>
