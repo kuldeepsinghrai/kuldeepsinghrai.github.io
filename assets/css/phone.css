@@ -557,6 +557,7 @@ a.cell:active, button.cell:active { background: var(--press); transition: none; 
 .g-li      { background: #0a66c2; }
 .g-gh      { background: linear-gradient(180deg, #3b4048, #15191e); }
 .g-wa      { background: linear-gradient(180deg, #5cf57a, #1ebe4b); }
+.g-term    { background: linear-gradient(180deg, #3d3d42, #111114); color: #5af78e; }
 .g-ig      { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
 
 @media (prefers-reduced-motion: reduce) {
