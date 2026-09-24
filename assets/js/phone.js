@@ -182,6 +182,7 @@ function unlock(instant) {
   if (!st.locked && !st.cover) return;
   const first = st.locked;
   st.locked = st.cover = false;
+  try { sessionStorage.setItem('unlocked', '1'); } catch { /* private mode */ }
   lock.classList.add('open');
   anim(lock, { transform: `translateY(${-H()}px)` }, { d: instant ? 0 : 420, e: 'cubic-bezier(.25,.8,.3,1)' })
     .then(() => { if (!st.locked && !st.cover) lock.classList.add('gone'); });
@@ -242,6 +243,7 @@ function sleep() {
   hideCC(true);
   if (!st.locked) {
     st.locked = true; st.cover = false;
+    try { sessionStorage.removeItem('unlocked'); } catch { /* private mode */ }
     lock.getAnimations().forEach(a => a.cancel());
     lock.classList.remove('gone');
     lock.style.transform = 'translateY(0px)';
@@ -818,11 +820,11 @@ function showCtx(ic) {
   lifted = vis;
   vis.style.visibility = 'hidden';
 
-  const id = ic.dataset.open, href = ic.getAttribute('href');
+  const id = ic.dataset.open, href = ic.href; // resolved URL (anchors only)
   const name = ic.querySelector('.lbl')?.textContent || '';
   const url = href || `${location.origin}${location.pathname}#${id}`;
   const items = id || href ? [
-    [href ? `Open ${name}` : 'Open', 'i-open', () => (href ? window.open(href, '_blank', 'noopener') : openApp(id, ic))],
+    [href ? `Open ${name}` : 'Open', 'i-open', () => (href ? ic.click() : openApp(id, ic))],
     ['Copy Link', 'i-copy', () => copy(url)],
     ['Share…', 'i-share', () => share(name || 'Kuldeep Singh', url)],
     ['Edit Home Screen', 'i-apps', () => setJiggle(true), 'gap'],
@@ -1041,6 +1043,8 @@ setBright(1);
 home.style.transform = 'scale(1.12)';
 home.style.opacity = .6;
 faceId();
+// Coming back from the Terminal (or reloading) in the same tab: stay unlocked, like switching apps on iOS
+try { if (sessionStorage.getItem('unlocked')) unlock(true); } catch { /* private mode */ }
 const deep = location.hash.slice(1);
 if (APPS.some(a => a.id === deep)) { // shared link like /#exp opens straight into that app
   history.replaceState(null, '', location.pathname + location.search);
