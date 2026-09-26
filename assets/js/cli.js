@@ -25,7 +25,7 @@ const ME = {
   },
   jobs: [
     {
-      role: 'Kotlin Multiplatform Development Intern', at: 'Zillout · Remote', when: 'February 2026 – Present',
+      role: 'App Development Intern', at: 'Zillout · Remote', when: 'February 2026 – Present',
       points: ['Working on a project that can run on Mac, Windows, iOS and Android devices'], tags: [],
     },
     {
