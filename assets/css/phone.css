@@ -479,6 +479,23 @@ a.cell:active, button.cell:active { background: var(--press); transition: none; 
 .compose textarea { display: block; width: calc(100% - 40px); min-height: 320px; margin: 14px 20px; border: 0; outline: 0; resize: none; background: none;
   font: inherit; font-size: 16px; line-height: 1.45; color: var(--label); user-select: text; -webkit-user-select: text; }
 
+/* Chrome — in-app browser */
+.web { display: flex; flex-direction: column; background: var(--card); }
+.web-top { flex: none; padding: calc(var(--sat) + 2px) 12px 8px; box-shadow: 0 .5px 0 var(--sep); }
+.omni { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: 20px; background: var(--fill); }
+.omni:focus-within { box-shadow: inset 0 0 0 1.5px var(--tint); }
+.omni svg { width: 13px; height: 13px; color: var(--label2); }
+.omni:not(.known) svg, .omni:focus-within svg { display: none; }
+.omni input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: none; font: inherit; font-size: 16px; color: var(--label); text-align: center; user-select: text; -webkit-user-select: text; }
+.omni input:focus { text-align: left; }
+.omni input::placeholder { color: var(--label2); }
+.web iframe { flex: 1; min-height: 0; width: 100%; border: 0; background: #fff; }
+.web-bar { flex: none; display: grid; grid-template-columns: repeat(4, 1fr); padding: 4px 8px calc(var(--sab) + 4px); box-shadow: 0 -.5px 0 var(--sep); }
+.web-bar button { height: 44px; display: grid; place-items: center; color: var(--label); }
+.web-bar button:disabled { color: var(--label3); cursor: default; }
+.web-bar svg { width: 22px; height: 22px; }
+#webFwd svg { transform: scaleX(-1); }
+
 /* ── SYSTEM OVERLAYS ──────────────────────────────────────── */
 .hot { position: absolute; z-index: 65; top: 0; height: max(28px, calc(var(--sat) - 8px)); touch-action: none; display: none; }
 .screen.unlocked .hot-l, .hot-r { display: block; }
@@ -535,7 +552,7 @@ a.cell:active, button.cell:active { background: var(--press); transition: none; 
 .sfield { flex: 1; display: flex; align-items: center; gap: 7px; height: 40px; padding: 0 12px; border-radius: 20px; background: rgba(255,255,255,.2); }
 .sfield svg { width: 16px; height: 16px; opacity: .75; }
 .sfield input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; color: #fff; font: inherit; font-size: 17px; user-select: text; -webkit-user-select: text; }
-.sfield input:focus-visible, .cf input:focus-visible, .compose textarea:focus-visible { outline: none; }
+.sfield input:focus-visible, .cf input:focus-visible, .compose textarea:focus-visible, .omni input:focus-visible { outline: none; }
 .sfield input::placeholder { color: rgba(255,255,255,.62); }
 .sfield input::-webkit-search-cancel-button { -webkit-appearance: none; }
 #spotX { font-size: 17px; }
@@ -597,6 +614,8 @@ a.cell:active, button.cell:active { background: var(--press); transition: none; 
 .g-gh      { background: linear-gradient(180deg, #3b4048, #15191e); }
 .g-wa      { background: linear-gradient(180deg, #5cf57a, #1ebe4b); }
 .g-term    { background: linear-gradient(180deg, #3d3d42, #111114); color: #5af78e; }
+.g-chrome  { background: #fff; }
+.g-chrome:not(.splash) > svg { width: 74%; height: 74%; }
 .g-ig      { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
 
 @media (prefers-reduced-motion: reduce) {
