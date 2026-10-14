@@ -366,6 +366,15 @@ function target(app, from) {
   return null;
 }
 
+// Back over n of our own entries. The Navigation API counts only this page's entries, so it also rewinds
+// the steps links in Chrome's iframe add to the joint session history; history.go() would stop on those.
+function goBack(n) {
+  const nav = window.navigation, i = nav?.currentEntry?.index ?? -1;
+  if (i < n) return history.go(-n);
+  const t = nav.traverseTo(nav.entries()[i - n].key);
+  t.committed.catch(() => {}); t.finished.catch(() => {});
+}
+
 // History mirrors the foreground app: base → #app → #app (one entry per pushed view)
 let depth = 0, ignorePop = false; // entries owned by the foreground app; ignorePop may carry a follow-up
 function syncHistory(app) {
@@ -373,13 +382,14 @@ function syncHistory(app) {
     if (!app) return;
     history.pushState({ app: app.id }, '', '#' + app.id);
     app._stack.slice(1).forEach(v => history.pushState({ app: app.id, view: v.id }, '', '#' + app.id));
+    onFront[app.id]?.(); // fresh entries: nothing to go back or forward to inside the app yet
   };
   const n = depth;
   depth = app ? app._stack.length : 0;
-  if (n) { ignorePop = push; history.go(-n); } else push();
+  if (n) { ignorePop = push; goBack(n); } else push();
 }
 
-const onOpen = {};
+const onOpen = {}, onFront = {};
 const recents = []; // backgrounded apps keep their state, oldest → newest
 
 function resetApp(app) {
@@ -989,6 +999,58 @@ onOpen.resume = () => {
   f.src = f.dataset.src;
 };
 $('#shareBtn').addEventListener('click', () => share('Kuldeep Singh — Resume', $('#resume .btn-primary').href));
+
+/* ── CHROME (in-app browser) ──────────────────────────────── */
+// Google refuses to be framed unless igu=1 is set. Other sites may refuse too, so ↗ opens the page in a real tab.
+const START = 'https://www.google.com/webhp?igu=1';
+const chromeApp = $('#chrome'), web = $('#web'), webQ = $('#webQ');
+// The iframe's history steps since Chrome's own entry: URLs we opened, or null for links followed inside the page
+let trail = [START], at = 0, expect = null, len = 0; // expect: the URL being opened, or 'back' / 'fwd'
+const clean = u => { const x = new URL(u); x.searchParams.delete('igu'); return x.href; };
+function toURL(q) {
+  let u = null;
+  try { if (!/\s/.test(q) && /\.\w{2,}/.test(q)) u = new URL(/^https?:\/\//i.test(q) ? q : 'https://' + q); } catch { /* not a URL */ }
+  if (!u) return 'https://www.google.com/search?igu=1&q=' + encodeURIComponent(q);
+  if (/(^|\.)google\.[\w.]+$/.test(u.hostname)) u.searchParams.set('igu', '1');
+  return u.href;
+}
+function paintWeb() {
+  const u = trail[at];
+  $('.omni', chromeApp).classList.toggle('known', !!u);
+  if (document.activeElement !== webQ) webQ.value = u ? new URL(u).hostname.replace(/^www\./, '') : '';
+  $('#webBack').disabled = at < 1;
+  $('#webFwd').disabled = at >= trail.length - 1;
+  $('#webOpen').disabled = !u;
+}
+function browse(u) { expect = u; web.contentWindow.location.href = u; }
+web.addEventListener('load', () => {
+  if (st.app !== chromeApp) { expect = null; return; } // leaving Chrome rewinds its steps in the background
+  // Browsers replace instead of adding a step when the page was still loading, so compare lengths. With exactly
+  // one page ahead, a new page (which drops it) keeps the length too, and is far likelier than a replace.
+  const pushed = history.length !== len || at === trail.length - 2;
+  len = history.length;
+  if (expect === 'back') at--;
+  else if (expect === 'fwd') at++;
+  else if (pushed) trail.splice(++at, Infinity, expect);
+  else if (expect) trail[at] = expect;
+  expect = null;
+  paintWeb();
+});
+onOpen.chrome = () => { trail = [START]; at = 0; expect = START; web.contentWindow.location.replace(START); paintWeb(); };
+onFront.chrome = () => { trail.splice(1); at = 0; len = history.length; paintWeb(); };
+$('#webForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const q = webQ.value.trim();
+  if (q) browse(toURL(q));
+  webQ.blur();
+});
+webQ.addEventListener('focus', () => { webQ.value = trail[at] ? clean(trail[at]) : ''; webQ.select(); });
+webQ.addEventListener('blur', paintWeb);
+webQ.addEventListener('keydown', e => { if (e.key === 'Escape') { e.stopPropagation(); webQ.blur(); } });
+$('#webBack').addEventListener('click', () => { expect = 'back'; history.back(); });
+$('#webFwd').addEventListener('click', () => { expect = 'fwd'; history.forward(); });
+$('#webNew').addEventListener('click', () => browse(START));
+$('#webOpen').addEventListener('click', () => window.open(clean(trail[at]), '_blank', 'noopener'));
 
 /* ── TAPS (one delegated handler) ─────────────────────────── */
 screen.addEventListener('click', e => {

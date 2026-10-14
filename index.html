@@ -56,6 +56,14 @@
   <symbol id="i-del" viewBox="0 0 24 24"><path fill="currentColor" d="M8.5 4H20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H8.5L2 12l6.5-8zm3.7 4.3-1.4 1.4 2.3 2.3-2.3 2.3 1.4 1.4 2.3-2.3 2.3 2.3 1.4-1.4-2.3-2.3 2.3-2.3-1.4-1.4-2.3 2.3-2.3-2.3z"/></symbol>
   <symbol id="i-term" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 7 5 5-5 5m7 0h7"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m-6 6 6-6 6 6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><path fill="currentColor" d="M7 10V7.5a5 5 0 0 1 10 0V10h.5a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2H7zm2.2 0h5.6V7.5a2.8 2.8 0 0 0-5.6 0V10z"/></symbol>
+  <symbol id="i-chrome" viewBox="0 0 24 24">
+    <path fill="#ea4335" d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0z"/>
+    <path fill="#34a853" d="M1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29z"/>
+    <path fill="#fbbc04" d="M15.273 7.636a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364z"/>
+    <path fill="#1a73e8" d="M12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728z"/>
+  </symbol>
 </svg>
 
 <main class="stage">
@@ -97,6 +105,7 @@
             <a class="icon" href="https://github.com/kuldeepsinghrai" target="_blank" rel="noopener"><span class="ico g-gh"><svg><use href="#i-gh"/></svg><b class="badge">3</b></span><span class="lbl">GitHub</span></a>
             <a class="icon" href="https://instagram.com/imkuldeepsinghrai" target="_blank" rel="noopener"><span class="ico g-ig"><svg><use href="#i-ig"/></svg></span><span class="lbl">Instagram</span></a>
             <a class="icon" href="cli.html"><span class="ico g-term"><svg><use href="#i-term"/></svg></span><span class="lbl">Terminal</span></a>
+            <button class="icon" data-open="chrome"><span class="ico g-chrome"><svg><use href="#i-chrome"/></svg></span><span class="lbl">Chrome</span></button>
           </div>
         </div>
 
@@ -423,6 +432,23 @@
           <label class="cf"><span>Subject:</span><input id="mailSubj" autocomplete="off"></label>
           <textarea id="mailBody" aria-label="Message body"></textarea>
         </div>
+      </div>
+    </section>
+
+    <!-- CHROME (in-app browser) -->
+    <section class="app" id="chrome" data-name="Chrome" data-ico="g-chrome" aria-label="Chrome" hidden>
+      <div class="splash g-chrome"><svg><use href="#i-chrome"/></svg></div>
+      <div class="view root web">
+        <form class="web-top" id="webForm" role="search">
+          <label class="omni"><svg><use href="#i-lock"/></svg><input id="webQ" type="text" placeholder="Search or type URL" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" aria-label="Address and search bar"></label>
+        </form>
+        <iframe id="web" title="Web page" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+        <nav class="web-bar" aria-label="Browser controls">
+          <button id="webBack" aria-label="Back" disabled><svg><use href="#i-chev-l"/></svg></button>
+          <button id="webFwd" aria-label="Forward" disabled><svg><use href="#i-chev-l"/></svg></button>
+          <button id="webNew" aria-label="New tab"><svg><use href="#i-plus"/></svg></button>
+          <button id="webOpen" aria-label="Open in a new browser tab"><svg><use href="#i-open"/></svg></button>
+        </nav>
       </div>
     </section>
 
