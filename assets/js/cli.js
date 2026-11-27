@@ -9,8 +9,8 @@ const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* ── PROFILE — mirrors the iPhone portfolio (index.html); update both together ── */
 const ME = {
   name: 'Kuldeep Singh', role: 'App Developer', location: 'New Delhi, India',
-  bio: 'Android Developer skilled in building smooth, user-friendly apps with Java, Kotlin, Jetpack Compose & MVVM. Worked with startups — adaptable, creative, and always learning new technologies.',
-  stats: [['4+', 'Years'], ['3', 'Companies'], ['∞', 'Bugs Fixed']],
+  bio: 'Android developer building native apps in Kotlin and Jetpack Compose. I led the Java to Kotlin migration at Bijnis, shipped exports, multi-currency and staff roles for Stock Register on Google Play, and now work on an app for Mac, Windows, iOS and Android at Zillout.',
+  stats: [['4+', 'Years'], ['3', 'Companies']],
   phone: ['+91 98718 31349', 'tel:+919871831349'],
   email: ['imkuldeepsinghrai@gmail.com', 'mailto:imkuldeepsinghrai@gmail.com'],
   links: {
@@ -54,8 +54,9 @@ const ME = {
     },
   ],
   skills: [
-    ['Programming Languages', [['Kotlin', 92, '#AF52DE'], ['Java', 88, '#FF9500']]],
-    ['Android', [['Jetpack Compose', 85, '#34C759'], ['MVVM + Jetpack', 87, '#007AFF'], ['Retrofit / APIs', 84, '#5AC8FA'], ['Room / SQLite', 80, '#FF3B30'], ['Firebase', 76, '#FF9500']]],
+    // [skill, where it was used] — mirrors the Skills app in index.html
+    ['Programming languages', [['Kotlin', 'Stock Register, Bijnis'], ['Java', 'Bijnis']]],
+    ['Android', [['Jetpack Compose', 'Stock Register'], ['MVVM + Jetpack', 'Stock Register'], ['Retrofit / APIs', 'Stock Register, Bijnis'], ['Room / SQLite', 'Stock Register'], ['Firebase', '']]],
   ],
   tools: [['Android Studio', 'IDE'], ['Git / GitHub / Bitbucket', 'VCS'], ['Gradle', 'Build'], ['Jira / Agile / Scrum', 'PM'], ['Gson / OkHttp', 'Network'], ['Segment / CleverTap', 'Analytics'], ['JUnit', 'Testing']],
   degrees: [
@@ -128,7 +129,6 @@ function neofetch() {
       ['Education', esc(`${ME.degrees[0][0]}, NIELIT`)],
       ['Email', link(ME.email[1], ME.email[0])],
       ['Shell', 'zsh 5.9'],
-      ['Bugs Fixed', '∞'],
     ].map(([k, v]) => `<b class="g">${k}</b>: ${v}`),
     '',
     swatches(['#3b3b40', '#ff5c57', '#5af78e', '#f3f99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#e7e7ea']),
@@ -167,13 +167,10 @@ function skills() {
   ME.skills.forEach(([group, list], i) => {
     if (i) print();
     print(`<b class="y">${esc(group)}</b>`);
-    list.forEach(([name, v, color]) => {
-      const n = Math.round(v / 5);
-      print(`  ${esc(name.padEnd(18))}<span style="color:${color}">${'█'.repeat(n)}</span><span class="d">${'░'.repeat(20 - n)}</span>`);
-    });
+    list.forEach(([name, used]) => print(`  ${esc(name.padEnd(18))}<span class="d">${esc(used)}</span>`));
   });
   print();
-  print('<b class="y">Tools &amp; Workflow</b>');
+  print('<b class="y">Tools &amp; workflow</b>');
   ME.tools.forEach(([name, tag]) => print(`  ${esc(name.padEnd(28))}<span class="c">${esc(tag)}</span>`));
 }
 
