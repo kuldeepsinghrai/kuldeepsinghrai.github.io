@@ -1,7 +1,7 @@
 /* Kuldeep Singh · Terminal portfolio — a macOS Terminal window */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
-body { overflow: hidden; background: #0d0d14; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+body { overflow: hidden; background: #121110; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 [hidden] { display: none !important; }
 
@@ -15,12 +15,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* desktop behind the window */
 .desk {
   position: fixed; top: 0; left: 0; right: 0; height: 100%; display: grid; place-items: center; padding: 24px;
-  background:
-    radial-gradient(60% 50% at 18% 8%, rgba(255,140,90,.28), transparent 70%),
-    radial-gradient(50% 50% at 92% 18%, rgba(214,48,140,.24), transparent 70%),
-    radial-gradient(70% 60% at 8% 96%, rgba(40,90,255,.34), transparent 70%),
-    radial-gradient(60% 60% at 96% 96%, rgba(120,60,255,.3), transparent 70%),
-    #0d0d14;
+  background: #121110;
 }
 .desk:has(.win.max) { padding: 8px; }
 

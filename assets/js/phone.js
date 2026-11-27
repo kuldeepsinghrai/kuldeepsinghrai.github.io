@@ -190,7 +190,7 @@ function unlock(instant) {
   sync();
   if (first && !instant && !welcomed) {
     welcomed = true;
-    setTimeout(() => notify('Portfolio', 'Welcome, let\'s explore!'), T(900));
+    setTimeout(() => notify('Portfolio', 'Open any app, or swipe left for widgets'), T(900));
   }
 }
 function settleLock() {
